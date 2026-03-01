@@ -1,0 +1,218 @@
+{
+  "site.title": {
+    "selector": "title",
+    "property": "textContent",
+    "value": "Психолог Терёхина Виктория — онлайн‑консультации"
+  },
+  "hero.pill": {
+    "selector": ".hero-pill-text",
+    "property": "textContent",
+    "value": "Онлайн‑психолог для тех, кто хочет больше ясности и мира"
+  },
+  "hero.title": {
+    "selector": ".hero-title",
+    "property": "innerHTML",
+    "value": "Помогаю <span>найти опору</span><br />в себе и отношениях"
+  },
+  "hero.subtitle": {
+    "selector": ".hero-subtitle",
+    "property": "textContent",
+    "value": "Индивидуальные и парные онлайн‑консультации. Бережно поддерживаю, помогаю разобраться в сложных чувствах, снизить тревогу и сделать шаг к более спокойной, наполненной жизни."
+  },
+  "hero.list.item1": {
+    "selector": ".hero-list li:nth-child(1) span",
+    "property": "textContent",
+    "value": "Интегративный семейный психолог, диплом института Smart"
+  },
+  "hero.list.item2": {
+    "selector": ".hero-list li:nth-child(2) span",
+    "property": "textContent",
+    "value": "Работаем онлайн — где бы вы ни находились"
+  },
+  "hero.list.item3": {
+    "selector": ".hero-list li:nth-child(3) span",
+    "property": "textContent",
+    "value": "Опора на ваши сильные стороны и реальные цели"
+  },
+  "hero.cta.button": {
+    "selector": ".hero-cta-row .btn-primary",
+    "property": "innerHTML",
+    "value": "Записаться на консультацию <span>→</span>"
+  },
+  "hero.cta.note": {
+    "selector": ".hero-cta-note",
+    "property": "textContent",
+    "value": "Первая встреча поможет сформулировать запрос и наметить план работы."
+  },
+  "hero.meta": {
+    "selector": ".hero-meta",
+    "property": "innerHTML",
+    "value": "<strong>Формат:</strong> онлайн‑встреча в удобном для вас мессенджере. <br /><strong>Длительность:</strong> 60 или 120 минут."
+  },
+  "hero.float.tag": {
+    "selector": ".hero-float-tag span:nth-child(2)",
+    "property": "textContent",
+    "value": "Безопасное пространство для ваших чувств"
+  },
+  "hero.photo.badge.title": {
+    "selector": ".hero-photo-badge-title",
+    "property": "textContent",
+    "value": "Моё кредо"
+  },
+  "hero.photo.badge.text": {
+    "selector": ".hero-photo-badge-text",
+    "property": "textContent",
+    "value": "Наше счастливое будущее зависит от нас самих. Я рядом, чтобы помочь вам увидеть это и опереться на себя."
+  },
+  "hero.photo.placeholder": {
+    "selector": ".hero-photo-main-inner",
+    "property": "textContent",
+    "value": "Здесь может быть ваше портретное фото в мягких пастельных тонах."
+  },
+  "hero.tag1": {
+    "selector": ".hero-tags-row .tag-soft:nth-child(1)",
+    "property": "textContent",
+    "value": "онлайн‑консультации"
+  },
+  "hero.tag2": {
+    "selector": ".hero-tags-row .tag-soft:nth-child(2)",
+    "property": "textContent",
+    "value": "индивидуальная терапия"
+  },
+  "hero.tag3": {
+    "selector": ".hero-tags-row .tag-soft:nth-child(3)",
+    "property": "textContent",
+    "value": "семейные и парные сессии"
+  },
+  "about.kicker": {
+    "selector": "#about .section-kicker span",
+    "property": "textContent",
+    "value": "О психологе"
+  },
+  "about.title": {
+    "selector": "#about .section-title",
+    "property": "textContent",
+    "value": "Интегративный семейный психолог — с тёплым и реалистичным взглядом на жизнь"
+  },
+  "about.subtitle": {
+    "selector": "#about .section-subtitle",
+    "property": "textContent",
+    "value": "Я верю, что у любой, даже очень сложной ситуации, есть другая сторона. Вы видите одну сторону медали — моя задача аккуратно показать вам другую, помочь найти в себе силу и опору."
+  },
+  "nav.about": {
+    "selector": ".nav a[href='#about']",
+    "property": "textContent",
+    "value": "О психологе"
+  },
+  "nav.services": {
+    "selector": ".nav a[href='#services']",
+    "property": "textContent",
+    "value": "Услуги и стоимость"
+  },
+  "nav.articles": {
+    "selector": ".nav a[href='#articles']",
+    "property": "textContent",
+    "value": "Статьи"
+  },
+  "nav.contact": {
+    "selector": ".nav a[href='#contact']",
+    "property": "textContent",
+    "value": "Контакты"
+  },
+  "nav.cta": {
+    "selector": ".nav-cta",
+    "property": "innerHTML",
+    "value": "Записаться <span>→</span>"
+  },
+  "services.kicker": {
+    "selector": "#services .section-kicker span",
+    "property": "textContent",
+    "value": "Услуги и стоимость"
+  },
+  "services.title": {
+    "selector": "#services .section-title",
+    "property": "textContent",
+    "value": "Форматы работы и цены"
+  },
+  "services.subtitle": {
+    "selector": "#services .section-subtitle",
+    "property": "textContent",
+    "value": "Выбирайте формат, который подходит именно вам сейчас. При необходимости мы можем обсудить, с чего лучше начать, на первой консультации."
+  },
+  "card1.title": {
+    "selector": ".cards .card:nth-child(1) .card-title",
+    "property": "textContent",
+    "value": "Индивидуальная онлайн‑консультация"
+  },
+  "card1.duration": {
+    "selector": ".cards .card:nth-child(1) .card-duration",
+    "property": "textContent",
+    "value": "60 минут"
+  },
+  "card1.price": {
+    "selector": ".cards .card:nth-child(1) .card-price",
+    "property": "innerHTML",
+    "value": "4&nbsp;000&nbsp;₽"
+  },
+  "card1.text": {
+    "selector": ".cards .card:nth-child(1) .card-text",
+    "property": "textContent",
+    "value": "Подходит, если вы чувствуете напряжение, тревогу, усталость, сложности в отношениях или просто хотите лучше понять себя и свои реакции."
+  },
+  "card1.note": {
+    "selector": ".cards .card:nth-child(1) .card-note",
+    "property": "textContent",
+    "value": "Мягкий вход в терапию, знакомство и первые шаги к изменениям."
+  },
+  "pricing.note": {
+    "selector": ".pricing-note",
+    "property": "innerHTML",
+    "value": "<strong>Групповая терапия:</strong> формат подбирается индивидуально, по мере набора группы. Если вам интересна такая работа, напишите об этом в сообщении — я расскажу подробности."
+  },
+  "articles.kicker": {
+    "selector": "#articles .section-kicker span",
+    "property": "textContent",
+    "value": "Статьи"
+  },
+  "articles.title": {
+    "selector": "#articles .section-title",
+    "property": "textContent",
+    "value": "Немного о том, как проходит терапия и когда она может помочь"
+  },
+  "articles.subtitle": {
+    "selector": "#articles .section-subtitle",
+    "property": "textContent",
+    "value": "Здесь вы можете аккуратно познакомиться с моим подходом, прежде чем записываться на консультацию."
+  },
+  "contact.kicker": {
+    "selector": "#contact .section-kicker span",
+    "property": "textContent",
+    "value": "Контакты"
+  },
+  "contact.title": {
+    "selector": "#contact .section-title",
+    "property": "textContent",
+    "value": "Записаться на консультацию или задать вопрос"
+  },
+  "contact.subtitle": {
+    "selector": "#contact .section-subtitle",
+    "property": "textContent",
+    "value": "Напишите мне любым удобным способом — коротко опишите, что вас беспокоит, и я предложу варианты ближайших дат и формата встречи."
+  },
+  "footer.text1": {
+    "selector": ".footer-legal span:nth-child(1)",
+    "property": "innerHTML",
+    "value": "© <span id=\"year\"></span> Психолог Терёхина Виктория. Все права защищены."
+  },
+  "footer.text2": {
+    "selector": ".footer-legal span:nth-child(2)",
+    "property": "textContent",
+    "value": "Онлайн‑консультации. Индивидуальная и семейная психология."
+  },
+  "footer.maker": {
+    "selector": ".footer-maker span",
+    "property": "textContent",
+    "value": "Дизайн‑макет для обновления сайта в пастельных тонах."
+  }
+}
+
