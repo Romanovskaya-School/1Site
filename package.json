@@ -1,0 +1,8 @@
+{
+  "name": "vika-terekhova-psychologist",
+  "version": "1.0.0",
+  "description": "Сайт психолога Виктории Тереховой",
+  "scripts": {
+    "start": "npx serve . --listen 3000 --open"
+  }
+}
