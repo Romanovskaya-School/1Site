@@ -71,7 +71,9 @@ function cmsApiPlugin() {
 export default defineConfig({
   plugins: [
     vue(),
-    vueDevTools(),
+    vueDevTools({
+      launchEditor: '/Applications/WebStorm.app/Contents/MacOS/webstorm'
+    }),
     cmsApiPlugin(),
   ],
   server: {},

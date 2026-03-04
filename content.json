@@ -44,11 +44,6 @@
     "property": "textContent",
     "value": "Первая встреча поможет сформулировать запрос и наметить план работы."
   },
-  "hero.meta": {
-    "selector": ".hero-meta",
-    "property": "innerHTML",
-    "value": "<strong>Формат:</strong> онлайн‑встреча в удобном для вас мессенджере. <br /><strong>Длительность:</strong> 60 или 120 минут."
-  },
   "hero.float.tag": {
     "selector": ".hero-float-tag span:nth-child(2)",
     "property": "textContent",
@@ -87,22 +82,72 @@
   "about.kicker": {
     "selector": "#about .section-kicker span",
     "property": "textContent",
-    "value": "О психологе"
+    "value": "Обо мне"
   },
   "about.title": {
     "selector": "#about .section-title",
     "property": "textContent",
-    "value": "Интегративный семейный психолог — с тёплым и реалистичным взглядом на жизнь"
+    "value": "Заголовок ваш текст"
   },
-  "about.subtitle": {
-    "selector": "#about .section-subtitle",
+  "about.text1": {
+    "selector": "",
     "property": "textContent",
-    "value": "Я верю, что у любой, даже очень сложной ситуации, есть другая сторона. Вы видите одну сторону медали — моя задача аккуратно показать вам другую, помочь найти в себе силу и опору."
+    "value": "Ваш текст"
+  },
+  "about.text2": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Ваш текст"
+  },
+  "about.text3": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Ваш текст"
+  },
+  "about.education.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Образование"
+  },
+  "about.education.text": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "Диплом института Smart<br />интегративная семейная психология"
+  },
+  "about.format.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Формат работы"
+  },
+  "about.format.text": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "Ваш текст"
+  },
+  "about.approach.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Подход"
+  },
+  "about.approach.text": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "Ваш текст"
+  },
+  "about.clients.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Клиенты"
+  },
+  "about.clients.text": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "Ваш текст"
   },
   "nav.about": {
     "selector": ".nav a[href='#about']",
     "property": "textContent",
-    "value": "О психологе"
+    "value": "Обо мне"
   },
   "nav.services": {
     "selector": ".nav a[href='#services']",
@@ -164,6 +209,151 @@
     "property": "textContent",
     "value": "Мягкий вход в терапию, знакомство и первые шаги к изменениям."
   },
+  "card1.button": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Записаться"
+  },
+  "card2.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Первичная расширенная консультация"
+  },
+  "card2.duration": {
+    "selector": "",
+    "property": "textContent",
+    "value": "120 минут"
+  },
+  "card2.price": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "8&nbsp;000&nbsp;₽"
+  },
+  "card2.label": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Для сложных запросов и пар"
+  },
+  "card2.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Углублённая встреча, чтобы внимательно рассмотреть ваш запрос, жизненную ситуацию и определить приоритеты. Часто выбирают пары или клиенты в остром кризисе."
+  },
+  "card2.note": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Помогает сформировать чёткий план дальнейшей работы."
+  },
+  "card2.button": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Записаться"
+  },
+  "card3.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Индивидуальная терапия"
+  },
+  "card3.duration": {
+    "selector": "",
+    "property": "textContent",
+    "value": "5 встреч по 60 минут"
+  },
+  "card3.price": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "17&nbsp;000&nbsp;₽"
+  },
+  "card3.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Небольшой, но важный цикл встреч для постепенных изменений: снижения тревоги, работы с самооценкой, поиском новых опор и решений."
+  },
+  "card3.note": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Формат для тех, кто готов к более стабильной поддержке."
+  },
+  "card3.button": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Оставить заявку"
+  },
+  "card4.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Парные консультации"
+  },
+  "card4.duration": {
+    "selector": "",
+    "property": "textContent",
+    "value": "пакет из 5 встреч"
+  },
+  "card4.price": {
+    "selector": "",
+    "property": "innerHTML",
+    "value": "36&nbsp;000&nbsp;₽"
+  },
+  "card4.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Работа с парой: учимся слышать друг друга, говорить о важном без обвинений, искать решения, которые подходят обоим партнёрам."
+  },
+  "card4.note": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Для тех, кто хочет улучшить качество отношений."
+  },
+  "card4.button": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Записаться вдвоём"
+  },
+  "home.come.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": "С чем вы можете прийти ко мне"
+  },
+  "home.come.item1": {
+    "selector": "",
+    "property": "textContent",
+    "value": "чувство, что вы «застряли» в одном и том же сценарии;"
+  },
+  "home.come.item2": {
+    "selector": "",
+    "property": "textContent",
+    "value": "ощущение одиночества даже в отношениях;"
+  },
+  "home.come.item3": {
+    "selector": "",
+    "property": "textContent",
+    "value": "регулярные конфликты с партнёром, родителями, детьми;"
+  },
+  "home.come.item4": {
+    "selector": "",
+    "property": "textContent",
+    "value": "страх перемен, сложности с принятием решений;"
+  },
+  "home.come.item5": {
+    "selector": "",
+    "property": "textContent",
+    "value": "повышенная тревога, самокритика, ощущение «я недостаточно хорош(а)»;"
+  },
+  "home.come.item6": {
+    "selector": "",
+    "property": "textContent",
+    "value": "периоды сильных перемен, потерь, переездов, расставаний;"
+  },
+  "home.come.item7": {
+    "selector": "",
+    "property": "textContent",
+    "value": "желание лучше понять себя, свои границы и желания."
+  },
+  "home.come.note": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Если вы не уверены, подходит ли ваш запрос для работы с психологом, вы можете написать мне: кратко опишите ситуацию, и я подскажу, чем могу быть полезна в рамках своей компетенции."
+  },
   "pricing.note": {
     "selector": ".pricing-note",
     "property": "innerHTML",
@@ -189,6 +379,41 @@
     "property": "textContent",
     "value": "Контакты"
   },
+  "contact.phone.label": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Телефон"
+  },
+  "contact.phone.href": {
+    "selector": "",
+    "property": "textContent",
+    "value": "tel:+79854003000"
+  },
+  "contact.phone.display": {
+    "selector": "",
+    "property": "textContent",
+    "value": "+7 (985) 400‑30‑00"
+  },
+  "contact.email.label": {
+    "selector": "",
+    "property": "textContent",
+    "value": "E‑mail"
+  },
+  "contact.email.href": {
+    "selector": "",
+    "property": "textContent",
+    "value": "mailto:ddvv2009@gmail.com"
+  },
+  "contact.email.display": {
+    "selector": "",
+    "property": "textContent",
+    "value": "ddvv2009@gmail.com"
+  },
+  "contact.confidentiality": {
+    "selector": "",
+    "property": "textContent",
+    "value": "Вся предоставленная вами информация остаётся конфиденциальной и не передаётся третьим лицам."
+  },
   "contact.title": {
     "selector": "#contact .section-title",
     "property": "textContent",
@@ -213,6 +438,885 @@
     "selector": ".footer-maker span",
     "property": "textContent",
     "value": "Дизайн‑макет для обновления сайта в пастельных тонах."
+  },
+  "logo.main": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "logo.sub": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.kicker": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.family.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.family.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.personal.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.personal.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.rpp.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "sections.rpp.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.subtitle": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.kicker": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.overview.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.joint.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.joint.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.conflicts.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.conflicts.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.individual.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.couples.individual.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.consult.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.consult.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.joint.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.joint.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.teens.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "family.parents.teens.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.kicker": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.overview.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.overview.subtitle": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.confidence.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.confidence.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.acceptance.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.acceptance.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.body.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.selfesteem.body.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.dontknow.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.dontknow.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.motivation.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.motivation.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.procrastination.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.search.procrastination.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.anxiety.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.anxiety.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.depression.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.depression.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.apathy.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "personal.emotions.apathy.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.subtitle": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.kicker": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.overview.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.overview.subtitle": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.anorexia.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.anorexia.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.what.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.what.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.symptoms.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.symptoms.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.compulsive.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.compulsive.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.emotional.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.emotional.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.analysis.title": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "rpp.analysis.text": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-joint.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-joint.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-joint.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-joint.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-joint.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-conflicts.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-conflicts.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-conflicts.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-conflicts.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-conflicts.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-individual.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-individual.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-individual.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-individual.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-couples-individual.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-consult.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-consult.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-consult.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-consult.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-consult.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-joint.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-joint.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-joint.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-joint.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-joint.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-teens.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-teens.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-teens.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-teens.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.family-parents-teens.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-confidence.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-confidence.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-confidence.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-confidence.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-confidence.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-acceptance.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-acceptance.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-acceptance.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-acceptance.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-acceptance.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-body.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-body.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-body.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-body.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-selfesteem-body.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-dontknow.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-dontknow.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-dontknow.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-dontknow.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-dontknow.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-motivation.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-motivation.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-motivation.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-motivation.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-motivation.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-procrastination.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-procrastination.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-procrastination.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-procrastination.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-search-procrastination.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-anxiety.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-anxiety.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-anxiety.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-anxiety.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-anxiety.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-depression.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-depression.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-depression.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-depression.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-depression.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-apathy.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-apathy.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-apathy.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-apathy.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.personal-emotions-apathy.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-anorexia.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-anorexia.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-anorexia.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-anorexia.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-anorexia.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-what-is.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-what-is.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-what-is.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-what-is.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-what-is.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-symptoms.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-symptoms.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-symptoms.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-symptoms.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-symptoms.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-compulsive.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-compulsive.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-compulsive.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-compulsive.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-compulsive.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-emotional.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-emotional.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-emotional.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-emotional.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-emotional.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-analysis.description": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-analysis.details": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-analysis.help": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-analysis.pricing": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "topic.rpp-analysis.articles": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
+  },
+  "hero.meta": {
+    "selector": "",
+    "property": "textContent",
+    "value": ""
   }
 }
-

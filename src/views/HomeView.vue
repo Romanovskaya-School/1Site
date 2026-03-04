@@ -1,87 +1,13 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import SiteShell from '@/components/SiteShell.vue'
+import RppQuiz from '@/components/RppQuiz.vue'
+import { useContent } from '@/composables/useContent'
 
-const content = ref({})
-const defaultFooterText1 =
-  '© <span id="year"></span> Психолог Терёхина Виктория. Все права защищены.'
-
-function setYear() {
-  const yearEl = document.getElementById('year')
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear().toString()
-  }
-}
-
-function getValue(key, fallback = '') {
-  return content.value?.[key]?.value ?? fallback
-}
-
-function getHtml(key, fallback = '') {
-  return content.value?.[key]?.value ?? fallback
-}
-
-async function loadContent() {
-  try {
-    const res = await fetch('/api/content')
-    if (!res.ok) return
-    const data = await res.json()
-    content.value = data || {}
-
-    if (content.value['site.title']?.value) {
-      document.title = content.value['site.title'].value
-    }
-
-    await nextTick()
-    setYear()
-  } catch {
-    // если API недоступно — просто используем встроенные тексты
-  }
-}
-
-onMounted(() => {
-  setYear()
-  loadContent()
-})
+const { getValue, getHtml } = useContent()
 </script>
 
 <template>
-  <div class="page">
-    <header class="header">
-      <div class="container header-inner">
-        <div class="logo">
-          <div class="logo-mark" />
-          <div>
-            <div class="logo-text-main">
-              {{ getValue('logo.main', 'Виктория Терёхина') }}
-            </div>
-            <div class="logo-text-sub">
-              {{ getValue('logo.sub', 'интегративный семейный психолог') }}
-            </div>
-          </div>
-        </div>
-        <nav class="nav">
-          <a href="#about">
-            {{ getValue('nav.about', 'О психологе') }}
-          </a>
-          <a href="#services">
-            {{ getValue('nav.services', 'Услуги и стоимость') }}
-          </a>
-          <a href="#articles">
-            {{ getValue('nav.articles', 'Статьи') }}
-          </a>
-          <a href="#contact">
-            {{ getValue('nav.contact', 'Контакты') }}
-          </a>
-          <button
-            class="nav-cta"
-            @click="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })"
-            v-html="getHtml('nav.cta', 'Записаться <span>→</span>')"
-          ></button>
-        </nav>
-      </div>
-    </header>
-
-    <main>
+  <SiteShell>
       <!-- Hero -->
       <section class="hero">
         <div class="container hero-inner">
@@ -107,15 +33,6 @@ onMounted(() => {
                 "
               ></button>
             </div>
-            <div
-              class="hero-meta"
-              v-html="
-                getHtml(
-                  'hero.meta',
-                  '<strong>Формат:</strong> онлайн‑встреча в удобном для вас мессенджере. <br /><strong>Длительность:</strong> 60 или 120 минут.'
-                )
-              "
-            ></div>
           </div>
 
           <aside class="hero-photo-card" aria-label="Информация о психологе">
@@ -146,13 +63,119 @@ onMounted(() => {
         </div>
       </section>
 
+      <!-- Main sections shortcuts -->
+      <section class="services">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-kicker">
+              <span>
+                {{
+                  getValue(
+                    'sections.kicker',
+                    'Разделы сайта'
+                  )
+                }}
+              </span>
+            </div>
+            <h2 class="section-title">
+              {{
+                getValue(
+                  'sections.title',
+                  'Выберите направление, которое ближе к вашему запросу'
+                )
+              }}
+            </h2>
+          </div>
+
+          <div class="cards">
+            <RouterLink
+              to="/family"
+              class="card"
+            >
+              <header class="card-header">
+                <div>
+                  <div class="card-title">
+                    {{
+                      getValue(
+                        'sections.family.title',
+                        'Семейная психология'
+                      )
+                    }}
+                  </div>
+                </div>
+              </header>
+              <div class="card-text">
+                {{
+                  getValue(
+                    'sections.family.text',
+                    'Для пар, родителей и подростков: совместные и индивидуальные встречи, работа с конфликтами и кризисами в семье.'
+                  )
+                }}
+              </div>
+            </RouterLink>
+
+            <RouterLink
+              to="/personal"
+              class="card"
+            >
+              <header class="card-header">
+                <div>
+                  <div class="card-title">
+                    {{
+                      getValue(
+                        'sections.personal.title',
+                        'Личная терапия и самореализация'
+                      )
+                    }}
+                  </div>
+                </div>
+              </header>
+              <div class="card-text">
+                {{
+                  getValue(
+                    'sections.personal.text',
+                    'Самооценка, поиск себя, мотивация, тревога, выгорание и другие эмоциональные состояния.'
+                  )
+                }}
+              </div>
+            </RouterLink>
+
+            <RouterLink
+              to="/eating-disorders"
+              class="card"
+            >
+              <header class="card-header">
+                <div>
+                  <div class="card-title">
+                    {{
+                      getValue(
+                        'sections.rpp.title',
+                        'Помощь при РПП'
+                      )
+                    }}
+                  </div>
+                </div>
+              </header>
+              <div class="card-text">
+                {{
+                  getValue(
+                    'sections.rpp.text',
+                    'Анорексия, компульсивное переедание, эмоциональное заедание и другие формы расстройств пищевого поведения.'
+                  )
+                }}
+              </div>
+            </RouterLink>
+          </div>
+        </div>
+      </section>
+
       <!-- About -->
       <section id="about" class="about">
         <div class="container">
           <div class="section-header">
             <div class="section-kicker">
               <span>
-                {{ getValue('about.kicker', 'О психологе') }}
+                {{ getValue('about.kicker', 'Обо мне') }}
               </span>
             </div>
             <h2 class="section-title">
@@ -163,249 +186,94 @@ onMounted(() => {
                 )
               }}
             </h2>
-            <p class="section-subtitle">
-              {{
-                getValue(
-                  'about.subtitle',
-                  'Я верю, что у любой, даже очень сложной ситуации, есть другая сторона. Вы видите одну сторону медали — моя задача аккуратно показать вам другую, помочь найти в себе силу и опору.'
-                )
-              }}
-            </p>
           </div>
 
           <div class="about-grid">
             <div class="about-text">
               <p>
-                Меня зовут Виктория Терёхина. Я — интегративный семейный психолог, работаю с взрослыми и парами в
-                онлайн‑формате.
+                {{
+                  getValue(
+                    'about.text1',
+                    'Меня зовут Виктория Терёхина. Я — интегративный семейный психолог, работаю с взрослыми и парами в онлайн‑формате.'
+                  )
+                }}
               </p>
               <p>
-                В своей работе я совмещаю разные подходы, подбирая инструменты под ваш запрос и особенности. Мой фокус —
-                не только на трудностях, но и на ваших ресурсах: внутренней силе, ценностях, мечтах, которые иногда
-                оказываются спрятаны глубоко под тревогой, обидами или усталостью.
+                {{
+                  getValue(
+                    'about.text2',
+                    'В своей работе я совмещаю разные подходы, подбирая инструменты под ваш запрос и особенности. Мой фокус — не только на трудностях, но и на ваших ресурсах: внутренней силе, ценностях, мечтах, которые иногда оказываются спрятаны глубоко под тревогой, обидами или усталостью.'
+                  )
+                }}
               </p>
               <p>
-                Я стараюсь «зарядить позитивом» каждого клиента, опираясь не на пустой оптимизм, а на реальные шаги и
-                изменения, которые вы готовы делать. Оптимизм — это навык, который можно развивать, и я сопровождаю вас в
-                этом процессе.
+                {{
+                  getValue(
+                    'about.text3',
+                    'Я стараюсь «зарядить позитивом» каждого клиента, опираясь не на пустой оптимизм, а на реальные шаги и изменения, которые вы готовы делать. Оптимизм — это навык, который можно развивать, и я сопровождаю вас в этом процессе.'
+                  )
+                }}
               </p>
-
-              <div class="about-highlight">
-                <strong>Как мы работаем вместе:</strong> я задаю вопросы, помогаю структурировать ваши переживания, мягко
-                обозначаю закономерности и предлагаю новые точки зрения. Без оценок, сравнений и навязывания решений.
-              </div>
-
-              <ul class="about-list">
-                <li>тревога, чувство вины и самокритика;</li>
-                <li>сложности в отношениях с партнёром, родителями, детьми;</li>
-                <li>ощущение тупика, выгорание, потеря вкуса к жизни;</li>
-                <li>кризисы, расставания, переживание потерь и изменений.</li>
-              </ul>
             </div>
 
             <aside class="about-meta-card">
               <div class="about-meta-row">
                 <div class="about-meta-block">
-                  <h4>Образование</h4>
-                  <p>Диплом института Smart<br />интегративная семейная психология</p>
+                  <h4>
+                    {{
+                      getValue(
+                        'about.education.title',
+                        'Образование'
+                      )
+                    }}
+                  </h4>
+                  <p v-html="getHtml('about.education.text', 'Диплом института Smart<br />интегративная семейная психология')"></p>
                 </div>
                 <div class="about-meta-block">
-                  <h4>Формат работы</h4>
-                  <p>Онлайн‑консультации<br />индивидуально и парами</p>
+                  <h4>
+                    {{
+                      getValue(
+                        'about.format.title',
+                        'Формат работы'
+                      )
+                    }}
+                  </h4>
+                  <p v-html="getHtml('about.format.text', 'Онлайн‑консультации<br />индивидуально и парами')"></p>
                 </div>
               </div>
               <div class="about-meta-row">
                 <div class="about-meta-block">
-                  <h4>Подход</h4>
-                  <p>бережное, уважительное сопровождение<br />без осуждения и ярлыков</p>
-                </div>
-                <div class="about-meta-block">
-                  <h4>Клиенты</h4>
-                  <p>взрослые, пары, семьи<br />при запросах на изменения в жизни и отношениях</p>
-                </div>
-              </div>
-              <div class="about-meta-note">
-                Ваши чувства важны. На консультации можно злиться, плакать, молчать, путаться в словах — здесь не нужно
-                «держаться» или казаться сильнее, чем вы себя ощущаете.
-              </div>
-            </aside>
-          </div>
-        </div>
-      </section>
-
-      <!-- Services & Pricing -->
-      <section id="services" class="services">
-        <div class="container">
-          <div class="section-header">
-            <div class="section-kicker">
-              <span>
-                {{ getValue('services.kicker', 'Услуги и стоимость') }}
-              </span>
-            </div>
-            <h2 class="section-title">
-              {{ getValue('services.title', 'Форматы работы и цены') }}
-            </h2>
-            <p class="section-subtitle">
-              {{
-                getValue(
-                  'services.subtitle',
-                  'Выбирайте формат, который подходит именно вам сейчас. При необходимости мы можем обсудить, с чего лучше начать, на первой консультации.'
-                )
-              }}
-            </p>
-          </div>
-
-          <div class="services-grid">
-            <div>
-              <div class="cards">
-                <article class="card">
-                  <header class="card-header">
-                    <div>
-                      <div class="card-title">
-                        {{ getValue('card1.title', 'Индивидуальная онлайн‑консультация') }}
-                      </div>
-                      <div class="card-duration">
-                        {{ getValue('card1.duration', '60 минут') }}
-                      </div>
-                    </div>
-                    <div
-                      class="card-price"
-                      v-html="getHtml('card1.price', '4&nbsp;000&nbsp;₽')"
-                    ></div>
-                  </header>
-                  <div class="card-text">
+                  <h4>
                     {{
                       getValue(
-                        'card1.text',
-                        'Подходит, если вы чувствуете напряжение, тревогу, усталость, сложности в отношениях или просто хотите лучше понять себя и свои реакции.'
+                        'about.approach.title',
+                        'Подход'
                       )
                     }}
-                  </div>
-                  <div class="card-footer">
-                    <div class="card-note">
-                      {{
-                        getValue(
-                          'card1.note',
-                          'Мягкий вход в терапию, знакомство и первые шаги к изменениям.'
-                        )
-                      }}
-                    </div>
-                    <button
-                      class="card-btn-link"
-                      @click="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })"
-                    >
-                      Записаться
-                    </button>
-                  </div>
-                </article>
-
-                <article class="card">
-                  <header class="card-header">
-                    <div>
-                      <div class="card-title">Первичная расширенная консультация</div>
-                      <div class="card-duration">120 минут</div>
-                    </div>
-                    <div class="card-price">8&nbsp;000&nbsp;₽</div>
-                  </header>
-                  <div class="card-label">Для сложных запросов и пар</div>
-                  <div class="card-text">
-                    Углублённая встреча, чтобы внимательно рассмотреть ваш запрос, жизненную ситуацию и определить
-                    приоритеты. Часто выбирают пары или клиенты в остром кризисе.
-                  </div>
-                  <div class="card-footer">
-                    <div class="card-note">Помогает сформировать чёткий план дальнейшей работы.</div>
-                    <button
-                      class="card-btn-link"
-                      @click="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })"
-                    >
-                      Записаться
-                    </button>
-                  </div>
-                </article>
-
-                <article class="card">
-                  <header class="card-header">
-                    <div>
-                      <div class="card-title">Индивидуальная терапия</div>
-                      <div class="card-duration">5 встреч по 60 минут</div>
-                    </div>
-                    <div class="card-price">17&nbsp;000&nbsp;₽</div>
-                  </header>
-                  <div class="card-text">
-                    Небольшой, но важный цикл встреч для постепенных изменений: снижения тревоги, работы с самооценкой,
-                    поиском новых опор и решений.
-                  </div>
-                  <div class="card-footer">
-                    <div class="card-note">
-                      Формат для тех, кто готов к более стабильной поддержке.
-                    </div>
-                    <button
-                      class="card-btn-link"
-                      @click="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })"
-                    >
-                      Оставить заявку
-                    </button>
-                  </div>
-                </article>
-
-                <article class="card">
-                  <header class="card-header">
-                    <div>
-                      <div class="card-title">Парные консультации</div>
-                      <div class="card-duration">пакет из 5 встреч</div>
-                    </div>
-                    <div class="card-price">36&nbsp;000&nbsp;₽</div>
-                  </header>
-                  <div class="card-text">
-                    Работа с парой: учимся слышать друг друга, говорить о важном без обвинений, искать решения, которые
-                    подходят обоим партнёрам.
-                  </div>
-                  <div class="card-footer">
-                    <div class="card-note">Для тех, кто хочет улучшить качество отношений.</div>
-                    <button
-                      class="card-btn-link"
-                      @click="document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })"
-                    >
-                      Записаться вдвоём
-                    </button>
-                  </div>
-                </article>
+                  </h4>
+                  <p v-html="getHtml('about.approach.text', 'бережное, уважительное сопровождение<br />без осуждения и ярлыков')"></p>
+                </div>
+                <div class="about-meta-block">
+                  <h4>
+                    {{
+                      getValue(
+                        'about.clients.title',
+                        'Клиенты'
+                      )
+                    }}
+                  </h4>
+                  <p v-html="getHtml('about.clients.text', 'взрослые, пары, семьи<br />при запросах на изменения в жизни и отношениях')"></p>
+                </div>
               </div>
-
-              <p
-                class="pricing-note"
-                v-html="
-                  getHtml(
-                    'pricing.note',
-                    '<strong>Групповая терапия:</strong> формат подбирается индивидуально, по мере набора группы. Если вам интересна такая работа, напишите об этом в сообщении — я расскажу подробности.'
-                  )
-                "
-              ></p>
-            </div>
-
-            <aside>
-              <h3 class="section-title" style="font-size: 18px; margin-bottom: 10px">
-                С чем вы можете прийти ко мне
-              </h3>
-              <ul class="bullet-list">
-                <li>чувство, что вы «застряли» в одном и том же сценарии;</li>
-                <li>ощущение одиночества даже в отношениях;</li>
-                <li>регулярные конфликты с партнёром, родителями, детьми;</li>
-                <li>страх перемен, сложности с принятием решений;</li>
-                <li>повышенная тревога, самокритика, ощущение «я недостаточно хорош(а)»;</li>
-                <li>периоды сильных перемен, потерь, переездов, расставаний;</li>
-                <li>желание лучше понять себя, свои границы и желания.</li>
-              </ul>
-              <p class="pricing-note">
-                Если вы не уверены, подходит ли ваш запрос для работы с психологом, вы можете написать мне: кратко
-                опишите ситуацию, и я подскажу, чем могу быть полезна в рамках своей компетенции.
-              </p>
             </aside>
           </div>
         </div>
       </section>
 
-      <!-- Articles -->
+      <!-- Тест «Есть ли у вас РПП?» -->
+      <RppQuiz />
+
+<!--      &lt;!&ndash; Articles &ndash;&gt;
       <section id="articles" class="articles">
         <div class="container">
           <div class="section-header">
@@ -473,42 +341,9 @@ onMounted(() => {
                 </span>
               </div>
             </article>
-
-            <aside>
-              <p class="article-tagline">
-                Ещё несколько тем, с которыми часто приходят клиенты и о которых я пишу:
-              </p>
-              <div class="article-list">
-                <div class="article-list-item">
-                  <div class="article-list-title">
-                    Когда стоит обратиться к психологу: 7 признаков, что помощь уже нужна
-                  </div>
-                  <div>
-                    О том, как распознать момент, когда «просто тяжело» превращается в состояние, которое важно не
-                    игнорировать.
-                  </div>
-                </div>
-                <div class="article-list-item">
-                  <div class="article-list-title">
-                    Границы в отношениях: как говорить «нет» без чувства вины
-                  </div>
-                  <div>
-                    Про здоровые личные границы, уважение к себе и умение оставаться в контакте с важными людьми.
-                  </div>
-                </div>
-                <div class="article-list-item">
-                  <div class="article-list-title">
-                    Оптимизм как навык: почему он не про «делать вид, что всё хорошо»
-                  </div>
-                  <div>
-                    О том, как формировать реалистичный, поддерживающий взгляд на себя и свою жизнь.
-                  </div>
-                </div>
-              </div>
-            </aside>
           </div>
         </div>
-      </section>
+      </section>-->
 
       <!-- Contact -->
       <section id="contact" class="contact">
@@ -522,43 +357,56 @@ onMounted(() => {
 
             <div class="contact-card">
               <div class="contact-row">
-                <div class="contact-label">Телефон</div>
+                <div class="contact-label">
+                  {{
+                    getValue(
+                      'contact.phone.label',
+                      'Телефон'
+                    )
+                  }}
+                </div>
                 <div class="contact-value">
-                  <a href="tel:+79854003000">+7&nbsp;(985)&nbsp;400‑30‑00</a>
+                  <a :href="getValue('contact.phone.href', 'tel:+79854003000')">
+                    {{
+                      getValue(
+                        'contact.phone.display',
+                        '+7\u00a0(985)\u00a0400‑30‑00'
+                      )
+                    }}
+                  </a>
                 </div>
               </div>
               <div class="contact-row">
-                <div class="contact-label">E‑mail</div>
+                <div class="contact-label">
+                  {{
+                    getValue(
+                      'contact.email.label',
+                      'E‑mail'
+                    )
+                  }}
+                </div>
                 <div class="contact-value">
-                  <a href="mailto:ddvv2009@gmail.com">ddvv2009@gmail.com</a>
+                  <a :href="getValue('contact.email.href', 'mailto:ddvv2009@gmail.com')">
+                    {{
+                      getValue(
+                        'contact.email.display',
+                        'ddvv2009@gmail.com'
+                      )
+                    }}
+                  </a>
                 </div>
               </div>
               <div class="contact-small">
-                Вся предоставленная вами информация остаётся конфиденциальной и не передаётся третьим лицам.
+                {{
+                  getValue(
+                    'contact.confidentiality',
+                    'Вся предоставленная вами информация остаётся конфиденциальной и не передаётся третьим лицам.'
+                  )
+                }}
               </div>
             </div>
           </div>
         </div>
       </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-inner">
-        <div class="footer-legal">
-          <span
-            v-html="getHtml('footer.text1', defaultFooterText1)"
-          ></span>
-          <span>
-            {{
-              getValue(
-                'footer.text2',
-                'Онлайн‑консультации. Индивидуальная и семейная психология.'
-              )
-            }}
-          </span>
-        </div>
-      </div>
-    </footer>
-  </div>
+  </SiteShell>
 </template>
-
