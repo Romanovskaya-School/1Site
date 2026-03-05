@@ -2,489 +2,549 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Виктория Терехова — Психолог | Онлайн-консультации</title>
-    <meta name="description"
-        content="Виктория Терехова — профессиональный психолог, помогает справляться с тревожностью, выстраивать границы и находить себя. Онлайн-консультации." />
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Виктория Терехова — Психолог | Онлайн-консультации</title>
+  <meta name="description"
+    content="Виктория Терехова — профессиональный психолог, помогает справляться с тревожностью, выстраивать границы и находить себя. Онлайн-консультации." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-    <!-- ─── MOBILE NAV ─────────────────────────────────────── -->
-    <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Мобильное меню">
-        <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть меню">✕</button>
-        <a href="#about" onclick="closeMobileNav()">О психологе</a>
-        <a href="#services" onclick="closeMobileNav()">Услуги</a>
-        <a href="#how" onclick="closeMobileNav()">Как это работает</a>
-        <a href="#articles" onclick="closeMobileNav()">Статьи</a>
-        <a href="#testimonials" onclick="closeMobileNav()">Отзывы</a>
-        <a href="#contact" onclick="closeMobileNav()">Записаться</a>
+  <!-- ─── MOBILE NAV ─────────────────────────────────────── -->
+  <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Мобильное меню">
+    <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть меню">✕</button>
+    <a href="#about" onclick="closeMobileNav()">О психологе</a>
+    <a href="#services" onclick="closeMobileNav()">Услуги</a>
+    <a href="#how" onclick="closeMobileNav()">Как это работает</a>
+    <a href="#articles" onclick="closeMobileNav()">Статьи</a>
+    <a href="#testimonials" onclick="closeMobileNav()">Отзывы</a>
+    <a href="#contact" onclick="closeMobileNav()">Записаться</a>
+  </div>
+
+  <!-- ─── HEADER ────────────────────────────────────────── -->
+  <header id="header">
+    <div class="container">
+      <nav>
+        <a href="index.html" class="nav-logo">
+          <span class="logo-name">Виктория Терехова</span>
+          <span class="logo-sub">Психолог · Онлайн</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#about">О психологе</a></li>
+          <li><a href="#services">Услуги</a></li>
+          <li><a href="#how">Как это работает</a></li>
+          <li><a href="#articles">Статьи</a></li>
+          <li><a href="#testimonials">Отзывы</a></li>
+        </ul>
+
+        <div class="nav-cta">
+          <a href="#contact" class="btn btn-primary">Записаться</a>
+          <button class="burger" id="burgerBtn" aria-label="Открыть меню" onclick="openMobileNav()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </nav>
     </div>
+  </header>
 
-    <!-- ─── HEADER ────────────────────────────────────────── -->
-    <header id="header">
-        <div class="container">
-            <nav>
-                <a href="index.html" class="nav-logo">
-                    <span class="logo-name">Виктория Терехова</span>
-                    <span class="logo-sub">Психолог · Онлайн</span>
-                </a>
+  <!-- ─── HERO ──────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
-                <ul class="nav-links">
-                    <li><a href="#about">О психологе</a></li>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#how">Как это работает</a></li>
-                    <li><a href="#articles">Статьи</a></li>
-                    <li><a href="#testimonials">Отзывы</a></li>
-                </ul>
-
-                <div class="nav-cta">
-                    <a href="#contact" class="btn btn-primary">Записаться</a>
-                    <button class="burger" id="burgerBtn" aria-label="Открыть меню" onclick="openMobileNav()">
-                        <span></span><span></span><span></span>
-                    </button>
-                </div>
-            </nav>
+    <div class="container">
+      <div class="hero-inner">
+        <!-- Text -->
+        <div class="hero-content reveal">
+          <div class="hero-tag">
+            <span>🌿</span> Онлайн-консультации
+          </div>
+          <h1 class="hero-title">
+            Пространство для вашего<br>
+            <em>внутреннего роста</em>
+          </h1>
+          <p class="hero-desc">
+            Я — Виктория Терехова, психолог с нежным и профессиональным подходом. Помогаю справляться с
+            тревожностью, выстраивать личные границы и находить путь к себе в спокойной, безопасной
+            обстановке.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Записаться на консультацию →</a>
+            <a href="#about" class="btn btn-outline">Узнать больше</a>
+          </div>
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">7+</div>
+              <div class="stat-label">лет<br>опыта</div>
+            </div>
+            <div>
+              <div class="stat-num">400+</div>
+              <div class="stat-label">довольных<br>клиентов</div>
+            </div>
+            <div>
+              <div class="stat-num">100%</div>
+              <div class="stat-label">онлайн<br>формат</div>
+            </div>
+          </div>
         </div>
-    </header>
 
-    <!-- ─── HERO ──────────────────────────────────────────── -->
-    <section class="hero" id="home">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-
-        <div class="container">
-            <div class="hero-inner">
-                <!-- Text -->
-                <div class="hero-content reveal">
-                    <div class="hero-tag">
-                        <span>🌿</span> Онлайн-консультации
-                    </div>
-                    <h1 class="hero-title">
-                        Пространство для вашего<br>
-                        <em>внутреннего роста</em>
-                    </h1>
-                    <p class="hero-desc">
-                        Я — Виктория Терехова, психолог с нежным и профессиональным подходом. Помогаю справляться с
-                        тревожностью, выстраивать личные границы и находить путь к себе в спокойной, безопасной
-                        обстановке.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="#contact" class="btn btn-primary">Записаться на консультацию →</a>
-                        <a href="#about" class="btn btn-outline">Узнать больше</a>
-                    </div>
-                    <div class="hero-stats">
-                        <div>
-                            <div class="stat-num">7+</div>
-                            <div class="stat-label">лет<br>опыта</div>
-                        </div>
-                        <div>
-                            <div class="stat-num">400+</div>
-                            <div class="stat-label">довольных<br>клиентов</div>
-                        </div>
-                        <div>
-                            <div class="stat-num">100%</div>
-                            <div class="stat-label">онлайн<br>формат</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Visual -->
-                <div class="hero-visual reveal" style="transition-delay:0.2s">
-                    <div class="hero-photo-wrap">
-                        <div class="hero-photo-bg"></div>
-                        <img src="images/hero.png" alt="Виктория Терехова — психолог" class="hero-photo" />
-                        <div class="hero-badge">
-                            <div class="badge-icon">🎓</div>
-                            <div class="badge-text">
-                                <strong>Сертифицированный</strong>
-                                психолог, КПТ и гештальт
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- Visual -->
+        <div class="hero-visual reveal" style="transition-delay:0.2s">
+          <div class="hero-photo-wrap">
+            <div class="hero-photo-bg"></div>
+            <img src="images/hero.png" alt="Виктория Терехова — психолог" class="hero-photo" />
+            <div class="hero-badge">
+              <div class="badge-icon">🎓</div>
+              <div class="badge-text">
+                <strong>Сертифицированный</strong>
+                психолог, КПТ и гештальт
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ─── ABOUT ─────────────────────────────────────────── -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="about-inner">
-                <!-- Image -->
-                <div class="about-image-wrap reveal">
-                    <img src="images/hero.png" alt="Виктория Терехова" class="about-image-main" />
-                    <div class="about-cert">
-                        <strong>7+</strong>
-                        лет практики
-                    </div>
-                </div>
-
-                <!-- Text -->
-                <div class="about-text reveal" style="transition-delay:0.15s">
-                    <p class="section-label">О психологе</p>
-                    <h2 class="section-title">Здравствуйте, я — Виктория</h2>
-                    <p class="about-body" style="margin-top:20px">
-                        Я верю, что каждый человек несёт в себе огромный ресурс и способность к исцелению. Моя задача —
-                        создать для вас безопасное пространство, где вы сможете открыто говорить, исследовать себя и
-                        двигаться вперёд в своём темпе.
-                    </p>
-                    <p class="about-body">
-                        Работаю в интегративном подходе, объединяя методы когнитивно-поведенческой терапии (КПТ) и
-                        гештальт-терапии. Это позволяет мне помогать с широким кругом запросов — от ситуативной тревоги
-                        до глубинных личностных паттернов.
-                    </p>
-                    <p class="about-body">
-                        Образование: высшее психологическое, Московский государственный университет. Дополнительные
-                        сертификаты: КПТ (Berlin Institute), гештальт-терапия (МГИ), психосоматика.
-                    </p>
-
-                    <div class="about-qualities">
-                        <span class="quality-tag">🧠 КПТ-терапия</span>
-                        <span class="quality-tag">🌱 Гештальт</span>
-                        <span class="quality-tag">💬 Психосоматика</span>
-                        <span class="quality-tag">🤝 Семейные отношения</span>
-                        <span class="quality-tag">✨ Тревога и стресс</span>
-                        <span class="quality-tag">🏠 Личные границы</span>
-                    </div>
-
-                    <a href="#contact" class="btn btn-primary">Записаться на первую встречу</a>
-                </div>
-            </div>
+  <!-- ─── ABOUT ─────────────────────────────────────────── -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-inner">
+        <!-- Image -->
+        <div class="about-image-wrap reveal">
+          <img src="images/hero.png" alt="Виктория Терехова" class="about-image-main" />
+          <div class="about-cert">
+            <strong>7+</strong>
+            лет практики
+          </div>
         </div>
-    </section>
 
-    <!-- ─── SERVICES ───────────────────────────────────────── -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="services-head reveal">
-                <p class="section-label">Услуги и стоимость</p>
-                <h2 class="section-title">Чем я могу вам помочь</h2>
-                <p class="section-subtitle">Все консультации проходят онлайн в удобном для вас формате — через Zoom или
-                    Telegram.</p>
-            </div>
+        <!-- Text -->
+        <div class="about-text reveal" style="transition-delay:0.15s">
+          <p class="section-label">О психологе</p>
+          <h2 class="section-title">Здравствуйте, я — Виктория</h2>
+          <p class="about-body" style="margin-top:20px">
+            Я верю, что каждый человек несёт в себе огромный ресурс и способность к исцелению. Моя задача —
+            создать для вас безопасное пространство, где вы сможете открыто говорить, исследовать себя и
+            двигаться вперёд в своём темпе.
+          </p>
+          <p class="about-body">
+            Работаю в интегративном подходе, объединяя методы когнитивно-поведенческой терапии (КПТ) и
+            гештальт-терапии. Это позволяет мне помогать с широким кругом запросов — от ситуативной тревоги
+            до глубинных личностных паттернов.
+          </p>
+          <p class="about-body">
+            Образование: высшее психологическое, Московский государственный университет. Дополнительные
+            сертификаты: КПТ (Berlin Institute), гештальт-терапия (МГИ), психосоматика.
+          </p>
 
-            <div class="services-grid">
-                <!-- Card 1 -->
-                <div class="service-card reveal" style="transition-delay:0.05s">
-                    <div class="service-icon">🌿</div>
-                    <h3 class="service-title">Разовая консультация</h3>
-                    <p class="service-desc">Первый шаг к пониманию себя. Мы обсудим ваш запрос, познакомимся и наметим
-                        возможные пути работы.</p>
-                    <div class="service-price">
-                        <span class="price-amount">3 500 ₽</span>
-                        <span class="price-meta">/ 60 минут</span>
-                    </div>
-                </div>
+          <div class="about-qualities">
+            <span class="quality-tag">🧠 КПТ-терапия</span>
+            <span class="quality-tag">🌱 Гештальт</span>
+            <span class="quality-tag">💬 Психосоматика</span>
+            <span class="quality-tag">🤝 Семейные отношения</span>
+            <span class="quality-tag">✨ Тревога и стресс</span>
+            <span class="quality-tag">🏠 Личные границы</span>
+          </div>
 
-                <!-- Card 2 (Featured) -->
-                <div class="service-card featured reveal" style="transition-delay:0.1s">
-                    <span class="service-badge">Популярно</span>
-                    <div class="service-icon">💫</div>
-                    <h3 class="service-title">Курс терапии (5 сессий)</h3>
-                    <p class="service-desc">Глубокая работа с вашим запросом. Регулярные встречи позволяют прийти к
-                        устойчивым изменениям и лучше понять себя.</p>
-                    <div class="service-price">
-                        <span class="price-amount">15 000 ₽</span>
-                        <span class="price-meta">/ пакет (экономия 20%)</span>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="service-card reveal" style="transition-delay:0.15s">
-                    <div class="service-icon">💌</div>
-                    <h3 class="service-title">Письменная терапия</h3>
-                    <p class="service-desc">Переписка с психологом в удобном темпе. Отлично подходит, если сложно
-                        говорить вслух или ограничено время.</p>
-                    <div class="service-price">
-                        <span class="price-amount">2 500 ₽</span>
-                        <span class="price-meta">/ неделя переписки</span>
-                    </div>
-                </div>
-            </div>
+          <a href="#contact" class="btn btn-primary">Записаться на первую встречу</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ─── HOW IT WORKS ───────────────────────────────────── -->
-    <section class="how" id="how">
-        <div class="container">
-            <div class="how-head reveal">
-                <p class="section-label">Как это работает</p>
-                <h2 class="section-title">4 простых шага к началу</h2>
-                <p class="section-subtitle">Начать работу с психологом проще, чем кажется. Я проведу вас через каждый
-                    этап.</p>
-            </div>
+  <!-- ─── SERVICES ───────────────────────────────────────── -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="services-head reveal">
+        <p class="section-label">Услуги и стоимость</p>
+        <h2 class="section-title">Чем я могу вам помочь</h2>
+        <p class="section-subtitle">Все консультации проходят онлайн в удобном для вас формате — через Zoom или
+          Telegram.</p>
+      </div>
 
-            <div class="how-steps">
-                <div class="how-step reveal" style="transition-delay:0.05s">
-                    <div class="step-num">1</div>
-                    <h4 class="step-title">Оставьте заявку</h4>
-                    <p class="step-desc">Заполните форму ниже или напишите мне напрямую в любом удобном мессенджере.</p>
-                </div>
-                <div class="how-step reveal" style="transition-delay:0.12s">
-                    <div class="step-num">2</div>
-                    <h4 class="step-title">Первый контакт</h4>
-                    <p class="step-desc">Я отвечу в течение дня, уточним детали и согласуем удобное для вас время
-                        встречи.</p>
-                </div>
-                <div class="how-step reveal" style="transition-delay:0.18s">
-                    <div class="step-num">3</div>
-                    <h4 class="step-title">Оплата</h4>
-                    <p class="step-desc">Оплата удобным способом: карта, переводом. Оплата за разовую сессию или пакет.
-                    </p>
-                </div>
-                <div class="how-step reveal" style="transition-delay:0.24s">
-                    <div class="step-num">4</div>
-                    <h4 class="step-title">Встреча онлайн</h4>
-                    <p class="step-desc">Встречаемся в Zoom или Telegram в удобное время. Никаких поездок, всё из дома.
-                    </p>
-                </div>
-            </div>
+      <div class="services-grid">
+        <!-- Card 1 -->
+        <div class="service-card reveal" style="transition-delay:0.05s">
+          <div class="service-icon">🌿</div>
+          <h3 class="service-title">Разовая консультация</h3>
+          <p class="service-desc">Первый шаг к пониманию себя. Мы обсудим ваш запрос, познакомимся и наметим
+            возможные пути работы.</p>
+          <div class="service-price">
+            <span class="price-amount">3 500 ₽</span>
+            <span class="price-meta">/ 60 минут</span>
+          </div>
         </div>
-    </section>
 
-    <!-- ─── ARTICLES PREVIEW ───────────────────────────────── -->
-    <section class="articles-prev" id="articles">
-        <div class="container">
-            <div class="articles-head reveal">
-                <div>
-                    <p class="section-label">Блог и статьи</p>
-                    <h2 class="section-title">Полезные материалы</h2>
-                </div>
-                <a href="articles.html" class="btn btn-outline">Все статьи →</a>
+        <!-- Card 2 (Featured) -->
+        <div class="service-card featured reveal" style="transition-delay:0.1s">
+          <span class="service-badge">Популярно</span>
+          <div class="service-icon">💫</div>
+          <h3 class="service-title">Курс терапии (5 сессий)</h3>
+          <p class="service-desc">Глубокая работа с вашим запросом. Регулярные встречи позволяют прийти к
+            устойчивым изменениям и лучше понять себя.</p>
+          <div class="service-price">
+            <span class="price-amount">15 000 ₽</span>
+            <span class="price-meta">/ пакет (экономия 20%)</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="service-card reveal" style="transition-delay:0.15s">
+          <div class="service-icon">💌</div>
+          <h3 class="service-title">Письменная терапия</h3>
+          <p class="service-desc">Переписка с психологом в удобном темпе. Отлично подходит, если сложно
+            говорить вслух или ограничено время.</p>
+          <div class="service-price">
+            <span class="price-amount">2 500 ₽</span>
+            <span class="price-meta">/ неделя переписки</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── HOW IT WORKS ───────────────────────────────────── -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="how-head reveal">
+        <p class="section-label">Как это работает</p>
+        <h2 class="section-title">4 простых шага к началу</h2>
+        <p class="section-subtitle">Начать работу с психологом проще, чем кажется. Я проведу вас через каждый
+          этап.</p>
+      </div>
+
+      <div class="how-steps">
+        <div class="how-step reveal" style="transition-delay:0.05s">
+          <div class="step-num">1</div>
+          <h4 class="step-title">Оставьте заявку</h4>
+          <p class="step-desc">Заполните форму ниже или напишите мне напрямую в любом удобном мессенджере.</p>
+        </div>
+        <div class="how-step reveal" style="transition-delay:0.12s">
+          <div class="step-num">2</div>
+          <h4 class="step-title">Первый контакт</h4>
+          <p class="step-desc">Я отвечу в течение дня, уточним детали и согласуем удобное для вас время
+            встречи.</p>
+        </div>
+        <div class="how-step reveal" style="transition-delay:0.18s">
+          <div class="step-num">3</div>
+          <h4 class="step-title">Оплата</h4>
+          <p class="step-desc">Оплата удобным способом: карта, переводом. Оплата за разовую сессию или пакет.
+          </p>
+        </div>
+        <div class="how-step reveal" style="transition-delay:0.24s">
+          <div class="step-num">4</div>
+          <h4 class="step-title">Встреча онлайн</h4>
+          <p class="step-desc">Встречаемся в Zoom или Telegram в удобное время. Никаких поездок, всё из дома.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ARTICLES PREVIEW ───────────────────────────────── -->
+  <section class="articles-prev" id="articles">
+    <div class="container">
+      <div class="articles-head reveal">
+        <div>
+          <p class="section-label">Блог и статьи</p>
+          <h2 class="section-title">Полезные материалы</h2>
+        </div>
+        <a href="articles.html" class="btn btn-outline">Все статьи →</a>
+      </div>
+
+      <div class="articles-grid" id="homeArticlesList">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ────────────────────────────────────── -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="testimonials-head reveal"
+        style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+        <div style="text-align:left;">
+          <p class="section-label">Отзывы</p>
+          <h2 class="section-title">Что говорят клиенты</h2>
+        </div>
+        <button class="btn btn-outline" onclick="openReviewModal()">Оставить отзыв</button>
+      </div>
+
+      <div class="testimonials-grid" id="testimonialsList">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ────────────────────────────────────────── -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <!-- Info -->
+        <div class="contact-info reveal">
+          <p class="section-label">Записаться</p>
+          <h2 class="section-title">Сделайте первый шаг</h2>
+          <p class="section-subtitle">Готова ответить на ваши вопросы и помочь выбрать формат работы, который
+            подойдёт именно вам.</p>
+
+          <div class="contact-links">
+            <a href="https://t.me/vikaterekhova" class="contact-link" target="_blank" rel="noopener">
+              <span class="contact-link-icon">✈️</span>
+              <div class="contact-link-text">
+                <span>Telegram</span>
+                <strong>@vikaterekhova</strong>
+              </div>
+            </a>
+            <a href="https://wa.me/79001234567" class="contact-link" target="_blank" rel="noopener">
+              <span class="contact-link-icon">📱</span>
+              <div class="contact-link-text">
+                <span>WhatsApp</span>
+                <strong>+7 900 123-45-67</strong>
+              </div>
+            </a>
+            <a href="mailto:vika@terekhova.ru" class="contact-link">
+              <span class="contact-link-icon">📧</span>
+              <div class="contact-link-text">
+                <span>Email</span>
+                <strong>vika@terekhova.ru</strong>
+              </div>
+            </a>
+          </div>
+
+          <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">
+            Отвечаю на сообщения в будние дни с 9:00 до 21:00 (МСК).
+            Стараюсь ответить в течение нескольких часов.
+          </p>
+        </div>
+
+        <!-- Form -->
+        <div class="reveal" style="transition-delay:0.15s">
+          <form class="contact-form" id="contactForm" onsubmit="handleContactSubmit(event)">
+            <h3 style="font-family:var(--font-head);font-size:1.4rem;color:var(--text-dark);margin-bottom:28px;">
+              Оставить заявку
+            </h3>
+            <div class="form-group">
+              <label for="contactName">Ваше имя</label>
+              <input type="text" id="contactName" name="name" placeholder="Анна" required />
             </div>
+            <div class="form-group">
+              <label for="contactRef">Телефон / Telegram</label>
+              <input type="text" id="contactRef" name="phone" placeholder="+7 999 000-00-00" required />
+            </div>
+            <div class="form-group">
+              <label for="contactQuery">С чем вы хотели бы поработать?</label>
+              <textarea id="contactQuery" name="message"
+                placeholder="Опишите ситуацию в нескольких словах (необязательно)"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit" id="contactSubmitBtn">
+              Отправить заявку →
+            </button>
+            <div id="contactSuccess"
+              style="display:none; color:var(--accent); text-align:center; margin-top:16px; font-weight:600;">Спасибо!
+              Заявка успешно отправлена.<br>Я свяжусь с вами в ближайшее время.</div>
 
-            <div class="articles-grid">
-                <div class="article-card reveal" style="transition-delay:0.05s">
-                    <img src="images/article-anxiety.png" alt="Тревожность" class="article-thumb" />
-                    <div class="article-body">
-                        <span class="article-cat">Тревога</span>
-                        <h3 class="article-title">Как справиться с тревожностью: практические шаги</h3>
-                        <p class="article-excerpt">Тревога — это нормальная реакция организма, но когда она становится
-                            постоянной, важно знать, как с ней работать...</p>
-                        <div class="article-meta">
-                            <span>🗓</span> 28 февраля 2026
+            <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:14px;">
+              Нажимая кнопку, вы соглашаетесь на обработку персональных данных
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <span class="logo-name">Виктория Терехова</span>
+            <span class="logo-sub">Психолог · Онлайн</span>
+          </div>
+          <p style="margin-top:16px">
+            Создаю безопасное пространство для вашего роста и исцеления. Онлайн-консультации для клиентов по
+            всему миру.
+          </p>
+        </div>
+
+        <ul class="footer-col">
+          <h4>Навигация</h4>
+          <li><a href="#about">О психологе</a></li>
+          <li><a href="#services">Услуги и цены</a></li>
+          <li><a href="#how">Как это работает</a></li>
+          <li><a href="articles.html">Статьи</a></li>
+          <li><a href="#testimonials">Отзывы</a></li>
+        </ul>
+
+        <ul class="footer-col">
+          <h4>Связаться</h4>
+          <li><a href="https://t.me/vikaterekhova" target="_blank">Telegram</a></li>
+          <li><a href="https://wa.me/79001234567" target="_blank">WhatsApp</a></li>
+          <li><a href="mailto:vika@terekhova.ru">Email</a></li>
+          <li><a href="#contact">Записаться</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Виктория Терехова. Все права защищены.</span>
+        <span>Психолог-консультант · КПТ · Гештальт</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── REVIEW MODAL ────────────────────────────────────── -->
+  <div id="reviewModal" role="dialog" aria-modal="true"
+    style="display:none; position:fixed; inset:0; z-index:5000; background:rgba(61,43,43,0.4); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px;">
+    <div class="contact-form" style="width:100%; max-width:500px; position:relative;">
+      <button onclick="closeReviewModal()"
+        style="position:absolute; top:20px; right:20px; border:none; background:none; font-size:1.5rem; cursor:pointer; color:var(--text-mid);">✕</button>
+      <h3 style="font-family:var(--font-head); font-size:1.4rem; color:var(--text-dark); margin-bottom:24px;">Оставить
+        отзыв</h3>
+      <form id="submitReviewForm" onsubmit="handleReviewSubmit(event)">
+        <div class="form-group">
+          <label>Ваше имя</label>
+          <input type="text" id="revName" placeholder="Анна М." required />
+        </div>
+        <div class="form-group">
+          <label>Год начала работы (необязательно)</label>
+          <input type="text" id="revYear" placeholder="Например: 2025" />
+        </div>
+        <div class="form-group">
+          <label>Ваш отзыв</label>
+          <textarea id="revText"
+            placeholder="Буду рада, если вы поделитесь своими впечатлениями от совместной работы..." required
+            style="min-height:90px;"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit" id="revSubmitBtn">Отправить на модерацию</button>
+        <div id="revSuccess"
+          style="display:none; color:var(--accent); text-align:center; margin-top:16px; font-weight:600;">Спасибо! Отзыв
+          успешно отправлен.<br>Он появится на сайте после модерации.</div>
+      </form>
+    </div>
+  </div>
+
+  <script src="articles-data.js"></script>
+  <script src="applications-data.js"></script>
+  <script src="reviews-data.js"></script>
+  <script src="main.js"></script>
+  <script>
+    function renderHomeArticles() {
+      const articles = getArticles().slice(0, 3);
+      const list = document.getElementById('homeArticlesList');
+      if (articles.length === 0) list.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Статей пока нет.</p>';
+      else {
+        list.innerHTML = articles.map((a, i) => {
+          const date = a.date ? new Date(a.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+          return `
+                    <div class="article-card reveal" style="transition-delay:${i * 0.05}s; cursor:pointer;" onclick="window.location.href='articles.html?read=${a.id}'">
+                        <img src="${a.image || 'images/article-anxiety.png'}" class="article-thumb" onerror="this.src='images/article-anxiety.png'" />
+                        <div class="article-body">
+                            <span class="article-cat">${a.category || ''}</span>
+                            <h3 class="article-title">${a.title}</h3>
+                            <p class="article-excerpt">${(a.excerpt || '').slice(0, 100)}...</p>
+                            <div class="article-meta"><span>🗓</span> ${date} <span style="margin-left: 8px;">👁 ${a.views || 0}</span></div>
                         </div>
-                    </div>
-                </div>
+                    </div>`;
+        }).join('');
+      }
 
-                <div class="article-card reveal" style="transition-delay:0.1s">
-                    <img src="images/article-boundaries.png" alt="Личные границы" class="article-thumb" />
-                    <div class="article-body">
-                        <span class="article-cat">Отношения</span>
-                        <h3 class="article-title">Личные границы: как научиться говорить «нет»</h3>
-                        <p class="article-excerpt">Умение отказывать — это не эгоизм, а забота о себе. Разбираемся,
-                            почему слово «нет» так сложно даётся...</p>
-                        <div class="article-meta">
-                            <span>🗓</span> 15 февраля 2026
-                        </div>
-                    </div>
-                </div>
+      // Observe dynamically generated elements if Observer is present
+      if (typeof revealObserver !== 'undefined') {
+        document.querySelectorAll('#homeArticlesList .reveal').forEach(el => revealObserver.observe(el));
+      }
+    }
 
-                <div class="article-card reveal" style="transition-delay:0.15s">
-                    <img src="images/article-therapy.png" alt="Психотерапия" class="article-thumb" />
-                    <div class="article-body">
-                        <span class="article-cat">О терапии</span>
-                        <h3 class="article-title">Путь к себе: зачем нужна психотерапия</h3>
-                        <p class="article-excerpt">Многие задаются вопросом: зачем идти к психологу, если можно
-                            справиться самому? Отвечаю честно...</p>
-                        <div class="article-meta">
-                            <span>🗓</span> 2 февраля 2026
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── TESTIMONIALS ────────────────────────────────────── -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="testimonials-head reveal">
-                <p class="section-label">Отзывы</p>
-                <h2 class="section-title">Что говорят клиенты</h2>
-            </div>
-
-            <div class="testimonials-grid">
-                <div class="testi-card reveal" style="transition-delay:0.05s">
+    function renderTestimonials() {
+      const reviews = getApprovedReviews().slice(0, 3); // show latest 3
+      const list = document.getElementById('testimonialsList');
+      if (reviews.length === 0) {
+        list.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Отзывов пока нет.</p>';
+      } else {
+        list.innerHTML = reviews.map((r, i) => `
+                <div class="testi-card reveal" style="transition-delay:${i * 0.05}s">
                     <div class="testi-quote">"</div>
-                    <p class="testi-text">
-                        После нескольких месяцев работы с Викторией я наконец почувствовала, что понимаю себя. Тревога
-                        стала гораздо тише. Благодарна за безопасное пространство и искреннее внимание.
-                    </p>
+                    <p class="testi-text">${r.text}</p>
                     <div class="testi-author">
-                        <div class="testi-avatar">А</div>
+                        <div class="testi-avatar">${r.avatarText || r.name.charAt(0)}</div>
                         <div>
-                            <div class="testi-name">Анна М.</div>
-                            <div class="testi-since">Клиент с 2024 года</div>
+                            <div class="testi-name">${r.name}</div>
+                            <div class="testi-since">${r.date ? 'Клиент с ' + r.date + ' года' : ''}</div>
                         </div>
                     </div>
-                </div>
+                </div>`).join('');
+      }
 
-                <div class="testi-card reveal" style="transition-delay:0.1s">
-                    <div class="testi-quote">"</div>
-                    <p class="testi-text">
-                        Виктория помогла мне разобраться в запутанных отношениях с семьёй. Её подход очень тёплый и при
-                        этом профессиональный. Я научился говорить «нет» и не чувствовать себя виноватым.
-                    </p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">С</div>
-                        <div>
-                            <div class="testi-name">Сергей Р.</div>
-                            <div class="testi-since">Клиент с 2025 года</div>
-                        </div>
-                    </div>
-                </div>
+      // Observe dynamically generated elements if Observer is present
+      if (typeof revealObserver !== 'undefined') {
+        document.querySelectorAll('#testimonialsList .reveal').forEach(el => revealObserver.observe(el));
+      }
+    }
 
-                <div class="testi-card reveal" style="transition-delay:0.15s">
-                    <div class="testi-quote">"</div>
-                    <p class="testi-text">
-                        Онлайн-формат сначала казался необычным, но оказался очень удобным. Чувствуется, что Виктория
-                        по-настоящему слышит. Рекомендую всем, кто хочет понять себя лучше.
-                    </p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">Е</div>
-                        <div>
-                            <div class="testi-name">Елена К.</div>
-                            <div class="testi-since">Клиент с 2025 года</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    function openReviewModal() {
+      document.getElementById('reviewModal').style.display = 'flex';
+      document.getElementById('revSuccess').style.display = 'none';
+      document.getElementById('submitReviewForm').reset();
+      document.getElementById('revSubmitBtn').style.display = 'flex';
+    }
 
-    <!-- ─── CONTACT ────────────────────────────────────────── -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-inner">
-                <!-- Info -->
-                <div class="contact-info reveal">
-                    <p class="section-label">Записаться</p>
-                    <h2 class="section-title">Сделайте первый шаг</h2>
-                    <p class="section-subtitle">Готова ответить на ваши вопросы и помочь выбрать формат работы, который
-                        подойдёт именно вам.</p>
+    function closeReviewModal() {
+      document.getElementById('reviewModal').style.display = 'none';
+    }
 
-                    <div class="contact-links">
-                        <a href="https://t.me/vikaterekhova" class="contact-link" target="_blank" rel="noopener">
-                            <span class="contact-link-icon">✈️</span>
-                            <div class="contact-link-text">
-                                <span>Telegram</span>
-                                <strong>@vikaterekhova</strong>
-                            </div>
-                        </a>
-                        <a href="https://wa.me/79001234567" class="contact-link" target="_blank" rel="noopener">
-                            <span class="contact-link-icon">📱</span>
-                            <div class="contact-link-text">
-                                <span>WhatsApp</span>
-                                <strong>+7 900 123-45-67</strong>
-                            </div>
-                        </a>
-                        <a href="mailto:vika@terekhova.ru" class="contact-link">
-                            <span class="contact-link-icon">📧</span>
-                            <div class="contact-link-text">
-                                <span>Email</span>
-                                <strong>vika@terekhova.ru</strong>
-                            </div>
-                        </a>
-                    </div>
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const rev = {
+        id: generateReviewId(),
+        name: document.getElementById('revName').value.trim(),
+        date: document.getElementById('revYear').value.trim(),
+        text: document.getElementById('revText').value.trim(),
+        status: 'pending',
+        avatarText: document.getElementById('revName').value.trim().charAt(0).toUpperCase()
+      };
+      saveReview(rev);
+      document.getElementById('revSubmitBtn').style.display = 'none';
+      document.getElementById('revSuccess').style.display = 'block';
+      setTimeout(closeReviewModal, 3000);
+    }
 
-                    <p style="font-size:0.85rem;color:var(--text-light);line-height:1.7">
-                        Отвечаю на сообщения в будние дни с 9:00 до 21:00 (МСК).
-                        Стараюсь ответить в течение нескольких часов.
-                    </p>
-                </div>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const app = {
+        id: generateAppId(),
+        name: document.getElementById('contactName').value.trim(),
+        contact: document.getElementById('contactRef').value.trim(),
+        query: document.getElementById('contactQuery').value.trim(),
+        date: new Date().toISOString(),
+        status: 'new'
+      };
+      saveApplication(app);
+      document.getElementById('contactSubmitBtn').style.display = 'none';
+      document.getElementById('contactSuccess').style.display = 'block';
+      document.getElementById('contactForm').reset();
+      setTimeout(() => {
+        document.getElementById('contactSuccess').style.display = 'none';
+        document.getElementById('contactSubmitBtn').style.display = 'block';
+      }, 5000);
+    }
 
-                <!-- Form -->
-                <div class="reveal" style="transition-delay:0.15s">
-                    <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
-                        <h3
-                            style="font-family:var(--font-head);font-size:1.4rem;color:var(--text-dark);margin-bottom:28px;">
-                            Оставить заявку
-                        </h3>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Ваше имя</label>
-                                <input type="text" id="name" name="name" placeholder="Алёна" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Телефон / Telegram</label>
-                                <input type="text" id="phone" name="phone" placeholder="+7 900 000-00-00" required />
-                            </div>
-                        </div>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderHomeArticles();
+      if (typeof getApprovedReviews === 'function') {
+        renderTestimonials();
+      }
 
-                        <div class="form-group">
-                            <label for="service">Формат работы</label>
-                            <select id="service" name="service">
-                                <option value="">Выберите формат</option>
-                                <option value="single">Разовая консультация (3 500 ₽)</option>
-                                <option value="package">Курс 5 сессий (15 000 ₽)</option>
-                                <option value="written">Письменная терапия (2 500 ₽/нед)</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Расскажите немного о себе и запросе</label>
-                            <textarea id="message" name="message"
-                                placeholder="С чем вы хотели бы поработать? Можно написать совсем коротко."></textarea>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary form-submit" id="submitBtn">
-                            Отправить заявку →
-                        </button>
-
-                        <p style="font-size:0.78rem;color:var(--text-light);text-align:center;margin-top:14px;">
-                            Нажимая кнопку, вы соглашаетесь на обработку персональных данных
-                        </p>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ─── FOOTER ─────────────────────────────────────────── -->
-    <footer>
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-brand">
-                    <div class="nav-logo">
-                        <span class="logo-name">Виктория Терехова</span>
-                        <span class="logo-sub">Психолог · Онлайн</span>
-                    </div>
-                    <p style="margin-top:16px">
-                        Создаю безопасное пространство для вашего роста и исцеления. Онлайн-консультации для клиентов по
-                        всему миру.
-                    </p>
-                </div>
-
-                <ul class="footer-col">
-                    <h4>Навигация</h4>
-                    <li><a href="#about">О психологе</a></li>
-                    <li><a href="#services">Услуги и цены</a></li>
-                    <li><a href="#how">Как это работает</a></li>
-                    <li><a href="articles.html">Статьи</a></li>
-                    <li><a href="#testimonials">Отзывы</a></li>
-                </ul>
-
-                <ul class="footer-col">
-                    <h4>Связаться</h4>
-                    <li><a href="https://t.me/vikaterekhova" target="_blank">Telegram</a></li>
-                    <li><a href="https://wa.me/79001234567" target="_blank">WhatsApp</a></li>
-                    <li><a href="mailto:vika@terekhova.ru">Email</a></li>
-                    <li><a href="#contact">Записаться</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-bottom">
-                <span>© 2026 Виктория Терехова. Все права защищены.</span>
-                <span>Психолог-консультант · КПТ · Гештальт</span>
-            </div>
-        </div>
-    </footer>
-
-    <script src="main.js"></script>
+      // Ensure any newly added .reveal elements are observed
+      if (typeof revealObserver !== 'undefined') {
+        setTimeout(() => {
+          document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        }, 100);
+      }
+    });
+  </script>
 </body>
 
 </html>

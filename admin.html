@@ -55,8 +55,11 @@
                 <button class="nav-item" id="navArticles" onclick="showPage('articles')">
                     <span class="nav-icon">📝</span> Статьи
                 </button>
-                <button class="nav-item" id="navNew" onclick="showPage('editor', null)">
-                    <span class="nav-icon">✏️</span> Новая статья
+                <button class="nav-item" id="navReviews" onclick="showPage('reviews')">
+                    <span class="nav-icon">💬</span> Отзывы
+                </button>
+                <button class="nav-item" id="navApplications" onclick="showPage('applications')">
+                    <span class="nav-icon">🎓</span> Заявки на курсы
                 </button>
             </nav>
 
@@ -171,9 +174,11 @@
                         <div class="form-group">
                             <div class="image-upload-wrap">
                                 <img id="imagePreview" class="image-preview" src="" alt="Превью" />
-                                <label class="image-upload-btn" for="imageUpload">
+                                <label class="image-upload-btn" for="imageUpload" id="imageUploadLabel">
                                     🖼 Загрузить изображение
                                 </label>
+                                <button type="button" class="btn btn-outline btn-sm" id="removeImageBtn"
+                                    style="display:none;" onclick="removeImage()">🗑 Удалить</button>
                                 <input type="file" id="imageUpload" accept="image/*" style="display:none"
                                     onchange="handleImageUpload(event)" />
                             </div>
@@ -215,6 +220,57 @@
                 </div>
             </div>
 
+            <!-- ── PAGE: Reviews ────────────────────────────── -->
+            <div class="page" id="pageReviews">
+                <div class="table-wrap">
+                    <div class="table-head">
+                        <h3>Все отзывы</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Автор / Текст</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviewsTable">
+                            <!-- injected by JS -->
+                        </tbody>
+                    </table>
+                    <div class="empty-state" id="reviewsEmpty" style="display:none;">
+                        <div class="empty-icon">💬</div>
+                        <p>Отзывов пока нет.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── PAGE: Applications ─────────────────────────── -->
+            <div class="page" id="pageApplications">
+                <div class="table-wrap">
+                    <div class="table-head">
+                        <h3>Заявки на курсы</h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Имя и Контакты</th>
+                                <th>Курс / Запрос</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applicationsTable">
+                            <!-- injected by JS -->
+                        </tbody>
+                    </table>
+                    <div class="empty-state" id="applicationsEmpty" style="display:none;">
+                        <div class="empty-icon">🎓</div>
+                        <p>Заявок пока нет.</p>
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 
@@ -234,6 +290,8 @@
     <div id="toast"></div>
 
     <!-- Scripts -->
+    <script src="applications-data.js"></script>
+    <script src="reviews-data.js"></script>
     <script src="articles-data.js"></script>
     <script>
         /* ============================================================
@@ -296,7 +354,9 @@
             const titles = {
                 dashboard: 'Дашборд',
                 articles: 'Все статьи',
-                editor: editId ? 'Редактировать статью' : 'Новая статья'
+                editor: editId ? 'Редактировать статью' : 'Новая статья',
+                reviews: 'Отзывы',
+                applications: 'Заявки на курсы'
             };
             document.getElementById('topbarTitle').textContent = titles[page] || '';
 
@@ -312,6 +372,14 @@
                 document.getElementById('pageEditor').classList.add('active');
                 document.getElementById('navNew').classList.add('active');
                 loadEditor(editId);
+            } else if (page === 'reviews') {
+                document.getElementById('pageReviews').classList.add('active');
+                document.getElementById('navReviews').classList.add('active');
+                renderReviewsTable();
+            } else if (page === 'applications') {
+                document.getElementById('pageApplications').classList.add('active');
+                document.getElementById('navApplications').classList.add('active');
+                renderApplicationsTable();
             }
         }
 
@@ -398,6 +466,8 @@
 
             if (!id) {
                 document.getElementById('articleId').value = '';
+                document.getElementById('imageUploadLabel').style.display = 'inline-flex';
+                document.getElementById('removeImageBtn').style.display = 'none';
                 return;
             }
 
@@ -417,6 +487,11 @@
                 const preview = document.getElementById('imagePreview');
                 preview.src = article.image;
                 preview.classList.add('show');
+                document.getElementById('imageUploadLabel').style.display = 'none';
+                document.getElementById('removeImageBtn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('imageUploadLabel').style.display = 'inline-flex';
+                document.getElementById('removeImageBtn').style.display = 'none';
             }
 
             document.getElementById('saveBtn').textContent = '💾 Обновить статью';
@@ -455,8 +530,19 @@
                 const preview = document.getElementById('imagePreview');
                 preview.src = src;
                 preview.classList.add('show');
+                document.getElementById('imageUploadLabel').style.display = 'none';
+                document.getElementById('removeImageBtn').style.display = 'inline-flex';
             };
             reader.readAsDataURL(file);
+        }
+
+        function removeImage() {
+            document.getElementById('articleImage').value = '';
+            document.getElementById('imagePreview').src = '';
+            document.getElementById('imagePreview').classList.remove('show');
+            document.getElementById('imageUploadLabel').style.display = 'inline-flex';
+            document.getElementById('removeImageBtn').style.display = 'none';
+            document.getElementById('imageUpload').value = '';
         }
 
         // ── Editor toolbar ──────────────────────────────────────────
@@ -514,6 +600,114 @@
         document.getElementById('confirmModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('confirmModal')) closeModal();
         });
+
+        // ── Reviews Logic ────────────────────────────────────────────
+        function renderReviewsTable() {
+            if (typeof getReviews !== 'function') return;
+            const reviews = getReviews();
+            const tbody = document.getElementById('reviewsTable');
+            const empty = document.getElementById('reviewsEmpty');
+            if (reviews.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            tbody.innerHTML = reviews.map(r => `
+                <tr>
+                  <td class="td-title">
+                    <strong>${escHtml(r.name)}</strong> ${r.date ? '<small>(' + escHtml(r.date) + ')</small>' : ''}
+                    <small style="margin-top:4px;">${escHtml(r.text)}</small>
+                  </td>
+                  <td>
+                    <span class="cat-badge" style="${r.status === 'pending' ? 'background:var(--danger-bg); color:var(--danger);' : 'background:var(--success-bg); color:var(--success);'}">
+                        ${r.status === 'pending' ? 'На модерации' : 'Одобрен'}
+                    </span>
+                  </td>
+                  <td class="td-actions">
+                    ${r.status === 'pending'
+                    ? `<button class="btn btn-outline btn-sm" onclick="approveReview('${r.id}')">✅ Одобрить</button>`
+                    : `<button class="btn btn-outline btn-sm" onclick="hideReview('${r.id}')" style="opacity:0.7;">Скрыть</button>`}
+                    <button class="btn btn-danger btn-sm" onclick="deleteReviewAdmin('${r.id}')">🗑 Удалить</button>
+                  </td>
+                </tr>
+            `).join('');
+        }
+
+        function approveReview(id) {
+            const reviews = getReviews();
+            const rev = reviews.find(r => r.id === id);
+            if (rev) { rev.status = 'approved'; saveReview(rev); showToast('✅ Отзыв одобрен', 'success'); renderReviewsTable(); }
+        }
+        function hideReview(id) {
+            const reviews = getReviews();
+            const rev = reviews.find(r => r.id === id);
+            if (rev) { rev.status = 'pending'; saveReview(rev); showToast('Отзыв скрыт', 'success'); renderReviewsTable(); }
+        }
+        function deleteReviewAdmin(id) {
+            if (confirm('Точно удалить этот отзыв?')) {
+                deleteReview(id);
+                showToast('🗑 Отзыв удален', 'error');
+                renderReviewsTable();
+            }
+        }
+
+        // ── Applications Logic ───────────────────────────────────────
+        function renderApplicationsTable() {
+            if (typeof getApplications !== 'function') return;
+            const apps = getApplications();
+            const tbody = document.getElementById('applicationsTable');
+            const empty = document.getElementById('applicationsEmpty');
+            if (apps.length === 0) {
+                tbody.innerHTML = '';
+                empty.style.display = 'block';
+                return;
+            }
+            empty.style.display = 'none';
+            tbody.innerHTML = apps.map(a => {
+                const date = a.date ? new Date(a.date).toLocaleDateString() : '';
+                return `
+                <tr>
+                    <td class="td-title">
+                        <strong>${escHtml(a.name)}</strong>
+                        <small>${escHtml(a.contact)}</small>
+                    </td>
+                    <td>
+                        <strong>${escHtml(a.courseName || '')}</strong>
+                        <small style="margin-top:4px;">${escHtml(a.query || '')}</small>
+                        ${date ? `<small>${date}</small>` : ''}
+                    </td>
+                    <td>
+                        <span class="cat-badge" style="background:${a.status === 'processed' ? 'var(--success-bg)' : 'var(--danger-bg)'}; color:${a.status === 'processed' ? 'var(--success)' : 'var(--danger)'};">
+                            ${a.status === 'processed' ? 'Обработана' : 'Новая'}
+                        </span>
+                    </td>
+                    <td class="td-actions">
+                        ${a.status !== 'processed' ? `<button class="btn btn-outline btn-sm" onclick="processApplication('${a.id}')">✅ Обработать</button>` : ''}
+                        <button class="btn btn-danger btn-sm" onclick="deleteApplicationAdmin('${a.id}')">🗑 Удалить</button>
+                    </td>
+                </tr>
+            `}).join('');
+        }
+
+        function processApplication(id) {
+            const apps = getApplications();
+            const app = apps.find(a => a.id === id);
+            if (app) {
+                app.status = 'processed';
+                saveApplication(app);
+                showToast('✅ Заявка обработана', 'success');
+                renderApplicationsTable();
+            }
+        }
+
+        function deleteApplicationAdmin(id) {
+            if (confirm('Точно удалить эту заявку?')) {
+                deleteApplication(id);
+                showToast('🗑 Заявка удалена', 'error');
+                renderApplicationsTable();
+            }
+        }
 
         // ── Toast ────────────────────────────────────────────────────
         function showToast(message, type = 'success') {

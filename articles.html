@@ -179,7 +179,7 @@
             background: var(--warm-white);
             border-radius: 24px;
             width: 100%;
-            max-width: 780px;
+            max-width: 900px;
             box-shadow: 0 32px 80px rgba(61, 43, 43, 0.2);
             overflow: hidden;
             animation: slideUp 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -509,9 +509,11 @@
             categories.forEach(cat => {
                 const count = articles.filter(a => a.category === cat).length;
                 const isActive = currentFilter === cat;
+                // create an ID without spaces for easier selection
+                const filterId = 'filter-' + btoa(unescape(encodeURIComponent(cat))).replace(/[^a-zA-Z0-9]/g, '');
                 html += `<button class="filter-btn ${isActive ? 'active' : ''}"
       onclick="applyFilter(${JSON.stringify(cat)})"
-      id="filter-${cat.replace(/\s+/g, '-')}">
+      id="${filterId}">
       ${escHtml(cat)} <span class="filter-count">${count}</span>
     </button>`;
             });
@@ -524,8 +526,11 @@
             const articles = getArticles();
             // Update active button
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            const id = cat === 'all' ? 'all' : cat.replace(/\s+/g, '-');
-            const btn = document.getElementById(`filter-${id}`);
+            let id = 'filter-all';
+            if (cat !== 'all') {
+                id = 'filter-' + btoa(unescape(encodeURIComponent(cat))).replace(/[^a-zA-Z0-9]/g, '');
+            }
+            const btn = document.getElementById(id);
             if (btn) btn.classList.add('active');
             renderArticles(articles, cat);
         }
@@ -561,7 +566,7 @@
           </div>
           <h2 class="article-full-title">${escHtml(a.title)}</h2>
           <div class="article-meta" style="margin-bottom:18px;">
-            🗓 ${date} ${readTime}
+            🗓 ${date} ${readTime} <span style="margin-left: 8px;">👁 ${a.views || 0}</span>
           </div>
           <p class="article-full-excerpt">${escHtml(a.excerpt || '')}</p>
           <span class="article-read-more" onclick="openArticle(${JSON.stringify(a.id)})">
@@ -602,6 +607,7 @@
       <div class="overlay-meta">
         <span>🗓 ${date}</span>
         ${readTime ? `<span>⏱ ${escHtml(readTime)}</span>` : ''}
+        <span>👁 ${article.views || 0}</span>
       </div>
       <div class="overlay-content">
         ${article.content || ''}
@@ -617,6 +623,15 @@
             overlay.classList.add('open');
             overlay.scrollTop = 0;
             document.body.style.overflow = 'hidden';
+
+            // Increment views
+            if (!article.views) article.views = 0;
+            article.views += 1;
+            saveArticle(article);
+
+            // Re-render articles to update count on card
+            const articlesList = getArticles();
+            renderArticles(articlesList, currentFilter);
         }
 
         function closeArticle() {
@@ -645,6 +660,15 @@
 
         // ── Init ─────────────────────────────────────────────────────
         renderAll();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const readId = params.get('read');
+            if (readId) {
+                openArticle(readId);
+                window.history.replaceState({}, '', window.location.pathname);
+            }
+        });
     </script>
 
 </body>
