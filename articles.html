@@ -61,6 +61,10 @@
             box-shadow: 0 4px 14px rgba(193, 127, 116, 0.35);
         }
 
+        .filter-btn {
+            cursor: pointer;
+        }
+
         .filter-count {
             display: inline-flex;
             align-items: center;
@@ -502,23 +506,27 @@
 
             const allCount = articles.length;
             let html = `<button class="filter-btn ${currentFilter === 'all' ? 'active' : ''}"
-    onclick="applyFilter('all')" id="filter-all">
-    Все <span class="filter-count">${allCount}</span>
-  </button>`;
+        data-cat="all" id="filter-all">
+        Все <span class="filter-count">${allCount}</span>
+      </button>`;
 
             categories.forEach(cat => {
                 const count = articles.filter(a => a.category === cat).length;
                 const isActive = currentFilter === cat;
-                // create an ID without spaces for easier selection
-                const filterId = 'filter-' + btoa(unescape(encodeURIComponent(cat))).replace(/[^a-zA-Z0-9]/g, '');
+                const filterId = 'filter-' + cat.replace(/[^a-z0-9а-яё]/gi, '_');
                 html += `<button class="filter-btn ${isActive ? 'active' : ''}"
-      onclick="applyFilter(${JSON.stringify(cat)})"
-      id="${filterId}">
-      ${escHtml(cat)} <span class="filter-count">${count}</span>
-    </button>`;
+          data-cat="${escHtml(cat)}"
+          id="${filterId}">
+          ${escHtml(cat)} <span class="filter-count">${count}</span>
+        </button>`;
             });
 
             bar.innerHTML = `<span class="filter-label">Фильтр:</span>` + html;
+
+            // Assign clicks via delegation or listeners
+            bar.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => applyFilter(btn.dataset.cat));
+            });
         }
 
         function applyFilter(cat) {
@@ -528,7 +536,7 @@
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             let id = 'filter-all';
             if (cat !== 'all') {
-                id = 'filter-' + btoa(unescape(encodeURIComponent(cat))).replace(/[^a-zA-Z0-9]/g, '');
+                id = 'filter-' + cat.replace(/[^a-z0-9а-яё]/gi, '_');
             }
             const btn = document.getElementById(id);
             if (btn) btn.classList.add('active');
@@ -569,18 +577,25 @@
             🗓 ${date} ${readTime} <span style="margin-left: 8px;">👁 ${a.views || 0}</span>
           </div>
           <p class="article-full-excerpt">${escHtml(a.excerpt || '')}</p>
-          <span class="article-read-more" onclick="openArticle(${JSON.stringify(a.id)})">
+          <div class="article-read-more" data-id="${a.id}">
             Читать статью →
-          </span>
+          </div>
         </div>
       </article>
     `;
             }).join('');
 
-            // Trigger reveal for newly rendered cards
-            document.querySelectorAll('#articlesList .reveal').forEach(el => {
-                revealObserver.observe(el);
+            // Assign clicks via delegation for efficiency and quote-safety
+            list.querySelectorAll('.article-read-more').forEach(btn => {
+                btn.addEventListener('click', () => openArticle(btn.dataset.id));
             });
+
+            // Trigger reveal for newly rendered cards
+            if (typeof revealObserver !== 'undefined') {
+                document.querySelectorAll('#articlesList .reveal').forEach(el => {
+                    revealObserver.observe(el);
+                });
+            }
         }
 
         // ── Article Overlay Reader ───────────────────────────────────
@@ -634,6 +649,11 @@
             renderArticles(articlesList, currentFilter);
         }
 
+        // Expose functions globally just in case
+        window.openArticle = openArticle;
+        window.applyFilter = applyFilter;
+        window.closeArticle = closeArticle;
+
         function closeArticle() {
             document.getElementById('articleOverlay').classList.remove('open');
             document.body.style.overflow = '';
@@ -659,13 +679,14 @@
         }
 
         // ── Init ─────────────────────────────────────────────────────
-        renderAll();
-
         document.addEventListener('DOMContentLoaded', () => {
+            renderAll();
+
             const params = new URLSearchParams(window.location.search);
             const readId = params.get('read');
             if (readId) {
-                openArticle(readId);
+                // small timeout to ensure everything is rendered
+                setTimeout(() => openArticle(readId), 100);
                 window.history.replaceState({}, '', window.location.pathname);
             }
         });
