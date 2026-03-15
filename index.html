@@ -16,10 +16,8 @@
   <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Мобильное меню">
     <button class="mobile-nav-close" id="mobileNavClose" aria-label="Закрыть меню">✕</button>
     <a href="#about" onclick="closeMobileNav()">О психологе</a>
-    <a href="#services" onclick="closeMobileNav()">Услуги</a>
-    <a href="#how" onclick="closeMobileNav()">Как это работает</a>
-    <a href="#articles" onclick="closeMobileNav()">Статьи</a>
-    <a href="#testimonials" onclick="closeMobileNav()">Отзывы</a>
+    <a href="rpp.html" onclick="closeMobileNav()">РПП</a>
+    <a href="#family" onclick="closeMobileNav()">Семейная терапия</a>
     <a href="#contact" onclick="closeMobileNav()">Записаться</a>
   </div>
 
@@ -34,10 +32,8 @@
 
         <ul class="nav-links">
           <li><a href="#about">О психологе</a></li>
-          <li><a href="#services">Услуги</a></li>
-          <li><a href="#how">Как это работает</a></li>
-          <li><a href="#articles">Статьи</a></li>
-          <li><a href="#testimonials">Отзывы</a></li>
+          <li><a href="rpp.html">Помощь при РПП</a></li>
+          <li><a href="#family">Семейная терапия</a></li>
         </ul>
 
         <div class="nav-cta">
@@ -62,11 +58,11 @@
           <div class="hero-tag">
             <span>🌿</span> Онлайн-консультации
           </div>
-          <h1 class="hero-title">
+          <h1 class="hero-title" id="editHeroTitle">
             Пространство для вашего<br>
             <em>внутреннего роста</em>
           </h1>
-          <p class="hero-desc">
+          <p class="hero-desc" id="editHeroDesc">
             Я — Виктория Терехова, психолог с нежным и профессиональным подходом. Помогаю справляться с
             тревожностью, выстраивать личные границы и находить путь к себе в спокойной, безопасной
             обстановке.
@@ -95,7 +91,10 @@
         <div class="hero-visual reveal" style="transition-delay:0.2s">
           <div class="hero-photo-wrap">
             <div class="hero-photo-bg"></div>
-            <img src="images/hero.png" alt="Виктория Терехова — психолог" class="hero-photo" />
+            <div class="photo-placeholder"
+              style="aspect-ratio: 3/4; border-radius: var(--radius-lg); position: relative; z-index: 1;">
+              <span>Место для фото</span>
+            </div>
             <div class="hero-badge">
               <div class="badge-icon">🎓</div>
               <div class="badge-text">
@@ -115,7 +114,9 @@
       <div class="about-inner">
         <!-- Image -->
         <div class="about-image-wrap reveal">
-          <img src="images/hero.png" alt="Виктория Терехова" class="about-image-main" />
+          <div class="photo-placeholder" style="width:100%; aspect-ratio:4/5;">
+            <span>Место для фото</span>
+          </div>
           <div class="about-cert">
             <strong>7+</strong>
             лет практики
@@ -125,21 +126,30 @@
         <!-- Text -->
         <div class="about-text reveal" style="transition-delay:0.15s">
           <p class="section-label">О психологе</p>
-          <h2 class="section-title">Здравствуйте, я — Виктория</h2>
-          <p class="about-body" style="margin-top:20px">
+          <h2 class="section-title" id="editAboutTitle">Здравствуйте, я — Виктория</h2>
+          <p class="about-body" style="margin-top:20px" id="editAboutP1">
             Я верю, что каждый человек несёт в себе огромный ресурс и способность к исцелению. Моя задача —
             создать для вас безопасное пространство, где вы сможете открыто говорить, исследовать себя и
             двигаться вперёд в своём темпе.
           </p>
-          <p class="about-body">
+          <p class="about-body" id="editAboutP2">
             Работаю в интегративном подходе, объединяя методы когнитивно-поведенческой терапии (КПТ) и
             гештальт-терапии. Это позволяет мне помогать с широким кругом запросов — от ситуативной тревоги
             до глубинных личностных паттернов.
           </p>
-          <p class="about-body">
-            Образование: высшее психологическое, Московский государственный университет. Дополнительные
-            сертификаты: КПТ (Berlin Institute), гештальт-терапия (МГИ), психосоматика.
-          </p>
+          <!-- Diplomas Section -->
+          <div class="diplomas-section" style="margin-top: 30px;">
+            <p class="section-label" style="font-size: 0.9rem; margin-bottom: 12px; letter-spacing: 1px;">Образование и
+              сертификаты</p>
+            <div class="diplomas-grid">
+              <img src="images/diploma1.png" alt="Диплом 1" class="diploma-thumb" onclick="openLightbox(this.src)"
+                onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'140\'><rect width=\'100\' height=\'140\' fill=\'%23f0e6e4\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'12\' fill=\'%238a7c78\'>Диплом МГУ</text></svg>'" />
+              <img src="images/diploma2.png" alt="Сертификат 1" class="diploma-thumb" onclick="openLightbox(this.src)"
+                onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'140\'><rect width=\'100\' height=\'140\' fill=\'%23ede6db\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'12\' fill=\'%238a7c78\'>КПТ</text></svg>'" />
+              <img src="images/diploma3.png" alt="Сертификат 2" class="diploma-thumb" onclick="openLightbox(this.src)"
+                onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'140\'><rect width=\'100\' height=\'140\' fill=\'%23f0e6e4\'/><text x=\'50%\' y=\'50%\' dominant-baseline=\'middle\' text-anchor=\'middle\' font-size=\'12\' fill=\'%238a7c78\'>Гештальт</text></svg>'" />
+            </div>
+          </div>
 
           <div class="about-qualities">
             <span class="quality-tag">🧠 КПТ-терапия</span>
@@ -156,53 +166,78 @@
     </div>
   </section>
 
-  <!-- ─── SERVICES ───────────────────────────────────────── -->
-  <section class="services" id="services">
+  <!-- ─── PERSONAL THERAPY ───────────────────────────────── -->
+  <section class="services" id="personal">
     <div class="container">
       <div class="services-head reveal">
-        <p class="section-label">Услуги и стоимость</p>
-        <h2 class="section-title">Чем я могу вам помочь</h2>
-        <p class="section-subtitle">Все консультации проходят онлайн в удобном для вас формате — через Zoom или
-          Telegram.</p>
+        <p class="section-label">Направления работы</p>
+        <h2 class="section-title" id="editPerTitle">Личная терапия</h2>
+        <p class="section-subtitle" id="editPerSubtitle">Работаем бережно и в вашем ритме, опираясь на ваши потребности.
+        </p>
       </div>
 
       <div class="services-grid">
         <!-- Card 1 -->
         <div class="service-card reveal" style="transition-delay:0.05s">
-          <div class="service-icon">🌿</div>
-          <h3 class="service-title">Разовая консультация</h3>
-          <p class="service-desc">Первый шаг к пониманию себя. Мы обсудим ваш запрос, познакомимся и наметим
-            возможные пути работы.</p>
-          <div class="service-price">
-            <span class="price-amount">3 500 ₽</span>
-            <span class="price-meta">/ 60 минут</span>
-          </div>
+          <div class="service-icon">🌱</div>
+          <h3 class="service-title" id="editPerCard1Title">Работа с самооценкой</h3>
+          <p class="service-desc" id="editPerCard1Desc">Учимся замечать свои сильные стороны. Помогаю выстроить
+            внутреннюю опору и здоровую уверенность в себе.</p>
         </div>
 
-        <!-- Card 2 (Featured) -->
-        <div class="service-card featured reveal" style="transition-delay:0.1s">
-          <span class="service-badge">Популярно</span>
-          <div class="service-icon">💫</div>
-          <h3 class="service-title">Курс терапии (5 сессий)</h3>
-          <p class="service-desc">Глубокая работа с вашим запросом. Регулярные встречи позволяют прийти к
-            устойчивым изменениям и лучше понять себя.</p>
-          <div class="service-price">
-            <span class="price-amount">15 000 ₽</span>
-            <span class="price-meta">/ пакет (экономия 20%)</span>
-          </div>
+        <!-- Card 2 -->
+        <div class="service-card reveal" style="transition-delay:0.1s">
+          <div class="service-icon">✨</div>
+          <h3 class="service-title" id="editPerCard2Title">Поиск себя и мотивация</h3>
+          <p class="service-desc" id="editPerCard2Desc">Исследуем ваши истинные желания. Находим смыслы, возвращаем
+            энергию и радость к жизни.</p>
         </div>
 
         <!-- Card 3 -->
         <div class="service-card reveal" style="transition-delay:0.15s">
-          <div class="service-icon">💌</div>
-          <h3 class="service-title">Письменная терапия</h3>
-          <p class="service-desc">Переписка с психологом в удобном темпе. Отлично подходит, если сложно
-            говорить вслух или ограничено время.</p>
-          <div class="service-price">
-            <span class="price-amount">2 500 ₽</span>
-            <span class="price-meta">/ неделя переписки</span>
-          </div>
+          <div class="service-icon">☁️</div>
+          <h3 class="service-title" id="editPerCard3Title">Эмоциональное состояние</h3>
+          <p class="service-desc" id="editPerCard3Desc">Бережная работа с тревогой и стрессом. Находим инструменты для
+            возвращения спокойствия.</p>
         </div>
+      </div>
+
+      <div class="articles-grid" id="personalArticlesList" style="margin-top: 60px;">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAMILY THERAPY ─────────────────────────────────── -->
+  <section class="services" id="family" style="background: var(--bg-alt); padding-top: 80px; padding-bottom: 80px;">
+    <div class="container">
+      <div class="services-head reveal">
+        <p class="section-label">Отношения</p>
+        <h2 class="section-title" id="editFamTitle">Семейная терапия</h2>
+        <p class="section-subtitle" id="editFamSubtitle">Работа со взрослыми и детьми в едином пространстве для
+          восстановления доверия.</p>
+      </div>
+
+      <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+        <!-- Card 1 -->
+        <div class="service-card reveal" style="background: var(--bg-main); transition-delay:0.05s">
+          <div class="service-icon">👥</div>
+          <h3 class="service-title" id="editFamCard1Title">Терапия для пар</h3>
+          <p class="service-desc" id="editFamCard1Desc">Помощь в преодолении кризисов, восстановление доверия и навыка
+            слышать друг друга.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="service-card reveal" style="background: var(--bg-main); transition-delay:0.1s">
+          <div class="service-icon">🧸</div>
+          <h3 class="service-title" id="editFamCard2Title">Детская психология</h3>
+          <p class="service-desc" id="editFamCard2Desc">Работа с детскими страхами, возрастными кризисами и трудностями
+            в обучении.</p>
+        </div>
+      </div>
+
+      <div class="articles-grid" id="familyArticlesList" style="margin-top: 60px;">
+        <!-- populated by JS -->
       </div>
     </div>
   </section>
@@ -245,41 +280,6 @@
     </div>
   </section>
 
-  <!-- ─── ARTICLES PREVIEW ───────────────────────────────── -->
-  <section class="articles-prev" id="articles">
-    <div class="container">
-      <div class="articles-head reveal">
-        <div>
-          <p class="section-label">Блог и статьи</p>
-          <h2 class="section-title">Полезные материалы</h2>
-        </div>
-        <a href="articles.html" class="btn btn-outline">Все статьи →</a>
-      </div>
-
-      <div class="articles-grid" id="homeArticlesList">
-        <!-- populated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── TESTIMONIALS ────────────────────────────────────── -->
-  <section class="testimonials" id="testimonials">
-    <div class="container">
-      <div class="testimonials-head reveal"
-        style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
-        <div style="text-align:left;">
-          <p class="section-label">Отзывы</p>
-          <h2 class="section-title">Что говорят клиенты</h2>
-        </div>
-        <button class="btn btn-outline" onclick="openReviewModal()">Оставить отзыв</button>
-      </div>
-
-      <div class="testimonials-grid" id="testimonialsList">
-        <!-- populated by JS -->
-      </div>
-    </div>
-  </section>
-
   <!-- ─── CONTACT ────────────────────────────────────────── -->
   <section class="contact" id="contact">
     <div class="container">
@@ -292,18 +292,18 @@
             подойдёт именно вам.</p>
 
           <div class="contact-links">
-            <a href="https://t.me/vikaterekhova" class="contact-link" target="_blank" rel="noopener">
+            <a href="https://t.me/vikaterekhova" class="contact-link" target="_blank" id="editContactTg">
               <span class="contact-link-icon">✈️</span>
               <div class="contact-link-text">
                 <span>Telegram</span>
-                <strong>@vikaterekhova</strong>
+                <strong>Написать</strong>
               </div>
             </a>
-            <a href="https://wa.me/79001234567" class="contact-link" target="_blank" rel="noopener">
-              <span class="contact-link-icon">📱</span>
+            <a href="https://wa.me/79001234567" class="contact-link" target="_blank" id="editContactWa">
+              <span class="contact-link-icon">💬</span>
               <div class="contact-link-text">
                 <span>WhatsApp</span>
-                <strong>+7 900 123-45-67</strong>
+                <strong>Написать</strong>
               </div>
             </a>
             <a href="mailto:vika@terekhova.ru" class="contact-link">
@@ -374,16 +374,14 @@
         <ul class="footer-col">
           <h4>Навигация</h4>
           <li><a href="#about">О психологе</a></li>
-          <li><a href="#services">Услуги и цены</a></li>
-          <li><a href="#how">Как это работает</a></li>
-          <li><a href="articles.html">Статьи</a></li>
-          <li><a href="#testimonials">Отзывы</a></li>
+          <li><a href="rpp.html">Помощь при РПП</a></li>
+          <li><a href="#family">Семейная терапия</a></li>
         </ul>
 
         <ul class="footer-col">
           <h4>Связаться</h4>
-          <li><a href="https://t.me/vikaterekhova" target="_blank">Telegram</a></li>
-          <li><a href="https://wa.me/79001234567" target="_blank">WhatsApp</a></li>
+          <li><a href="https://t.me/vikaterekhova" target="_blank" id="editFooterTg">Telegram</a></li>
+          <li><a href="https://wa.me/79001234567" target="_blank" id="editFooterWa">WhatsApp</a></li>
           <li><a href="mailto:vika@terekhova.ru">Email</a></li>
           <li><a href="#contact">Записаться</a></li>
         </ul>
@@ -395,120 +393,114 @@
       </div>
     </div>
   </footer>
-
-  <!-- ─── REVIEW MODAL ────────────────────────────────────── -->
-  <div id="reviewModal" role="dialog" aria-modal="true"
-    style="display:none; position:fixed; inset:0; z-index:5000; background:rgba(61,43,43,0.4); backdrop-filter:blur(6px); align-items:center; justify-content:center; padding:20px;">
-    <div class="contact-form" style="width:100%; max-width:500px; position:relative;">
-      <button onclick="closeReviewModal()"
-        style="position:absolute; top:20px; right:20px; border:none; background:none; font-size:1.5rem; cursor:pointer; color:var(--text-mid);">✕</button>
-      <h3 style="font-family:var(--font-head); font-size:1.4rem; color:var(--text-dark); margin-bottom:24px;">Оставить
-        отзыв</h3>
-      <form id="submitReviewForm" onsubmit="handleReviewSubmit(event)">
-        <div class="form-group">
-          <label>Ваше имя</label>
-          <input type="text" id="revName" placeholder="Анна М." required />
-        </div>
-        <div class="form-group">
-          <label>Год начала работы (необязательно)</label>
-          <input type="text" id="revYear" placeholder="Например: 2025" />
-        </div>
-        <div class="form-group">
-          <label>Ваш отзыв</label>
-          <textarea id="revText"
-            placeholder="Буду рада, если вы поделитесь своими впечатлениями от совместной работы..." required
-            style="min-height:90px;"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary form-submit" id="revSubmitBtn">Отправить на модерацию</button>
-        <div id="revSuccess"
-          style="display:none; color:var(--accent); text-align:center; margin-top:16px; font-weight:600;">Спасибо! Отзыв
-          успешно отправлен.<br>Он появится на сайте после модерации.</div>
-      </form>
-    </div>
+  <!-- Lightbox Modal for Diplomas -->
+  <div class="lightbox" id="diplomaLightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <img id="lightboxImg" src="" alt="Диплом" />
   </div>
 
+
+  <!-- Scripts -->
+  <script src="site-data.js"></script>
   <script src="articles-data.js"></script>
   <script src="applications-data.js"></script>
-  <script src="reviews-data.js"></script>
   <script src="main.js"></script>
+
+  <!-- Script to load site constructor data -->
   <script>
-    function renderHomeArticles() {
-      const articles = getArticles().slice(0, 3);
-      const list = document.getElementById('homeArticlesList');
-      if (articles.length === 0) list.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Статей пока нет.</p>';
-      else {
-        list.innerHTML = articles.map((a, i) => {
-          const date = a.date ? new Date(a.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
-          return `
-                    <div class="article-card reveal" style="transition-delay:${i * 0.05}s; cursor:pointer;" onclick="window.location.href='articles.html?read=${a.id}'">
-                        <img src="${a.image || 'images/article-anxiety.png'}" class="article-thumb" onerror="this.src='images/article-anxiety.png'" />
-                        <div class="article-body">
-                            <span class="article-cat">${a.category || ''}</span>
-                            <h3 class="article-title">${a.title}</h3>
-                            <p class="article-excerpt">${(a.excerpt || '').slice(0, 100)}...</p>
-                            <div class="article-meta"><span>🗓</span> ${date} <span style="margin-left: 8px;">👁 ${a.views || 0}</span></div>
-                        </div>
-                    </div>`;
-        }).join('');
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = getSiteData();
+
+      const elHeroTitle = document.getElementById('editHeroTitle');
+      if (elHeroTitle && data.heroTitle) elHeroTitle.innerHTML = data.heroTitle;
+
+      const elHeroDesc = document.getElementById('editHeroDesc');
+      if (elHeroDesc && data.heroDesc) elHeroDesc.textContent = data.heroDesc;
+
+      const elAboutTitle = document.getElementById('editAboutTitle');
+      if (elAboutTitle && data.aboutTitle) elAboutTitle.textContent = data.aboutTitle;
+
+      const elAboutP1 = document.getElementById('editAboutP1');
+      if (elAboutP1 && data.aboutP1) elAboutP1.textContent = data.aboutP1;
+
+      const elAboutP2 = document.getElementById('editAboutP2');
+      if (elAboutP2 && data.aboutP2) elAboutP2.textContent = data.aboutP2;
+
+
+      const elContactTg = document.getElementById('editContactTg');
+      if (elContactTg && data.contactTg) elContactTg.href = data.contactTg;
+
+      const elContactWa = document.getElementById('editContactWa');
+      if (elContactWa && data.contactWa) elContactWa.href = data.contactWa;
+
+      const elFooterTg = document.getElementById('editFooterTg');
+      if (elFooterTg && data.contactTg) elFooterTg.href = data.contactTg;
+
+      const elFooterWa = document.getElementById('editFooterWa');
+      if (elFooterWa && data.contactWa) elFooterWa.href = data.contactWa;
+
+      if (data.perTitle) {
+        const t = document.getElementById('editPerTitle');
+        if (t) t.textContent = data.perTitle;
       }
+      if (data.perSubtitle) {
+        const s = document.getElementById('editPerSubtitle');
+        if (s) s.textContent = data.perSubtitle;
+      }
+      if (data.perCard1Title) { const c = document.getElementById('editPerCard1Title'); if (c) c.textContent = data.perCard1Title; }
+      if (data.perCard1Desc) { const c = document.getElementById('editPerCard1Desc'); if (c) c.textContent = data.perCard1Desc; }
+      if (data.perCard2Title) { const c = document.getElementById('editPerCard2Title'); if (c) c.textContent = data.perCard2Title; }
+      if (data.perCard2Desc) { const c = document.getElementById('editPerCard2Desc'); if (c) c.textContent = data.perCard2Desc; }
+      if (data.perCard3Title) { const c = document.getElementById('editPerCard3Title'); if (c) c.textContent = data.perCard3Title; }
+      if (data.perCard3Desc) { const c = document.getElementById('editPerCard3Desc'); if (c) c.textContent = data.perCard3Desc; }
+
+      if (data.famTitle) { const c = document.getElementById('editFamTitle'); if (c) c.textContent = data.famTitle; }
+      if (data.famSubtitle) { const c = document.getElementById('editFamSubtitle'); if (c) c.textContent = data.famSubtitle; }
+      if (data.famCard1Title) { const c = document.getElementById('editFamCard1Title'); if (c) c.textContent = data.famCard1Title; }
+      if (data.famCard1Desc) { const c = document.getElementById('editFamCard1Desc'); if (c) c.textContent = data.famCard1Desc; }
+      if (data.famCard2Title) { const c = document.getElementById('editFamCard2Title'); if (c) c.textContent = data.famCard2Title; }
+      if (data.famCard2Desc) { const c = document.getElementById('editFamCard2Desc'); if (c) c.textContent = data.famCard2Desc; }
+
+    });
+  </script>
+  <script>
+    function renderThematicArticles(containerId, keywords) {
+      const allArticles = getArticles();
+      const filtered = allArticles.filter(a => {
+        const text = (a.title + ' ' + (a.category || '')).toLowerCase();
+        return keywords.some(kw => text.includes(kw));
+      }).slice(0, 3);
+
+      const articlesToDisplay = filtered.length > 0 ? filtered : allArticles.slice(0, 3);
+
+      const list = document.getElementById(containerId);
+      if (!list) return;
+      if (articlesToDisplay.length === 0) {
+        list.innerHTML = '';
+        return;
+      }
+
+      list.innerHTML = articlesToDisplay.map((a, i) => {
+        const date = a.date ? new Date(a.date).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })
+          : '';
+        return `
+  <div class="article-card reveal" style="transition-delay:${i * 0.05}s; cursor:pointer;"
+    onclick="window.location.href='articles.html?read=${a.id}'">
+    <img src="${a.image || 'images/article-anxiety.png'}" class="article-thumb"
+      onerror="this.src='images/article-anxiety.png'" />
+    <div class="article-body">
+      <span class="article-cat">${a.category || ''}</span>
+      <h3 class="article-title">${a.title}</h3>
+      <p class="article-excerpt">${(a.excerpt || '').slice(0, 100)}...</p>
+      <div class="article-meta"><span>🗓</span> ${date} <span style="margin-left: 8px;">👁 ${a.views || 0}</span></div>
+    </div>
+  </div>`;
+      }).join('');
 
       // Observe dynamically generated elements if Observer is present
       if (typeof revealObserver !== 'undefined') {
-        document.querySelectorAll('#homeArticlesList .reveal').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('#' + containerId + ' .reveal').forEach(el => revealObserver.observe(el));
       }
-    }
-
-    function renderTestimonials() {
-      const reviews = getApprovedReviews().slice(0, 3); // show latest 3
-      const list = document.getElementById('testimonialsList');
-      if (reviews.length === 0) {
-        list.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-light);">Отзывов пока нет.</p>';
-      } else {
-        list.innerHTML = reviews.map((r, i) => `
-                <div class="testi-card reveal" style="transition-delay:${i * 0.05}s">
-                    <div class="testi-quote">"</div>
-                    <p class="testi-text">${r.text}</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">${r.avatarText || r.name.charAt(0)}</div>
-                        <div>
-                            <div class="testi-name">${r.name}</div>
-                            <div class="testi-since">${r.date ? 'Клиент с ' + r.date + ' года' : ''}</div>
-                        </div>
-                    </div>
-                </div>`).join('');
-      }
-
-      // Observe dynamically generated elements if Observer is present
-      if (typeof revealObserver !== 'undefined') {
-        document.querySelectorAll('#testimonialsList .reveal').forEach(el => revealObserver.observe(el));
-      }
-    }
-
-    function openReviewModal() {
-      document.getElementById('reviewModal').style.display = 'flex';
-      document.getElementById('revSuccess').style.display = 'none';
-      document.getElementById('submitReviewForm').reset();
-      document.getElementById('revSubmitBtn').style.display = 'flex';
-    }
-
-    function closeReviewModal() {
-      document.getElementById('reviewModal').style.display = 'none';
-    }
-
-    function handleReviewSubmit(e) {
-      e.preventDefault();
-      const rev = {
-        id: generateReviewId(),
-        name: document.getElementById('revName').value.trim(),
-        date: document.getElementById('revYear').value.trim(),
-        text: document.getElementById('revText').value.trim(),
-        status: 'pending',
-        avatarText: document.getElementById('revName').value.trim().charAt(0).toUpperCase()
-      };
-      saveReview(rev);
-      document.getElementById('revSubmitBtn').style.display = 'none';
-      document.getElementById('revSuccess').style.display = 'block';
-      setTimeout(closeReviewModal, 3000);
     }
 
     function handleContactSubmit(e) {
@@ -532,10 +524,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      renderHomeArticles();
-      if (typeof getApprovedReviews === 'function') {
-        renderTestimonials();
-      }
+      renderThematicArticles('personalArticlesList', ['тревога', 'самооценка', 'мотивация', 'стресс', 'личное']);
+      renderThematicArticles('familyArticlesList', ['семья', 'дети', 'отношения', 'пара']);
 
       // Ensure any newly added .reveal elements are observed
       if (typeof revealObserver !== 'undefined') {

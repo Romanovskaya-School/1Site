@@ -52,11 +52,11 @@
                 <button class="nav-item active" id="navDashboard" onclick="showPage('dashboard')">
                     <span class="nav-icon">🏠</span> Дашборд
                 </button>
+                <button class="nav-item" id="navConstructor" onclick="showPage('constructor')">
+                    <span class="nav-icon">⚙️</span> Конструктор
+                </button>
                 <button class="nav-item" id="navArticles" onclick="showPage('articles')">
                     <span class="nav-icon">📝</span> Статьи
-                </button>
-                <button class="nav-item" id="navReviews" onclick="showPage('reviews')">
-                    <span class="nav-icon">💬</span> Отзывы
                 </button>
                 <button class="nav-item" id="navApplications" onclick="showPage('applications')">
                     <span class="nav-icon">🎓</span> Заявки на курсы
@@ -107,6 +107,106 @@
                             <!-- injected by JS -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <!-- ── PAGE: Constructor ─────────────────────────── -->
+            <div class="page" id="pageConstructor">
+                <div class="form-card">
+                    <form id="constructorForm" onsubmit="submitConstructor(event)">
+
+                        <div class="form-section-title">Главный экран (Hero)</div>
+                        <div class="form-group">
+                            <label for="cHeroTitle">Заголовок <span>(можно использовать &lt;br&gt; и
+                                    &lt;em&gt;)</span></label>
+                            <input type="text" id="cHeroTitle" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cHeroDesc">Описание</label>
+                            <textarea id="cHeroDesc" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-section-title">Блок «О психологе»</div>
+                        <div class="form-group">
+                            <label for="cAboutTitle">Заголовок</label>
+                            <input type="text" id="cAboutTitle" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cAboutP1">Абзац 1</label>
+                            <textarea id="cAboutP1" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cAboutP2">Абзац 2</label>
+                            <textarea id="cAboutP2" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-section-title">Личная терапия</div>
+                        <div class="form-group">
+                            <label for="cPerTitle">Заголовок секции</label>
+                            <input type="text" id="cPerTitle" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cPerSubtitle">Подзаголовок</label>
+                            <textarea id="cPerSubtitle" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cPerCard1Title">Карточка 1: Заголовок</label>
+                            <input type="text" id="cPerCard1Title" required />
+                            <label for="cPerCard1Desc" style="margin-top:8px;">Карточка 1: Текст</label>
+                            <textarea id="cPerCard1Desc" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cPerCard2Title">Карточка 2: Заголовок</label>
+                            <input type="text" id="cPerCard2Title" required />
+                            <label for="cPerCard2Desc" style="margin-top:8px;">Карточка 2: Текст</label>
+                            <textarea id="cPerCard2Desc" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cPerCard3Title">Карточка 3: Заголовок</label>
+                            <input type="text" id="cPerCard3Title" required />
+                            <label for="cPerCard3Desc" style="margin-top:8px;">Карточка 3: Текст</label>
+                            <textarea id="cPerCard3Desc" rows="2" required></textarea>
+                        </div>
+
+                        <div class="form-section-title">Семейная терапия</div>
+                        <div class="form-group">
+                            <label for="cFamTitle">Заголовок секции</label>
+                            <input type="text" id="cFamTitle" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cFamSubtitle">Подзаголовок</label>
+                            <textarea id="cFamSubtitle" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cFamCard1Title">Карточка 1: Заголовок</label>
+                            <input type="text" id="cFamCard1Title" required />
+                            <label for="cFamCard1Desc" style="margin-top:8px;">Карточка 1: Текст</label>
+                            <textarea id="cFamCard1Desc" rows="2" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="cFamCard2Title">Карточка 2: Заголовок</label>
+                            <input type="text" id="cFamCard2Title" required />
+                            <label for="cFamCard2Desc" style="margin-top:8px;">Карточка 2: Текст</label>
+                            <textarea id="cFamCard2Desc" rows="2" required></textarea>
+                        </div>
+
+                        <div class="form-section-title">Контакты</div>
+                        <div class="form-group">
+                            <label for="cContactTg">Ссылка на Telegram <span>(напр.
+                                    https://t.me/username)</span></label>
+                            <input type="url" id="cContactTg" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="cContactWa">Ссылка на WhatsApp <span>(напр.
+                                    https://wa.me/79001234567)</span></label>
+                            <input type="url" id="cContactWa" required />
+                        </div>
+
+                        <div class="form-actions" style="margin-top:32px;">
+                            <button type="submit" class="btn btn-primary" id="saveConstructorBtn">💾 Сохранить изменения
+                                сайта</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -220,31 +320,6 @@
                 </div>
             </div>
 
-            <!-- ── PAGE: Reviews ────────────────────────────── -->
-            <div class="page" id="pageReviews">
-                <div class="table-wrap">
-                    <div class="table-head">
-                        <h3>Все отзывы</h3>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Автор / Текст</th>
-                                <th>Статус</th>
-                                <th>Действия</th>
-                            </tr>
-                        </thead>
-                        <tbody id="reviewsTable">
-                            <!-- injected by JS -->
-                        </tbody>
-                    </table>
-                    <div class="empty-state" id="reviewsEmpty" style="display:none;">
-                        <div class="empty-icon">💬</div>
-                        <p>Отзывов пока нет.</p>
-                    </div>
-                </div>
-            </div>
-
             <!-- ── PAGE: Applications ─────────────────────────── -->
             <div class="page" id="pageApplications">
                 <div class="table-wrap">
@@ -290,8 +365,8 @@
     <div id="toast"></div>
 
     <!-- Scripts -->
+    <script src="site-data.js"></script>
     <script src="applications-data.js"></script>
-    <script src="reviews-data.js"></script>
     <script src="articles-data.js"></script>
     <script>
         /* ============================================================
@@ -353,9 +428,9 @@
 
             const titles = {
                 dashboard: 'Дашборд',
+                constructor: 'Настройки сайта',
                 articles: 'Все статьи',
                 editor: editId ? 'Редактировать статью' : 'Новая статья',
-                reviews: 'Отзывы',
                 applications: 'Заявки на курсы'
             };
             document.getElementById('topbarTitle').textContent = titles[page] || '';
@@ -364,6 +439,10 @@
                 document.getElementById('pageDashboard').classList.add('active');
                 document.getElementById('navDashboard').classList.add('active');
                 renderDashboard();
+            } else if (page === 'constructor') {
+                document.getElementById('pageConstructor').classList.add('active');
+                document.getElementById('navConstructor').classList.add('active');
+                loadConstructor();
             } else if (page === 'articles') {
                 document.getElementById('pageArticles').classList.add('active');
                 document.getElementById('navArticles').classList.add('active');
@@ -372,10 +451,6 @@
                 document.getElementById('pageEditor').classList.add('active');
                 document.getElementById('navNew').classList.add('active');
                 loadEditor(editId);
-            } else if (page === 'reviews') {
-                document.getElementById('pageReviews').classList.add('active');
-                document.getElementById('navReviews').classList.add('active');
-                renderReviewsTable();
             } else if (page === 'applications') {
                 document.getElementById('pageApplications').classList.add('active');
                 document.getElementById('navApplications').classList.add('active');
@@ -416,6 +491,65 @@
             document.getElementById('dashboardTable').innerHTML = recent.length
                 ? recent.map(a => tableRow(a)).join('')
                 : `<tr><td colspan="4" style="text-align:center;color:var(--text-light);padding:32px">Статей нет</td></tr>`;
+        }
+
+        // ── Constructor ─────────────────────────────────────────────
+        function loadConstructor() {
+            const data = getSiteData();
+            document.getElementById('cHeroTitle').value = data.heroTitle || '';
+            document.getElementById('cHeroDesc').value = data.heroDesc || '';
+            document.getElementById('cAboutTitle').value = data.aboutTitle || '';
+            document.getElementById('cAboutP1').value = data.aboutP1 || '';
+            document.getElementById('cAboutP2').value = data.aboutP2 || '';
+            document.getElementById('cContactTg').value = data.contactTg || '';
+            document.getElementById('cContactWa').value = data.contactWa || '';
+
+            document.getElementById('cPerTitle').value = data.perTitle || '';
+            document.getElementById('cPerSubtitle').value = data.perSubtitle || '';
+            document.getElementById('cPerCard1Title').value = data.perCard1Title || '';
+            document.getElementById('cPerCard1Desc').value = data.perCard1Desc || '';
+            document.getElementById('cPerCard2Title').value = data.perCard2Title || '';
+            document.getElementById('cPerCard2Desc').value = data.perCard2Desc || '';
+            document.getElementById('cPerCard3Title').value = data.perCard3Title || '';
+            document.getElementById('cPerCard3Desc').value = data.perCard3Desc || '';
+
+            document.getElementById('cFamTitle').value = data.famTitle || '';
+            document.getElementById('cFamSubtitle').value = data.famSubtitle || '';
+            document.getElementById('cFamCard1Title').value = data.famCard1Title || '';
+            document.getElementById('cFamCard1Desc').value = data.famCard1Desc || '';
+            document.getElementById('cFamCard2Title').value = data.famCard2Title || '';
+            document.getElementById('cFamCard2Desc').value = data.famCard2Desc || '';
+        }
+
+        function submitConstructor(e) {
+            e.preventDefault();
+            const data = {
+                heroTitle: document.getElementById('cHeroTitle').value.trim(),
+                heroDesc: document.getElementById('cHeroDesc').value.trim(),
+                aboutTitle: document.getElementById('cAboutTitle').value.trim(),
+                aboutP1: document.getElementById('cAboutP1').value.trim(),
+                aboutP2: document.getElementById('cAboutP2').value.trim(),
+                contactTg: document.getElementById('cContactTg').value.trim(),
+                contactWa: document.getElementById('cContactWa').value.trim(),
+
+                perTitle: document.getElementById('cPerTitle').value.trim(),
+                perSubtitle: document.getElementById('cPerSubtitle').value.trim(),
+                perCard1Title: document.getElementById('cPerCard1Title').value.trim(),
+                perCard1Desc: document.getElementById('cPerCard1Desc').value.trim(),
+                perCard2Title: document.getElementById('cPerCard2Title').value.trim(),
+                perCard2Desc: document.getElementById('cPerCard2Desc').value.trim(),
+                perCard3Title: document.getElementById('cPerCard3Title').value.trim(),
+                perCard3Desc: document.getElementById('cPerCard3Desc').value.trim(),
+
+                famTitle: document.getElementById('cFamTitle').value.trim(),
+                famSubtitle: document.getElementById('cFamSubtitle').value.trim(),
+                famCard1Title: document.getElementById('cFamCard1Title').value.trim(),
+                famCard1Desc: document.getElementById('cFamCard1Desc').value.trim(),
+                famCard2Title: document.getElementById('cFamCard2Title').value.trim(),
+                famCard2Desc: document.getElementById('cFamCard2Desc').value.trim(),
+            };
+            saveSiteData(data);
+            showToast('✅ Настройки сайта сохранены!', 'success');
         }
 
         // ── Articles table ──────────────────────────────────────────
@@ -600,57 +734,6 @@
         document.getElementById('confirmModal').addEventListener('click', (e) => {
             if (e.target === document.getElementById('confirmModal')) closeModal();
         });
-
-        // ── Reviews Logic ────────────────────────────────────────────
-        function renderReviewsTable() {
-            if (typeof getReviews !== 'function') return;
-            const reviews = getReviews();
-            const tbody = document.getElementById('reviewsTable');
-            const empty = document.getElementById('reviewsEmpty');
-            if (reviews.length === 0) {
-                tbody.innerHTML = '';
-                empty.style.display = 'block';
-                return;
-            }
-            empty.style.display = 'none';
-            tbody.innerHTML = reviews.map(r => `
-                <tr>
-                  <td class="td-title">
-                    <strong>${escHtml(r.name)}</strong> ${r.date ? '<small>(' + escHtml(r.date) + ')</small>' : ''}
-                    <small style="margin-top:4px;">${escHtml(r.text)}</small>
-                  </td>
-                  <td>
-                    <span class="cat-badge" style="${r.status === 'pending' ? 'background:var(--danger-bg); color:var(--danger);' : 'background:var(--success-bg); color:var(--success);'}">
-                        ${r.status === 'pending' ? 'На модерации' : 'Одобрен'}
-                    </span>
-                  </td>
-                  <td class="td-actions">
-                    ${r.status === 'pending'
-                    ? `<button class="btn btn-outline btn-sm" onclick="approveReview('${r.id}')">✅ Одобрить</button>`
-                    : `<button class="btn btn-outline btn-sm" onclick="hideReview('${r.id}')" style="opacity:0.7;">Скрыть</button>`}
-                    <button class="btn btn-danger btn-sm" onclick="deleteReviewAdmin('${r.id}')">🗑 Удалить</button>
-                  </td>
-                </tr>
-            `).join('');
-        }
-
-        function approveReview(id) {
-            const reviews = getReviews();
-            const rev = reviews.find(r => r.id === id);
-            if (rev) { rev.status = 'approved'; saveReview(rev); showToast('✅ Отзыв одобрен', 'success'); renderReviewsTable(); }
-        }
-        function hideReview(id) {
-            const reviews = getReviews();
-            const rev = reviews.find(r => r.id === id);
-            if (rev) { rev.status = 'pending'; saveReview(rev); showToast('Отзыв скрыт', 'success'); renderReviewsTable(); }
-        }
-        function deleteReviewAdmin(id) {
-            if (confirm('Точно удалить этот отзыв?')) {
-                deleteReview(id);
-                showToast('🗑 Отзыв удален', 'error');
-                renderReviewsTable();
-            }
-        }
 
         // ── Applications Logic ───────────────────────────────────────
         function renderApplicationsTable() {

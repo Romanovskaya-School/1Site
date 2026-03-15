@@ -95,3 +95,26 @@ if (blobs.length) {
         });
     }, { passive: true });
 }
+
+// ── Lightbox Gallery ───────────────────────────────────────
+function openLightbox(src) {
+    const lb = document.getElementById('diplomaLightbox');
+    const img = document.getElementById('lightboxImg');
+    if (lb && img) {
+        img.src = src;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeLightbox(event) {
+    // Only close if clicked outside the image or on the close button
+    if (event && event.target && event.target.tagName === 'IMG' && event.target.id === 'lightboxImg') {
+        return;
+    }
+    const lb = document.getElementById('diplomaLightbox');
+    if (lb) {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
