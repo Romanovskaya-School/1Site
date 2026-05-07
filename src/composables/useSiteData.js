@@ -132,17 +132,17 @@ const DEFAULT_SITE_DATA = {
     ]
 }
 
+const raw = localStorage.getItem(SITE_DATA_KEY)
+let initialData = { ...DEFAULT_SITE_DATA }
+if (raw) {
+    try {
+        initialData = { ...DEFAULT_SITE_DATA, ...JSON.parse(raw) }
+    } catch (e) {}
+}
+
+const siteData = reactive(initialData)
+
 export function useSiteData() {
-    const raw = localStorage.getItem(SITE_DATA_KEY)
-    let initialData = { ...DEFAULT_SITE_DATA }
-    if (raw) {
-        try {
-            initialData = { ...DEFAULT_SITE_DATA, ...JSON.parse(raw) }
-        } catch (e) {}
-    }
-    
-    const siteData = reactive(initialData)
-    
     const saveSiteData = (newData) => {
         if (newData) {
             Object.assign(siteData, newData)

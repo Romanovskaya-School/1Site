@@ -2,18 +2,19 @@ import { ref } from 'vue'
 
 const APPLICATIONS_KEY = 'vt_applications'
 
-export function useApplications() {
-  const getApplications = () => {
-    const raw = localStorage.getItem(APPLICATIONS_KEY)
-    if (!raw) return []
-    try {
-      return JSON.parse(raw)
-    } catch {
-      return []
-    }
+const getApplications = () => {
+  const raw = localStorage.getItem(APPLICATIONS_KEY)
+  if (!raw) return []
+  try {
+    return JSON.parse(raw)
+  } catch {
+    return []
   }
+}
 
-  const applications = ref(getApplications())
+const applications = ref(getApplications())
+
+export function useApplications() {
 
   const saveApplication = (app) => {
     const idx = applications.value.findIndex(a => a.id === app.id)

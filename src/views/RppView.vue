@@ -84,7 +84,7 @@
       <div class="container" style="max-width: 800px;">
         <div class="services-head reveal">
           <p class="section-label">Самодиагностика</p>
-          <h2 class="section-title">Каталог тестов</h2>
+          <h2 class="section-title">Есть ли у меня...?</h2>
         </div>
 
         <!-- Catalog Grid -->

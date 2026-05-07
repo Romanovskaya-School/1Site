@@ -32,23 +32,25 @@ const DEFAULT_ARTICLES = [
     }
 ]
 
-export function useArticles() {
-    const articles = ref([])
-    
-    const loadArticles = () => {
-        const raw = localStorage.getItem(STORAGE_KEY)
-        if (!raw) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_ARTICLES))
+const articles = ref([])
+
+const loadArticles = () => {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_ARTICLES))
+        articles.value = DEFAULT_ARTICLES
+    } else {
+        try {
+            articles.value = JSON.parse(raw)
+        } catch {
             articles.value = DEFAULT_ARTICLES
-        } else {
-            try {
-                articles.value = JSON.parse(raw)
-            } catch {
-                articles.value = DEFAULT_ARTICLES
-            }
         }
     }
-    
+}
+
+loadArticles()
+
+export function useArticles() {
     const saveArticle = (article) => {
         const idx = articles.value.findIndex(a => a.id === article.id)
         if (idx >= 0) {
@@ -63,8 +65,6 @@ export function useArticles() {
         articles.value = articles.value.filter(a => a.id !== id)
         localStorage.setItem(STORAGE_KEY, JSON.stringify(articles.value))
     }
-    
-    loadArticles()
     
     return { articles, loadArticles, saveArticle, deleteArticle }
 }

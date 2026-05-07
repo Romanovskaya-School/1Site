@@ -69,9 +69,9 @@ const submitted = ref(false)
 const phoneError = ref(false)
 
 const validatePhone = (phone) => {
-  // Stricter regex: must have 10-15 digits, can include +, (), -, and spaces
+  if (phone.startsWith('@')) return phone.length >= 3 
   const digitsOnly = phone.replace(/\D/g, '')
-  return digitsOnly.length >= 10 && digitsOnly.length <= 15
+  return digitsOnly.length >= 7 && digitsOnly.length <= 15
 }
 
 const submitForm = () => {
