@@ -1,8 +1,19 @@
 {
   "name": "vika-terekhova-psychologist",
   "version": "1.0.0",
+  "type": "module",
   "description": "Сайт психолога Виктории Тереховой",
   "scripts": {
-    "start": "npx serve . -l 3000"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.8"
   }
 }
