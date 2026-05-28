@@ -116,7 +116,7 @@
                 <h3 class="modal-test-title">{{ tests[activeTestIndex].title }}</h3>
                 
                 <div class="test-question-card">
-                  <p class="question-text">{{ tests[activeTestIndex].questions[currentQuestionIndex] }}</p>
+                  <p class="question-text">{{ typeof tests[activeTestIndex].questions[currentQuestionIndex] === 'object' ? tests[activeTestIndex].questions[currentQuestionIndex].text : tests[activeTestIndex].questions[currentQuestionIndex] }}</p>
                   <div class="options-grid">
                     <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '5' }" @click="answers[currentQuestionIndex] = '5'">Всегда</button>
                     <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '4' }" @click="answers[currentQuestionIndex] = '4'">Очень часто</button>
@@ -223,17 +223,37 @@ const nextQuestion = () => {
 }
 
 const calculateTest = () => {
-    const score = answers.value.reduce((a, b) => Number(a) + Number(b), 0)
+    let score = 0;
+    const test = tests.value[activeTestIndex.value];
     
-    const testResults = tests.value[activeTestIndex.value].results || []
-    const result = testResults.find(r => score <= r.max) || testResults[testResults.length - 1]
+    test.questions.forEach((q, index) => {
+        let answer = Number(answers.value[index]);
+        if (isNaN(answer)) answer = 0;
+        
+        let type = typeof q === 'object' ? (q.type || 'normal') : 'normal';
+        
+        if (type === 'normal') {
+            score += answer;
+        } else if (type === 'reverse') {
+            // Assuming 0-5 scale, reverse is 5 - answer
+            score += (5 - answer);
+        } else if (type === 'ignore') {
+            // Do nothing
+        }
+    });
     
-    testText.value = result ? result.text : `Ваш балл: ${score}`
+    const testResults = test.results || [];
     
-    // Check if it's the maximum threshold (i.e. the last one in the results array or score > first threshold)
-    isMaxResult.value = testResults.length > 1 && score > testResults[0].max
+    // Results should be sorted by max. Find the first result where score <= max
+    const sortedResults = [...testResults].sort((a, b) => a.max - b.max);
+    const result = sortedResults.find(r => score <= r.max) || sortedResults[sortedResults.length - 1];
+    
+    testText.value = result ? result.text : `Ваш балл: ${score}`;
+    
+    // Check if it's the maximum threshold
+    isMaxResult.value = sortedResults.length > 1 && score > sortedResults[0].max;
 
-    showResult.value = true
+    showResult.value = true;
 }
 
 const scrollToContactAndClose = () => {

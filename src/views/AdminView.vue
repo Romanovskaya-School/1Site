@@ -301,16 +301,30 @@
                 Вопросы ({{ editTest.questions.length }})
                 <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestQuestion">+ Добавить</button>
               </div>
-              <div v-for="(q, i) in editTest.questions" :key="i" class="form-group" style="display: flex; gap: 12px; align-items: flex-start;">
+              <div v-for="(q, i) in editTest.questions" :key="i" class="form-group" style="display: flex; gap: 12px; align-items: flex-start; flex-wrap: wrap; background: var(--bg-alt); padding: 12px; border-radius: 8px;">
                 <span style="padding-top: 8px; font-weight: bold; width: 24px;">{{ i + 1 }}.</span>
-                <textarea v-model="editTest.questions[i]" rows="2" style="flex: 1;" required></textarea>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
+                  <textarea v-model="editTest.questions[i].text" rows="2" required placeholder="Текст вопроса"></textarea>
+                  <div style="display: flex; gap: 12px; align-items: center;">
+                    <label style="font-size: 0.85rem; color: var(--text-mid);">Тип подсчета:</label>
+                    <select v-model="editTest.questions[i].type" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border);">
+                      <option value="normal">Обычный (5-0 баллов)</option>
+                      <option value="reverse">Обратный (0-5 баллов)</option>
+                      <option value="ignore">Не учитывается</option>
+                    </select>
+                  </div>
+                </div>
                 <button type="button" class="btn btn-danger btn-sm" @click="removeTestQuestion(i)">🗑</button>
               </div>
 
-              <div class="form-section-title">Пороги результатов (2 уровня)</div>
-              <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px;">Укажите максимальный балл, при достижении которого будет показана рекомендация. Всего 2 порога: первый для "нормы", второй (максимальный) для "требуется помощь" с кнопкой записи.</p>
+              <div class="form-section-title">
+                Пороги результатов ({{ editTest.results.length }})
+                <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestResult" v-if="editTest.results.length < 5">+ Добавить порог</button>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px;">Укажите максимальный балл, при достижении которого будет показана рекомендация. Пороги должны идти по возрастанию (например: 10, 20, 30, 999).</p>
               
-              <div v-for="(r, i) in editTest.results" :key="'r'+i" class="form-group" style="background: var(--bg-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+              <div v-for="(r, i) in editTest.results" :key="'r'+i" class="form-group" style="background: var(--bg-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); position: relative;">
+                <button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 12px; right: 12px;" @click="removeTestResult(i)" v-if="editTest.results.length > 1">🗑</button>
                 <div style="font-weight: 600; margin-bottom: 8px;">Порог {{ i + 1 }}</div>
                 <div style="display: flex; gap: 16px;">
                   <div style="width: 120px;">
@@ -318,7 +332,7 @@
                     <input type="number" v-model="editTest.results[i].max" required />
                   </div>
                   <div style="flex: 1;">
-                    <label>Текст рекомендации (поддерживает HTML, напр. &lt;b&gt;текст&lt;/b&gt;)</label>
+                    <label>Текст рекомендации (поддерживает HTML)</label>
                     <input type="text" v-model="editTest.results[i].text" required />
                   </div>
                 </div>
@@ -424,14 +438,13 @@ const showPage = (page, arg) => {
   } else if (page === 'testEditor') {
     if (arg) {
       editTest.value = JSON.parse(JSON.stringify(siteData.tests.find(t => t.id === arg)))
-      // Ensure results are exactly 2
-      if (!editTest.value.results || editTest.value.results.length !== 2) {
-         let results = editTest.value.results || []
-         while (results.length < 2) {
-             results.push({ max: 999, text: "Рекомендация" })
-         }
-         editTest.value.results = results.slice(0, 2)
-      }
+      // Ensure backwards compatibility with old string questions
+      editTest.value.questions = editTest.value.questions.map(q => {
+        if (typeof q === 'string') {
+          return { text: q, type: 'normal' }
+        }
+        return q
+      })
     }
   }
 }
@@ -448,12 +461,24 @@ const saveTest = () => {
 }
 
 const addTestQuestion = () => {
-    editTest.value.questions.push('')
+    editTest.value.questions.push({ text: '', type: 'normal' })
 }
 
 const removeTestQuestion = (index) => {
     if (confirm('Удалить этот вопрос?')) {
         editTest.value.questions.splice(index, 1)
+    }
+}
+
+const addTestResult = () => {
+    if (editTest.value.results.length < 5) {
+        editTest.value.results.push({ max: 999, text: 'Новый результат' })
+    }
+}
+
+const removeTestResult = (index) => {
+    if (editTest.value.results.length > 1) {
+        editTest.value.results.splice(index, 1)
     }
 }
 
