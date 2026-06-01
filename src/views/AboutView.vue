@@ -26,7 +26,8 @@
           <div class="about-hero-photo reveal" style="transition-delay: 0.2s;">
             <div class="hero-photo-wrap">
               <div class="hero-photo-bg"></div>
-              <div class="photo-placeholder" style="aspect-ratio: 3/4; border-radius: var(--radius-lg); position: relative; z-index: 1;">
+              <img v-if="siteData.aboutImage" :src="siteData.aboutImage" class="hero-photo" style="width: 100%; aspect-ratio: 3/4; border-radius: var(--radius-lg); object-fit: cover; position: relative; z-index: 1;" />
+              <div v-else class="photo-placeholder" style="aspect-ratio: 3/4; border-radius: var(--radius-lg); position: relative; z-index: 1;">
                 <span>Место для фото</span>
               </div>
               <div class="hero-badge">
@@ -106,17 +107,10 @@
           <h2 class="section-title">Дипломы и сертификаты</h2>
         </div>
         <div class="diplomas-grid">
-          <div class="diploma-card-new reveal">
-            <div class="photo-placeholder diploma-placeholder"><span>Диплом 1</span></div>
-            <p>Высшее профильное образование</p>
-          </div>
-          <div class="diploma-card-new reveal" style="transition-delay:0.1s">
-            <div class="photo-placeholder diploma-placeholder"><span>Диплом 2</span></div>
-            <p>Специализация КПТ</p>
-          </div>
-          <div class="diploma-card-new reveal" style="transition-delay:0.2s">
-            <div class="photo-placeholder diploma-placeholder"><span>Диплом 3</span></div>
-            <p>Специализация Гештальт</p>
+          <div v-for="(dip, idx) in (siteData.diplomas || [])" :key="idx" class="diploma-card-new reveal" :style="{ transitionDelay: (idx * 0.1) + 's' }">
+            <img v-if="dip.image" :src="dip.image" class="diploma-image" style="width: 100%; aspect-ratio: 3/4; border-radius: 16px; object-fit: cover; box-shadow: 0 8px 24px rgba(72,164,165,0.1); margin-bottom: 16px;" />
+            <div v-else class="photo-placeholder diploma-placeholder"><span>Диплом {{ idx + 1 }}</span></div>
+            <p>{{ dip.title }}</p>
           </div>
         </div>
       </div>

@@ -13,21 +13,23 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
 const showPrompt = ref(false)
 const route = useRoute()
+let timeoutId = null
 
-onMounted(() => {
+const checkAndStartPrompt = (path) => {
   // Check if we already showed or dismissed it in this session
   if (sessionStorage.getItem('testPromptShown')) {
     return
   }
 
   // Only show if we are on Home or Articles page
-  if (route.path === '/' || route.path.startsWith('/articles')) {
-    setTimeout(() => {
+  if (path === '/' || path.startsWith('/articles')) {
+    if (timeoutId) clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
       // Re-check route just in case user navigated away within 5 seconds
       if (route.path === '/' || route.path.startsWith('/articles')) {
         showPrompt.value = true
@@ -35,9 +37,18 @@ onMounted(() => {
       }
     }, 5000)
   }
+}
+
+onMounted(() => {
+  checkAndStartPrompt(route.path)
+})
+
+watch(() => route.path, (newPath) => {
+  checkAndStartPrompt(newPath)
 })
 
 const closePrompt = () => {
+  if (timeoutId) clearTimeout(timeoutId)
   showPrompt.value = false
   sessionStorage.setItem('testPromptShown', 'true')
 }

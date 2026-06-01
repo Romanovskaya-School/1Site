@@ -26,7 +26,8 @@
           <div class="hero-visual reveal" style="transition-delay:0.2s">
             <div class="hero-photo-wrap">
               <div class="hero-photo-bg" style="background: linear-gradient(135deg, var(--mauve), var(--rose));"></div>
-              <div class="photo-placeholder" style="aspect-ratio: 3/4; border-radius: var(--radius-lg); position: relative; z-index: 1;">
+              <img v-if="siteData.rppImage" :src="siteData.rppImage" class="hero-photo" alt="Виктория Терехова" style="width: 100%; aspect-ratio: 3/4; border-radius: var(--radius-lg); object-fit: cover; position: relative; z-index: 1;" />
+              <div v-else class="photo-placeholder" style="aspect-ratio: 3/4; border-radius: var(--radius-lg); position: relative; z-index: 1;">
                 <span>Место для фото</span>
               </div>
               <div class="hero-badge">
@@ -109,7 +110,12 @@
                 <div class="awwwards-progress-fill" :style="{ width: ((currentQuestionIndex + 1) / tests[activeTestIndex].questions.length * 100) + '%' }"></div>
               </div>
               
-              <button class="modal-close awwwards-close" @click="closeModal">✕</button>
+              <button class="modal-close awwwards-close" @click="closeModal" aria-label="Закрыть">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
               
               <div class="test-inner awwwards-inner" v-if="!showResult">
                 <div class="awwwards-header">
@@ -122,7 +128,7 @@
                     <p class="question-text awwwards-q-text">{{ typeof tests[activeTestIndex].questions[currentQuestionIndex] === 'object' ? tests[activeTestIndex].questions[currentQuestionIndex].text : tests[activeTestIndex].questions[currentQuestionIndex] }}</p>
                     <div class="options-grid awwwards-options">
                       <button 
-                         v-for="(opt, oIdx) in (tests[activeTestIndex].options || defaultOptions)" 
+                         v-for="(opt, oIdx) in (tests[activeTestIndex].questions[currentQuestionIndex]?.options || tests[activeTestIndex].options || defaultOptions)" 
                          :key="oIdx"
                          class="custom-radio-btn awwwards-btn" 
                          :class="{ selected: answers[currentQuestionIndex] === oIdx, 'is-transitioning': isTransitioning }" 
@@ -272,9 +278,11 @@ const calculateTest = () => {
             // scale.range is [startIndex, endIndex] inclusive
             for (let i = scale.range[0]; i <= Math.min(scale.range[1], test.questions.length - 1); i++) {
                 let ansIdx = Number(answers.value[i]);
-                if (!isNaN(ansIdx) && ansIdx >= 0 && ansIdx < testOptions.length) {
-                    let opt = testOptions[ansIdx];
-                    let type = typeof test.questions[i] === 'object' ? (test.questions[i].type || 'normal') : 'normal';
+                const q = test.questions[i];
+                const qOptions = (typeof q === 'object' && q.options) ? q.options : testOptions;
+                if (!isNaN(ansIdx) && ansIdx >= 0 && ansIdx < qOptions.length) {
+                    let opt = qOptions[ansIdx];
+                    let type = typeof q === 'object' ? (q.type || 'normal') : 'normal';
                     
                     if (type === 'normal') {
                         scaleScore += opt.value;
@@ -303,8 +311,9 @@ const calculateTest = () => {
         let score = 0;
         test.questions.forEach((q, index) => {
             let ansIdx = Number(answers.value[index]);
-            if (!isNaN(ansIdx) && ansIdx >= 0 && ansIdx < testOptions.length) {
-                let opt = testOptions[ansIdx];
+            const qOptions = (typeof q === 'object' && q.options) ? q.options : testOptions;
+            if (!isNaN(ansIdx) && ansIdx >= 0 && ansIdx < qOptions.length) {
+                let opt = qOptions[ansIdx];
                 let type = typeof q === 'object' ? (q.type || 'normal') : 'normal';
                 
                 if (type === 'normal') {

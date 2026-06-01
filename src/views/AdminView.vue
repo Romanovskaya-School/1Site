@@ -40,6 +40,9 @@
           <button class="nav-item" :class="{ active: activePage === 'tests' || activePage === 'testEditor' }" @click="showPage('tests')">
             <span class="nav-icon">📋</span> Тесты
           </button>
+          <button class="nav-item" :class="{ active: activePage === 'settings' }" @click="showPage('settings')">
+            <span class="nav-icon">⚙️</span> Настройки сайта
+          </button>
         </nav>
         <div class="sidebar-footer">
           <router-link to="/" target="_blank">🌐 Открыть сайт</router-link>
@@ -177,6 +180,17 @@
                 <label>Заголовок статьи</label>
                 <input type="text" v-model="editArticle.title" required />
               </div>
+              <div class="form-group">
+                <label>Изображение статьи</label>
+                <div class="image-upload-wrap">
+                  <img :src="editArticle.image" class="image-preview" :class="{ show: editArticle.image }" />
+                  <label class="image-upload-btn">
+                    <span>{{ editArticle.image ? 'Сменить картинку' : 'Загрузить картинку' }}</span>
+                    <input type="file" accept="image/*" @change="onImageSelected" style="display: none;" />
+                  </label>
+                  <button v-if="editArticle.image" type="button" class="btn btn-danger btn-sm" @click="editArticle.image = ''">Удалить</button>
+                </div>
+              </div>
               <div class="form-row">
                 <div class="form-group">
                   <label>Категория</label>
@@ -303,6 +317,7 @@
               <div class="form-section-title">
                 Варианты ответов
                 <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestOption" v-if="editTest.options">+ Добавить</button>
+                <button type="button" class="btn btn-outline btn-sm" style="margin-left: 12px; color: #e74c3c;" @click="editTest.options = null" v-if="editTest.options">Использовать стандартные варианты</button>
               </div>
               <div v-if="!editTest.options" style="margin-bottom: 16px;">
                 <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 8px;">Для этого теста используются стандартные варианты (Всегда, Часто, Иногда...). Хотите настроить свои варианты баллов?</p>
@@ -429,6 +444,116 @@
                 <button type="button" class="btn btn-outline" @click="showPage('tests')">Отмена</button>
               </div>
             </form>
+          </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="page" :class="{ active: activePage === 'settings' }">
+          <div class="form-card">
+            <h3>Настройки внешнего вида и контента</h3>
+            
+            <div class="form-section-title">Фотографии на сайте</div>
+            
+            <div class="form-group">
+              <label>Главное фото на главном экране (Hero Image)</label>
+              <div class="image-upload-wrap">
+                <img :src="siteData.heroImage" class="image-preview" :class="{ show: siteData.heroImage }" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px;" />
+                <label class="image-upload-btn">
+                  <span>{{ siteData.heroImage ? 'Сменить фото' : 'Загрузить фото' }}</span>
+                  <input type="file" accept="image/*" @change="onSiteImageSelected($event, 'heroImage')" style="display: none;" />
+                </label>
+                <button v-if="siteData.heroImage" type="button" class="btn btn-danger btn-sm" @click="siteData.heroImage = ''">Удалить</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Фото для страницы "Обо мне" (About Image)</label>
+              <div class="image-upload-wrap">
+                <img :src="siteData.aboutImage" class="image-preview" :class="{ show: siteData.aboutImage }" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px;" />
+                <label class="image-upload-btn">
+                  <span>{{ siteData.aboutImage ? 'Сменить фото' : 'Загрузить фото' }}</span>
+                  <input type="file" accept="image/*" @change="onSiteImageSelected($event, 'aboutImage')" style="display: none;" />
+                </label>
+                <button v-if="siteData.aboutImage" type="button" class="btn btn-danger btn-sm" @click="siteData.aboutImage = ''">Удалить</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Фото для страницы "РПП" (RPP Image)</label>
+              <div class="image-upload-wrap">
+                <img :src="siteData.rppImage" class="image-preview" :class="{ show: siteData.rppImage }" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px;" />
+                <label class="image-upload-btn">
+                  <span>{{ siteData.rppImage ? 'Сменить фото' : 'Загрузить фото' }}</span>
+                  <input type="file" accept="image/*" @change="onSiteImageSelected($event, 'rppImage')" style="display: none;" />
+                </label>
+                <button v-if="siteData.rppImage" type="button" class="btn btn-danger btn-sm" @click="siteData.rppImage = ''">Удалить</button>
+              </div>
+            </div>
+
+            <div class="form-section-title">Текстовый контент и контакты</div>
+
+            <div class="form-group">
+              <label>Заголовок главного экрана (Hero Title - поддерживает HTML тег &lt;em&gt; для курсива)</label>
+              <input type="text" v-model="siteData.heroTitle" placeholder="Бережная психологическая помощь <em>онлайн</em>" required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark);" />
+            </div>
+
+            <div class="form-group">
+              <label>Описание главного экрана (Hero Description)</label>
+              <textarea v-model="siteData.heroDesc" rows="3" placeholder="Описание деятельности психолога..." required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark); resize: vertical;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Имя/Заголовок на странице "Обо мне"</label>
+              <input type="text" v-model="siteData.aboutTitle" placeholder="Виктория Терехова" required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark);" />
+            </div>
+
+            <div class="form-group">
+              <label>Абзац 1 страницы "Обо мне" (Приветствие)</label>
+              <textarea v-model="siteData.aboutP1" rows="3" placeholder="Приветствие и общая информация..." required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark); resize: vertical;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Абзац 2 страницы "Обо мне" (Подходы / Опыт)</label>
+              <textarea v-model="siteData.aboutP2" rows="3" placeholder="Опыт, методы работы, принципы..." required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark); resize: vertical;"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Ссылка на Telegram (полная ссылка)</label>
+              <input type="text" v-model="siteData.contactTg" placeholder="https://t.me/username" required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark);" />
+            </div>
+
+            <div class="form-group">
+              <label>Ссылка на WhatsApp (полная ссылка)</label>
+              <input type="text" v-model="siteData.contactWa" placeholder="https://wa.me/79991234567" required style="width: 100%; padding: 10px; border: 1.5px solid rgba(72, 164, 165, 0.22); border-radius: 8px; background: var(--cream); outline: none; font-family: inherit; font-size: 0.95rem; color: var(--text-dark);" />
+            </div>
+
+            <div class="form-section-title">
+              Дипломы и сертификаты ({{ siteData.diplomas?.length || 0 }})
+              <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addDiploma">+ Добавить диплом</button>
+            </div>
+            
+            <div class="diplomas-container" style="display:flex; flex-direction:column; gap:16px; margin-bottom: 24px; margin-top: 16px;">
+              <div v-for="(dip, idx) in siteData.diplomas" :key="idx" style="background: var(--cream); padding: 16px; border-radius: 12px; border: 1.5px solid rgba(72, 164, 165, 0.22);">
+                <div style="display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap;">
+                  <div style="width: 120px;">
+                    <img :src="dip.image" class="image-preview" :class="{ show: dip.image }" style="width: 100px; height: 130px; object-fit: cover; border-radius: 8px;" />
+                    <label class="image-upload-btn btn-sm" style="margin-top: 8px; width: 100px; justify-content: center; padding: 6px; cursor: pointer;">
+                      <span style="font-size: 0.75rem;">Загрузить</span>
+                      <input type="file" accept="image/*" @change="onDiplomaImageSelected($event, idx)" style="display: none;" />
+                    </label>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; gap:8px;">
+                    <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-mid);">Описание диплома / сертификата</label>
+                    <input type="text" v-model="siteData.diplomas[idx].title" placeholder="например: Специализация КПТ" required style="width:100%; padding:8px; border:1px solid rgba(72, 164, 165, 0.22); border-radius:6px; background:var(--cream); outline:none;" />
+                  </div>
+                  <button type="button" class="btn btn-danger btn-sm" @click="removeDiploma(idx)" style="align-self: center;">Удалить диплом</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" @click="saveSettings">Сохранить изменения</button>
+            </div>
           </div>
         </div>
       </main>
@@ -664,6 +789,85 @@ const removeScaleResult = (sIdx, rIdx) => {
     editTest.value.scales[sIdx].results.splice(rIdx, 1)
 }
 
+const compressImage = (file, callback) => {
+  const reader = new FileReader()
+  reader.onload = (event) => {
+    const img = new Image()
+    img.onload = () => {
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      
+      const MAX_WIDTH = 800
+      const MAX_HEIGHT = 600
+      let width = img.width
+      let height = img.height
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width
+          width = MAX_WIDTH
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height
+          height = MAX_HEIGHT
+        }
+      }
+
+      canvas.width = width
+      canvas.height = height
+      ctx.drawImage(img, 0, 0, width, height)
+
+      const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.75)
+      callback(compressedDataUrl)
+    }
+    img.src = event.target.result
+  }
+  reader.readAsDataURL(file)
+}
+
+const onImageSelected = (e) => {
+  const file = e.target.files[0]
+  if (!file) return
+  compressImage(file, (dataUrl) => {
+    editArticle.value.image = dataUrl
+  })
+}
+
+const onSiteImageSelected = (e, field) => {
+  const file = e.target.files[0]
+  if (!file) return
+  compressImage(file, (dataUrl) => {
+    siteData[field] = dataUrl
+  })
+}
+
+const onDiplomaImageSelected = (e, idx) => {
+  const file = e.target.files[0]
+  if (!file) return
+  compressImage(file, (dataUrl) => {
+    siteData.diplomas[idx].image = dataUrl
+  })
+}
+
+const addDiploma = () => {
+  if (!siteData.diplomas) {
+    siteData.diplomas = []
+  }
+  siteData.diplomas.push({ title: 'Новый диплом', image: '' })
+}
+
+const removeDiploma = (idx) => {
+  if (confirm('Удалить этот диплом?')) {
+    siteData.diplomas.splice(idx, 1)
+  }
+}
+
+const saveSettings = () => {
+  saveSiteData(siteData)
+  showToast('✅ Настройки сохранены', 'success')
+}
+
 const submitArticle = () => {
   const article = { ...editArticle.value }
   if (!article.id) article.id = 'article-' + Date.now()
@@ -706,6 +910,13 @@ const formatDate = (dateStr) => {
 onMounted(() => {
   if (sessionStorage.getItem('vt_admin_session') === '1') {
     isAuthenticated.value = true
+  }
+  if (!siteData.diplomas) {
+    siteData.diplomas = [
+      { title: 'Высшее профильное образование', image: '' },
+      { title: 'Специализация КПТ', image: '' },
+      { title: 'Специализация Гештальт', image: '' }
+    ]
   }
 })
 </script>

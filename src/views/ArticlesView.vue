@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { useArticles } from '../composables/useArticles'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -119,7 +119,7 @@ const formatDate = (dateStr) => {
   return new Date(dateStr).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })
 }
 
-const openArticle = (article) => {
+const openArticle = (article, pushHistory = true) => {
   selectedArticle.value = article
   document.body.style.overflow = 'hidden'
   
@@ -127,13 +127,17 @@ const openArticle = (article) => {
   article.views += 1
   saveArticle(article)
   
-  router.replace({ query: { read: article.id } })
+  if (pushHistory) {
+    router.push({ query: { read: article.id } })
+  }
 }
 
-const closeArticle = () => {
+const closeArticle = (pushHistory = true) => {
   selectedArticle.value = null
   document.body.style.overflow = ''
-  router.replace({ query: {} })
+  if (pushHistory) {
+    router.push({ query: {} })
+  }
 }
 
 const handleOverlayClick = (e) => {
@@ -144,11 +148,24 @@ const handleKeydown = (e) => {
   if (e.key === 'Escape') closeArticle()
 }
 
+watch(() => route.query.read, (newRead) => {
+  if (newRead) {
+    const art = articles.value.find(a => a.id === newRead)
+    if (art && selectedArticle.value?.id !== newRead) {
+      openArticle(art, false)
+    }
+  } else {
+    if (selectedArticle.value) {
+      closeArticle(false)
+    }
+  }
+})
+
 onMounted(() => {
   document.addEventListener('keydown', handleKeydown)
   if (route.query.read) {
     const art = articles.value.find(a => a.id === route.query.read)
-    if (art) openArticle(art)
+    if (art) openArticle(art, false)
   }
 })
 
@@ -257,10 +274,19 @@ onUnmounted(() => {
   border: 1px solid rgba(72, 164, 165, 0.12);
   margin-bottom: 36px;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform, box-shadow;
 }
 .article-full-card:hover {
   box-shadow: 0 20px 56px rgba(72, 164, 165, 0.1);
-  transform: translateY(-4px);
+  transform: translate3d(0, -4px, 0);
+}
+.article-full-card:nth-child(even) {
+  direction: rtl;
+}
+.article-full-card:nth-child(even) > * {
+  direction: ltr;
 }
 .article-full-img {
   width: 100%;
@@ -268,6 +294,8 @@ onUnmounted(() => {
   min-height: 280px;
   object-fit: cover;
   display: block;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
 }
 .article-full-body {
   padding: 44px 48px;
@@ -471,7 +499,10 @@ onUnmounted(() => {
 }
 
 @media (max-width: 900px) {
-  .article-full-card { grid-template-columns: 1fr; }
+  .article-full-card { 
+    grid-template-columns: 1fr; 
+    direction: ltr !important;
+  }
   .article-full-img { min-height: 220px; max-height: 280px; }
   .article-full-body { padding: 28px 28px 32px; }
 }
