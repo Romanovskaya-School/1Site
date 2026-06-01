@@ -5,17 +5,17 @@
 
     <div class="container">
       <div class="hero-inner">
-        <div class="hero-content reveal">
-          <div class="hero-tag">
-            <span>🌿</span> Онлайн-консультации
+        <div class="hero-content">
+          <div class="hero-tag reveal-blur">
+            <span>🌿</span> Бережные онлайн-консультации
           </div>
-          <h1 class="hero-title" v-html="siteData.heroTitle"></h1>
-          <p class="hero-desc">{{ siteData.heroDesc }}</p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Записаться на консультацию →</a>
-            <a href="#about" class="btn btn-outline">Узнать больше</a>
+          <h1 class="hero-title reveal-blur" style="transition-delay:0.1s" v-html="siteData.heroTitle"></h1>
+          <p class="hero-desc reveal-blur" style="transition-delay:0.2s">{{ siteData.heroDesc }}</p>
+          <div class="hero-actions reveal-blur" style="transition-delay:0.3s">
+            <router-link to="/#contact" class="btn btn-primary">Начать изменения →</router-link>
+            <a href="#about" class="btn btn-outline">Познакомиться</a>
           </div>
-          <div class="hero-stats">
+          <div class="hero-stats reveal-blur" style="transition-delay:0.4s">
             <div>
               <div class="stat-num">7+</div>
               <div class="stat-label">лет<br>опыта</div>
@@ -31,7 +31,7 @@
           </div>
         </div>
 
-        <div class="hero-visual reveal" style="transition-delay:0.2s">
+        <div class="hero-visual reveal-blur" style="transition-delay:0.3s">
           <div class="hero-photo-wrap">
             <div class="hero-photo-bg"></div>
             <img v-if="siteData.heroImage" :src="siteData.heroImage" class="hero-photo" alt="Виктория Терехова" />

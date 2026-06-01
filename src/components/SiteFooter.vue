@@ -23,7 +23,7 @@
           <li><a :href="siteData.contactTg" target="_blank">Telegram</a></li>
           <li><a :href="siteData.contactWa" target="_blank">WhatsApp</a></li>
           <li><a href="mailto:vika@terekhova.ru">Email</a></li>
-          <li><a href="#contact">Записаться</a></li>
+          <li><router-link to="/#contact">Записаться</router-link></li>
         </ul>
       </div>
       <div class="footer-bottom">

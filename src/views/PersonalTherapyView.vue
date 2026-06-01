@@ -17,7 +17,7 @@
               Безопасное пространство, чтобы быть собой, разобраться в чувствах и найти опору внутри.
             </p>
             <div class="hero-actions" style="justify-content: center;">
-              <a href="#contact" class="btn btn-primary">Записаться на консультацию →</a>
+              <router-link to="/#contact" class="btn btn-primary">Записаться на консультацию →</router-link>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ import SiteContact from '../components/SiteContact.vue'
 }
 .article-topic-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(193, 127, 116, 0.15);
+  box-shadow: 0 12px 24px rgba(72, 164, 165, 0.15);
   border-color: var(--rose) !important;
 }
 </style>

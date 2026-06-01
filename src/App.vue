@@ -8,7 +8,7 @@
       <router-link to="/personal" @click="mobileNavOpen = false">Личная терапия</router-link>
       <router-link to="/family" @click="mobileNavOpen = false">Семейная терапия</router-link>
       <router-link to="/articles" @click="mobileNavOpen = false">Статьи</router-link>
-      <a href="#contact" @click="mobileNavOpen = false">Записаться</a>
+      <router-link to="/#contact" @click="mobileNavOpen = false">Записаться</router-link>
     </div>
     <router-view v-slot="{ Component }">
       <transition name="page-slide" mode="out-in" @after-enter="initReveal">
@@ -45,7 +45,7 @@ const initReveal = () => {
     })
   }, { threshold: 0.1 })
   nextTick(() => {
-    document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+    document.querySelectorAll('.reveal:not(.visible), .reveal-blur:not(.visible)').forEach(el => {
       revealObserver.observe(el)
     })
   })

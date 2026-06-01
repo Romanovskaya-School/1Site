@@ -2,7 +2,7 @@
   <section class="contact" id="contact">
     <div class="container">
       <div class="contact-inner">
-        <div class="contact-info reveal">
+        <div class="contact-info reveal-blur">
           <p class="section-label">Записаться</p>
           <h2 class="section-title">Сделайте первый шаг</h2>
           <p class="section-subtitle">Отвечу на вопросы и помогу выбрать формат.</p>
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="reveal" style="transition-delay:0.15s">
+        <div class="reveal-blur" style="transition-delay:0.15s">
           <form class="contact-form" @submit.prevent="submitForm">
             <h3 style="font-family:var(--font-head);font-size:1.4rem;color:var(--text-dark);margin-bottom:28px;">Оставить заявку</h3>
             <div class="form-group">

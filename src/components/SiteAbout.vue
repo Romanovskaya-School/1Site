@@ -2,7 +2,7 @@
   <section class="about" id="about">
     <div class="container">
       <div class="about-inner">
-        <div class="about-image-wrap reveal">
+        <div class="about-image-wrap reveal-blur">
           <div class="hero-photo-wrap">
             <div class="hero-photo-bg"></div>
             <img v-if="siteData.aboutImage" :src="siteData.aboutImage" class="hero-photo" alt="Виктория Терехова" />
@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <div class="about-text reveal" style="transition-delay:0.15s">
+        <div class="about-text reveal-blur" style="transition-delay:0.15s">
           <p class="section-label">О психологе</p>
           <h2 class="section-title">{{ siteData.aboutTitle }}</h2>
           <p class="about-body" style="margin-top:20px">{{ siteData.aboutP1 }}</p>
@@ -30,7 +30,7 @@
             <span class="quality-tag">🏠 Личные границы</span>
           </div>
 
-          <a href="#contact" class="btn btn-primary">Записаться на первую встречу</a>
+          <router-link to="/#contact" class="btn btn-primary">Записаться на первую встречу</router-link>
         </div>
       </div>
     </div>

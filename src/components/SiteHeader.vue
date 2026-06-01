@@ -16,7 +16,7 @@
         </ul>
 
         <div class="nav-cta">
-          <a href="#contact" class="btn btn-primary">Записаться</a>
+          <router-link to="/#contact" class="btn btn-primary">Записаться</router-link>
           <button class="burger" @click="$emit('open-mobile')" aria-label="Открыть меню">
             <span></span><span></span><span></span>
           </button>

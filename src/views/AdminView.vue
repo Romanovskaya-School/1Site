@@ -263,6 +263,7 @@
           <div class="table-wrap">
             <div class="table-head">
               <h3>Тесты на сайте</h3>
+              <button class="btn btn-primary btn-sm" @click="showPage('testEditor', 'new')">+ Добавить тест</button>
             </div>
             <table>
               <thead>
@@ -280,6 +281,7 @@
                   <td><span class="cat-badge">{{ t.questions.length }}</span></td>
                   <td class="td-actions">
                     <button class="btn btn-outline btn-sm" @click="showPage('testEditor', t.id)">✏️ Изменить</button>
+                    <button class="btn btn-danger btn-sm" @click="askDeleteTest(t.id)" style="margin-left: 8px;">🗑</button>
                   </td>
                 </tr>
               </tbody>
@@ -297,6 +299,33 @@
                 <input type="text" v-model="editTest.title" required />
               </div>
 
+              <!-- Options section -->
+              <div class="form-section-title">
+                Варианты ответов
+                <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestOption" v-if="editTest.options">+ Добавить</button>
+              </div>
+              <div v-if="!editTest.options" style="margin-bottom: 16px;">
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 8px;">Для этого теста используются стандартные варианты (Всегда, Часто, Иногда...). Хотите настроить свои варианты баллов?</p>
+                <button type="button" class="btn btn-primary btn-sm" @click="enableCustomOptions">Активировать кастомные баллы</button>
+              </div>
+              <div v-else class="options-container" style="display:flex; flex-direction:column; gap:8px; margin-bottom: 24px;">
+                <div v-for="(opt, idx) in editTest.options" :key="'opt'+idx" style="display:flex; gap:12px; align-items:center; background: var(--bg-alt); padding: 8px 12px; border-radius: 8px;">
+                  <div style="flex:2">
+                    <label style="font-size:0.8rem">Текст ответа</label>
+                    <input type="text" v-model="editTest.options[idx].text" required style="padding:4px 8px"/>
+                  </div>
+                  <div style="flex:1">
+                    <label style="font-size:0.8rem">Балл</label>
+                    <input type="number" step="0.1" v-model="editTest.options[idx].value" required style="padding:4px 8px"/>
+                  </div>
+                  <div style="flex:1">
+                    <label style="font-size:0.8rem">Реверс. балл</label>
+                    <input type="number" step="0.1" v-model="editTest.options[idx].reverseValue" required style="padding:4px 8px"/>
+                  </div>
+                  <button type="button" class="btn btn-danger btn-sm" style="margin-top:20px" @click="removeTestOption(idx)">🗑</button>
+                </div>
+              </div>
+
               <div class="form-section-title">
                 Вопросы ({{ editTest.questions.length }})
                 <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestQuestion">+ Добавить</button>
@@ -308,8 +337,8 @@
                   <div style="display: flex; gap: 12px; align-items: center;">
                     <label style="font-size: 0.85rem; color: var(--text-mid);">Тип подсчета:</label>
                     <select v-model="editTest.questions[i].type" style="padding: 4px 8px; border-radius: 4px; border: 1px solid var(--border);">
-                      <option value="normal">Обычный (5-0 баллов)</option>
-                      <option value="reverse">Обратный (0-5 баллов)</option>
+                      <option value="normal">Обычный (прямой балл)</option>
+                      <option value="reverse">Обратный (реверс. балл)</option>
                       <option value="ignore">Не учитывается</option>
                     </select>
                   </div>
@@ -318,22 +347,79 @@
               </div>
 
               <div class="form-section-title">
-                Пороги результатов ({{ editTest.results.length }})
-                <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestResult" v-if="editTest.results.length < 5">+ Добавить порог</button>
+                Подсчет результатов
+                <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="enableScales" v-if="!editTest.scales || editTest.scales.length === 0">Переключить на сложную шкалу</button>
               </div>
-              <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px;">Укажите максимальный балл, при достижении которого будет показана рекомендация. Пороги должны идти по возрастанию (например: 10, 20, 30, 999).</p>
-              
-              <div v-for="(r, i) in editTest.results" :key="'r'+i" class="form-group" style="background: var(--bg-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); position: relative;">
-                <button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 12px; right: 12px;" @click="removeTestResult(i)" v-if="editTest.results.length > 1">🗑</button>
-                <div style="font-weight: 600; margin-bottom: 8px;">Порог {{ i + 1 }}</div>
-                <div style="display: flex; gap: 16px;">
-                  <div style="width: 120px;">
-                    <label>До (баллов)</label>
-                    <input type="number" v-model="editTest.results[i].max" required />
+
+              <!-- Generic results -->
+              <div v-if="!editTest.scales || editTest.scales.length === 0">
+                <div style="display:flex; align-items:center; margin-bottom: 12px;">
+                  <div style="font-weight: 600;">Пороги результатов ({{ editTest.results?.length || 0 }})</div>
+                  <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addTestResult" v-if="editTest.results && editTest.results.length < 5">+ Добавить порог</button>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 16px;">Укажите максимальный балл, при достижении которого будет показана рекомендация. Пороги должны идти по возрастанию (например: 10, 20, 30, 999).</p>
+                
+                <div v-for="(r, i) in editTest.results" :key="'r'+i" class="form-group" style="background: var(--bg-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); position: relative;">
+                  <button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 12px; right: 12px;" @click="removeTestResult(i)" v-if="editTest.results && editTest.results.length > 1">🗑</button>
+                  <div style="font-weight: 600; margin-bottom: 8px;">Порог {{ i + 1 }}</div>
+                  <div style="display: flex; gap: 16px;">
+                    <div style="width: 120px;">
+                      <label>До (баллов)</label>
+                      <input type="number" step="0.1" v-model="editTest.results[i].max" required />
+                    </div>
+                    <div style="flex: 1;">
+                      <label>Текст рекомендации (поддерживает HTML)</label>
+                      <input type="text" v-model="editTest.results[i].text" required />
+                    </div>
                   </div>
-                  <div style="flex: 1;">
-                    <label>Текст рекомендации (поддерживает HTML)</label>
-                    <input type="text" v-model="editTest.results[i].text" required />
+                </div>
+              </div>
+
+              <!-- Scales -->
+              <div v-else>
+                <div style="display:flex; align-items:center; margin-bottom: 16px;">
+                  <button type="button" class="btn btn-primary btn-sm" @click="addTestScale">+ Добавить шкалу</button>
+                  <button type="button" class="btn btn-outline btn-sm" style="margin-left: auto;" @click="disableScales">Отключить сложные шкалы</button>
+                </div>
+
+                <div v-for="(scale, sIdx) in editTest.scales" :key="'scale'+sIdx" style="background: var(--bg-alt); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); margin-bottom: 24px; position: relative;">
+                  <button type="button" class="btn btn-danger btn-sm" style="position: absolute; top: 12px; right: 12px;" @click="removeTestScale(sIdx)">🗑 Удалить шкалу</button>
+                  <h4 style="margin-bottom: 16px;">Шкала {{ sIdx + 1 }}</h4>
+                  
+                  <div style="display:flex; gap:16px; margin-bottom: 16px; flex-wrap:wrap;">
+                    <div style="flex:2; min-width: 200px;">
+                      <label>Название шкалы</label>
+                      <input type="text" v-model="editTest.scales[sIdx].name" required />
+                    </div>
+                    <div style="flex:1; min-width: 100px;">
+                      <label>Вопросы с №</label>
+                      <input type="number" :value="(editTest.scales[sIdx].range?.[0] || 0) + 1" @input="updateScaleRange(sIdx, 0, $event.target.value)" required />
+                    </div>
+                    <div style="flex:1; min-width: 100px;">
+                      <label>по №</label>
+                      <input type="number" :value="(editTest.scales[sIdx].range?.[1] || 0) + 1" @input="updateScaleRange(sIdx, 1, $event.target.value)" required />
+                    </div>
+                    <div style="flex:1; min-width: 100px;">
+                      <label>Делитель</label>
+                      <input type="number" step="0.1" v-model="editTest.scales[sIdx].divider" required />
+                    </div>
+                  </div>
+
+                  <div style="background: rgba(255,255,255,0.5); padding: 12px; border-radius: 8px;">
+                    <div style="display:flex; align-items:center; margin-bottom: 12px;">
+                      <div style="font-weight: 600; font-size:0.9rem">Пороги шкалы</div>
+                      <button type="button" class="btn btn-outline btn-sm" style="margin-left: 16px;" @click="addScaleResult(sIdx)">+ Добавить порог</button>
+                    </div>
+
+                    <div v-for="(r, i) in editTest.scales[sIdx].results" :key="'sr'+i" style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+                      <div style="width: 100px;">
+                        <input type="number" step="0.1" v-model="editTest.scales[sIdx].results[i].max" placeholder="Макс. балл" required />
+                      </div>
+                      <div style="flex: 1;">
+                        <input type="text" v-model="editTest.scales[sIdx].results[i].text" placeholder="Текст рекомендации" required />
+                      </div>
+                      <button type="button" class="btn btn-danger btn-sm" @click="removeScaleResult(sIdx, i)">🗑</button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -349,13 +435,14 @@
     </div>
 
     <!-- Confirm Modal -->
-    <div id="confirmModal" :class="{ open: pendingDeleteId }" @click="pendingDeleteId = null">
+    <div id="confirmModal" :class="{ open: pendingDeleteId || pendingDeleteTestId }" @click="pendingDeleteId = null; pendingDeleteTestId = null">
       <div class="modal-card" @click.stop>
-        <h3>Удалить статью?</h3>
-        <p>Это действие нельзя отменить. Статья будет удалена навсегда.</p>
+        <h3 v-if="pendingDeleteId">Удалить статью?</h3>
+        <h3 v-else>Удалить тест?</h3>
+        <p>Это действие нельзя отменить. Запись будет удалена навсегда.</p>
         <div class="modal-actions">
-          <button class="btn btn-danger" @click="confirmDelete">Да, удалить</button>
-          <button class="btn btn-outline" @click="pendingDeleteId = null">Отмена</button>
+          <button class="btn btn-danger" @click="pendingDeleteId ? confirmDelete() : confirmDeleteTest()">Да, удалить</button>
+          <button class="btn btn-outline" @click="pendingDeleteId = null; pendingDeleteTestId = null">Отмена</button>
         </div>
       </div>
     </div>
@@ -383,6 +470,7 @@ const ADMIN_PASSWORD = 'admin' // Simple password for now
 const activePage = ref('dashboard')
 const sidebarOpen = ref(false)
 const pendingDeleteId = ref(null)
+const pendingDeleteTestId = ref(null)
 const editArticle = ref({})
 const editTest = ref(null)
 
@@ -436,7 +524,7 @@ const showPage = (page, arg) => {
       editArticle.value = { id: null, date: new Date().toISOString().split('T')[0] }
     }
   } else if (page === 'testEditor') {
-    if (arg) {
+    if (arg && arg !== 'new') {
       editTest.value = JSON.parse(JSON.stringify(siteData.tests.find(t => t.id === arg)))
       // Ensure backwards compatibility with old string questions
       editTest.value.questions = editTest.value.questions.map(q => {
@@ -445,19 +533,44 @@ const showPage = (page, arg) => {
         }
         return q
       })
+    } else {
+      // Create new test
+      editTest.value = {
+        id: 'test-' + Date.now(),
+        title: 'Новый тест',
+        subtitle: '0 вопросов',
+        questions: [],
+        results: [{ max: 999, text: 'Результат по умолчанию' }]
+      }
     }
   }
 }
 
 const saveTest = () => {
     const index = siteData.tests.findIndex(t => t.id === editTest.value.id)
+    editTest.value.subtitle = `${editTest.value.questions.length} вопросов`
     if (index !== -1) {
-        editTest.value.subtitle = `${editTest.value.questions.length} вопросов`
         siteData.tests[index] = editTest.value
-        saveSiteData(siteData)
-        showToast('✅ Тест сохранен', 'success')
-        showPage('tests')
+    } else {
+        siteData.tests.push(editTest.value)
     }
+    saveSiteData(siteData)
+    showToast('✅ Тест сохранен', 'success')
+    showPage('tests')
+}
+
+const askDeleteTest = (id) => {
+    pendingDeleteTestId.value = id
+}
+
+const confirmDeleteTest = () => {
+    const index = siteData.tests.findIndex(t => t.id === pendingDeleteTestId.value)
+    if (index !== -1) {
+        siteData.tests.splice(index, 1)
+        saveSiteData(siteData)
+        showToast('🗑 Тест удален', 'error')
+    }
+    pendingDeleteTestId.value = null
 }
 
 const addTestQuestion = () => {
@@ -470,16 +583,85 @@ const removeTestQuestion = (index) => {
     }
 }
 
+const enableCustomOptions = () => {
+    editTest.value.options = [
+      { text: 'Всегда', value: 5, reverseValue: 0 },
+      { text: 'Очень часто', value: 4, reverseValue: 1 },
+      { text: 'Часто', value: 3, reverseValue: 2 },
+      { text: 'Иногда', value: 2, reverseValue: 3 },
+      { text: 'Редко', value: 1, reverseValue: 4 },
+      { text: 'Никогда', value: 0, reverseValue: 5 }
+    ]
+}
+
+const addTestOption = () => {
+    editTest.value.options.push({ text: 'Новый вариант', value: 0, reverseValue: 0 })
+}
+
+const removeTestOption = (idx) => {
+    editTest.value.options.splice(idx, 1)
+}
+
 const addTestResult = () => {
+    if (!editTest.value.results) editTest.value.results = []
     if (editTest.value.results.length < 5) {
         editTest.value.results.push({ max: 999, text: 'Новый результат' })
     }
 }
 
 const removeTestResult = (index) => {
-    if (editTest.value.results.length > 1) {
+    if (editTest.value.results && editTest.value.results.length > 1) {
         editTest.value.results.splice(index, 1)
     }
+}
+
+const enableScales = () => {
+    editTest.value.scales = [
+        {
+            name: 'Новая шкала',
+            range: [0, Math.max(0, editTest.value.questions.length - 1)],
+            divider: 1,
+            results: [{ max: 999, text: 'Результат шкалы' }]
+        }
+    ]
+}
+
+const disableScales = () => {
+    if (confirm('Вы уверены? Это удалит все настроенные сложные шкалы.')) {
+        editTest.value.scales = []
+        if (!editTest.value.results || editTest.value.results.length === 0) {
+            editTest.value.results = [{ max: 999, text: 'Общий результат' }]
+        }
+    }
+}
+
+const addTestScale = () => {
+    editTest.value.scales.push({
+        name: 'Новая шкала',
+        range: [0, 0],
+        divider: 1,
+        results: [{ max: 999, text: 'Результат шкалы' }]
+    })
+}
+
+const removeTestScale = (sIdx) => {
+    editTest.value.scales.splice(sIdx, 1)
+}
+
+const updateScaleRange = (sIdx, boundIndex, value) => {
+    const val = parseInt(value, 10) - 1
+    if (!isNaN(val)) {
+        if (!editTest.value.scales[sIdx].range) editTest.value.scales[sIdx].range = [0, 0]
+        editTest.value.scales[sIdx].range[boundIndex] = val
+    }
+}
+
+const addScaleResult = (sIdx) => {
+    editTest.value.scales[sIdx].results.push({ max: 999, text: 'Рекомендация' })
+}
+
+const removeScaleResult = (sIdx, rIdx) => {
+    editTest.value.scales[sIdx].results.splice(rIdx, 1)
 }
 
 const submitArticle = () => {

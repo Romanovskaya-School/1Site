@@ -18,7 +18,7 @@
               Еда стала источником тревоги? Вы не одиноки. Помогу вернуть здоровые отношения с едой и телом.
             </p>
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Записаться на консультацию →</a>
+              <router-link to="/#contact" class="btn btn-primary">Записаться на консультацию →</router-link>
               <a href="#rpp-test" class="btn btn-outline">Тест: «Есть ли у меня РПП?»</a>
             </div>
           </div>
@@ -99,44 +99,58 @@
           </div>
         </div>
 
-        <!-- Fullscreen Modal Test -->
-        <transition name="modal-fade">
-          <div v-if="isModalOpen" class="fullscreen-modal">
-            <div class="modal-content">
-              <button class="modal-close" @click="closeModal">✕</button>
+        <!-- Fullscreen Modal Test (Awwwards Style) -->
+        <transition name="modal-fade" :duration="500">
+          <div v-if="isModalOpen" class="fullscreen-modal awwwards-bg">
+            <div class="modal-content awwwards-modal">
               
-              <div class="test-inner" v-if="!showResult">
-                <div class="test-progress">
-                  <div class="progress-bar">
-                    <div class="progress-fill" :style="{ width: ((currentQuestionIndex + 1) / tests[activeTestIndex].questions.length * 100) + '%' }"></div>
-                  </div>
-                  <div class="progress-text">Вопрос {{ currentQuestionIndex + 1 }} из {{ tests[activeTestIndex].questions.length }}</div>
+              <!-- Progress Line -->
+              <div class="awwwards-progress-line" v-if="!showResult">
+                <div class="awwwards-progress-fill" :style="{ width: ((currentQuestionIndex + 1) / tests[activeTestIndex].questions.length * 100) + '%' }"></div>
+              </div>
+              
+              <button class="modal-close awwwards-close" @click="closeModal">✕</button>
+              
+              <div class="test-inner awwwards-inner" v-if="!showResult">
+                <div class="awwwards-header">
+                  <h3 class="awwwards-test-title">{{ tests[activeTestIndex].title }}</h3>
+                  <div class="awwwards-counter">{{ String(currentQuestionIndex + 1).padStart(2, '0') }} <span class="dim">/ {{ String(tests[activeTestIndex].questions.length).padStart(2, '0') }}</span></div>
                 </div>
-
-                <h3 class="modal-test-title">{{ tests[activeTestIndex].title }}</h3>
                 
-                <div class="test-question-card">
-                  <p class="question-text">{{ typeof tests[activeTestIndex].questions[currentQuestionIndex] === 'object' ? tests[activeTestIndex].questions[currentQuestionIndex].text : tests[activeTestIndex].questions[currentQuestionIndex] }}</p>
-                  <div class="options-grid">
-                    <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '5' }" @click="answers[currentQuestionIndex] = '5'">Всегда</button>
-                    <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '4' }" @click="answers[currentQuestionIndex] = '4'">Очень часто</button>
-                    <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '3' }" @click="answers[currentQuestionIndex] = '3'">Часто</button>
-                    <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '2' }" @click="answers[currentQuestionIndex] = '2'">Иногда</button>
-                    <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '1' }" @click="answers[currentQuestionIndex] = '1'">Редко</button>
-                    <button class="custom-radio-btn" :class="{ selected: answers[currentQuestionIndex] === '0' }" @click="answers[currentQuestionIndex] = '0'">Никогда</button>
+                <transition name="slide-fade" mode="out-in">
+                  <div class="test-question-card awwwards-card" :key="currentQuestionIndex">
+                    <p class="question-text awwwards-q-text">{{ typeof tests[activeTestIndex].questions[currentQuestionIndex] === 'object' ? tests[activeTestIndex].questions[currentQuestionIndex].text : tests[activeTestIndex].questions[currentQuestionIndex] }}</p>
+                    <div class="options-grid awwwards-options">
+                      <button 
+                         v-for="(opt, oIdx) in (tests[activeTestIndex].options || defaultOptions)" 
+                         :key="oIdx"
+                         class="custom-radio-btn awwwards-btn" 
+                         :class="{ selected: answers[currentQuestionIndex] === oIdx, 'is-transitioning': isTransitioning }" 
+                         :disabled="isTransitioning"
+                         @click="handleAnswer(oIdx)">
+                         {{ opt.text }}
+                      </button>
+                    </div>
                   </div>
-                </div>
-
-                <div class="modal-footer-actions">
-                  <button class="btn btn-primary" :disabled="answers[currentQuestionIndex] === null" :class="{ 'btn-blurred': answers[currentQuestionIndex] === null }" @click="nextQuestion">
-                    {{ currentQuestionIndex === tests[activeTestIndex].questions.length - 1 ? 'Узнать результат' : 'Далее →' }}
-                  </button>
-                </div>
+                </transition>
               </div>
 
               <div class="test-inner" v-if="showResult" style="text-align: center; padding-top: 40px;">
-                <h3 style="font-family: var(--font-head); font-size: 2rem; color: var(--text-dark); margin-bottom: 16px;">Результат:</h3>
-                <p style="font-size: 1.2rem; color: var(--text-mid); margin-bottom: 40px;" v-html="testText"></p>
+                <h3 style="font-family: var(--font-head); font-size: 2rem; color: var(--text-dark); margin-bottom: 16px;">Результаты:</h3>
+                
+                <div v-if="Array.isArray(testText)" class="multi-scale-results" style="text-align: left; max-width: 600px; margin: 0 auto 40px;">
+                  <div v-for="(res, idx) in testText" :key="idx" class="scale-result-card" style="background:var(--warm-white); padding:20px; border-radius:var(--radius-md); border:1px solid rgba(72,164,165,0.15); margin-bottom:16px;">
+                    <h4 style="font-family:var(--font-head); font-size:1.2rem; color:var(--accent); margin-bottom:8px;">{{ res.name }}</h4>
+                    <div style="font-size:0.9rem; color:var(--text-light); margin-bottom:12px;">Балл: {{ res.score }}</div>
+                    <div class="result-text" v-html="res.text" style="font-size: 1rem; color: var(--text-mid); line-height: 1.5;"></div>
+                  </div>
+                  <div style="font-size:0.85rem; color:var(--text-light); margin-top:24px; text-align:center; padding-top:16px; border-top:1px solid rgba(0,0,0,0.05);">
+                    Этот тест не является диагнозом и не заменяет консультацию специалиста. Он помогает увидеть ведущие паттерны пищевого поведения.
+                  </div>
+                </div>
+                
+                <p v-else style="font-size: 1.2rem; color: var(--text-mid); margin-bottom: 40px;" v-html="testText"></p>
+                
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
                   <button v-if="isMaxResult" class="btn btn-primary" @click="scrollToContactAndClose">Записаться на консультацию</button>
                   <button class="btn btn-outline" @click="closeModal">Вернуться к тестам</button>
@@ -178,9 +192,12 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import SiteContact from '../components/SiteContact.vue'
 import { useSiteData } from '../composables/useSiteData'
 import { useArticles } from '../composables/useArticles'
+
+const router = useRouter()
 
 const { articles } = useArticles()
 const { siteData } = useSiteData()
@@ -198,6 +215,16 @@ const testText = ref('')
 const isModalOpen = ref(false)
 const currentQuestionIndex = ref(0)
 const isMaxResult = ref(false)
+const isTransitioning = ref(false)
+
+const defaultOptions = [
+  { text: 'Всегда', value: 5, reverseValue: 0 },
+  { text: 'Очень часто', value: 4, reverseValue: 1 },
+  { text: 'Часто', value: 3, reverseValue: 2 },
+  { text: 'Иногда', value: 2, reverseValue: 3 },
+  { text: 'Редко', value: 1, reverseValue: 4 },
+  { text: 'Никогда', value: 0, reverseValue: 5 }
+]
 
 const selectTest = (index) => {
   activeTestIndex.value = index
@@ -222,38 +249,80 @@ const nextQuestion = () => {
   }
 }
 
-const calculateTest = () => {
-    let score = 0;
-    const test = tests.value[activeTestIndex.value];
-    
-    test.questions.forEach((q, index) => {
-        let answer = Number(answers.value[index]);
-        if (isNaN(answer)) answer = 0;
-        
-        let type = typeof q === 'object' ? (q.type || 'normal') : 'normal';
-        
-        if (type === 'normal') {
-            score += answer;
-        } else if (type === 'reverse') {
-            // Assuming 0-5 scale, reverse is 5 - answer
-            score += (5 - answer);
-        } else if (type === 'ignore') {
-            // Do nothing
-        }
-    });
-    
-    const testResults = test.results || [];
-    
-    // Results should be sorted by max. Find the first result where score <= max
-    const sortedResults = [...testResults].sort((a, b) => a.max - b.max);
-    const result = sortedResults.find(r => score <= r.max) || sortedResults[sortedResults.length - 1];
-    
-    testText.value = result ? result.text : `Ваш балл: ${score}`;
-    
-    // Check if it's the maximum threshold
-    isMaxResult.value = sortedResults.length > 1 && score > sortedResults[0].max;
+const handleAnswer = (idx) => {
+  if (isTransitioning.value) return
+  answers.value[currentQuestionIndex.value] = idx
+  isTransitioning.value = true
+  
+  // 450ms wait for ripple/highlight animation before transitioning
+  setTimeout(() => {
+    isTransitioning.value = false
+    nextQuestion()
+  }, 450)
+}
 
-    showResult.value = true;
+const calculateTest = () => {
+    const test = tests.value[activeTestIndex.value];
+    const testOptions = test.options || defaultOptions;
+    
+    if (test.scales && test.scales.length > 0) {
+        let scaleResults = [];
+        test.scales.forEach(scale => {
+            let scaleScore = 0;
+            // scale.range is [startIndex, endIndex] inclusive
+            for (let i = scale.range[0]; i <= Math.min(scale.range[1], test.questions.length - 1); i++) {
+                let ansIdx = Number(answers.value[i]);
+                if (!isNaN(ansIdx) && ansIdx >= 0 && ansIdx < testOptions.length) {
+                    let opt = testOptions[ansIdx];
+                    let type = typeof test.questions[i] === 'object' ? (test.questions[i].type || 'normal') : 'normal';
+                    
+                    if (type === 'normal') {
+                        scaleScore += opt.value;
+                    } else if (type === 'reverse') {
+                        scaleScore += opt.reverseValue;
+                    }
+                }
+            }
+            
+            let finalScaleScore = scaleScore / (scale.divider || 1);
+            
+            const sortedResults = [...(scale.results || [])].sort((a, b) => a.max - b.max);
+            const res = sortedResults.find(r => finalScaleScore <= r.max) || sortedResults[sortedResults.length - 1];
+            
+            scaleResults.push({
+                name: scale.name,
+                score: finalScaleScore.toFixed(1),
+                text: res ? res.text : 'Результат не определен'
+            });
+        });
+        
+        isMaxResult.value = false;
+        testText.value = scaleResults;
+        showResult.value = true;
+    } else {
+        let score = 0;
+        test.questions.forEach((q, index) => {
+            let ansIdx = Number(answers.value[index]);
+            if (!isNaN(ansIdx) && ansIdx >= 0 && ansIdx < testOptions.length) {
+                let opt = testOptions[ansIdx];
+                let type = typeof q === 'object' ? (q.type || 'normal') : 'normal';
+                
+                if (type === 'normal') {
+                    score += opt.value;
+                } else if (type === 'reverse') {
+                    score += opt.reverseValue;
+                }
+            }
+        });
+        
+        const testResults = test.results || [];
+        const sortedResults = [...testResults].sort((a, b) => a.max - b.max);
+        const result = sortedResults.find(r => score <= r.max) || sortedResults[sortedResults.length - 1];
+        
+        isMaxResult.value = (result && result.max === 999);
+        testText.value = result ? result.text : 'Результат не определен';
+        showResult.value = true;
+    }
 }
 
 const scrollToContactAndClose = () => {
@@ -263,6 +332,8 @@ const scrollToContactAndClose = () => {
         const offset = 80
         const top = target.getBoundingClientRect().top + window.scrollY - offset
         window.scrollTo({ top, behavior: 'smooth' })
+    } else {
+        router.push('/#contact')
     }
 }
 
@@ -285,180 +356,214 @@ watch(isModalOpen, (val) => {
   box-shadow: 0 10px 20px rgba(163, 201, 202, 0.25);
 }
 
-/* Fullscreen Modal */
-.fullscreen-modal {
+/* Fullscreen Modal Awwwards Style */
+.fullscreen-modal.awwwards-bg {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--cream);
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  background-size: 200% 200%;
+  animation: gradientFlow 15s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow-y: auto;
-  padding: 20px;
 }
 
-.modal-content {
-  background: var(--warm-white);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 24px 64px var(--shadow);
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.modal-content.awwwards-modal {
   width: 100%;
-  max-width: 800px;
+  height: 100%;
+  max-width: 1200px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
   position: relative;
-  min-height: 500px;
   display: flex;
   flex-direction: column;
 }
 
-.modal-close {
+/* Progress Line at absolute top */
+.awwwards-progress-line {
   position: absolute;
-  top: 24px;
-  right: 24px;
-  background: var(--blush);
-  border: none;
-  width: 40px;
-  height: 40px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.awwwards-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.modal-close.awwwards-close {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  background: transparent;
+  color: var(--text-dark);
+  font-size: 2rem;
+  font-weight: 300;
+  width: 50px;
+  height: 50px;
+  border: 1px solid rgba(0,0,0,0.1);
   border-radius: 50%;
-  font-size: 1.2rem;
-  color: var(--text-mid);
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
-  z-index: 10;
+  transition: all 0.4s ease;
+  z-index: 100;
 }
 
-.modal-close:hover {
-  background: var(--rose);
-  color: var(--text-dark);
-  transform: rotate(90deg);
+.modal-close.awwwards-close:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--text-dark);
+  color: #fff;
+  border-color: var(--text-dark);
 }
 
-.test-inner {
-  padding: 60px 40px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.test-progress {
-  margin-bottom: 32px;
-}
-
-.progress-bar {
-  height: 6px;
-  background: var(--blush);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--accent);
-  transition: width 0.4s ease;
-}
-
-.progress-text {
-  font-size: 0.85rem;
-  color: var(--text-light);
-  text-align: right;
-}
-
-.modal-test-title {
-  font-family: var(--font-head);
-  font-size: 1.5rem;
-  color: var(--text-mid);
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.test-question-card {
+.test-inner.awwwards-inner {
+  padding: 80px 40px;
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 }
 
-.question-text {
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: var(--text-dark);
-  margin-bottom: 40px;
-  line-height: 1.4;
+.awwwards-header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.awwwards-counter {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.awwwards-counter .dim {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.awwwards-test-title {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--text-mid);
+}
+
+.test-question-card.awwwards-card {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.options-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  max-width: 500px;
-  margin: 0 auto 40px;
-  width: 100%;
+.question-text.awwwards-q-text {
+  font-family: var(--font-head);
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin-bottom: 60px;
 }
 
-@media (max-width: 600px) {
-  .options-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .question-text.awwwards-q-text {
+    font-size: 1.8rem;
+    margin-bottom: 40px;
+  }
+  .awwwards-header {
+    top: 20px;
+    left: 20px;
+  }
+  .modal-close.awwwards-close {
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
   }
 }
 
-.custom-radio-btn {
-  padding: 16px 24px;
-  border: 2px solid var(--blush);
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--text-mid);
+.options-grid.awwwards-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
+.custom-radio-btn.awwwards-btn {
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: var(--radius-lg);
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 500;
+  color: var(--text-dark);
   cursor: pointer;
-  transition: all 0.3s ease;
-  outline: none;
-  text-align: center;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0);
 }
 
-.custom-radio-btn:hover {
-  border-color: var(--rose);
-  background: var(--cream);
+.custom-radio-btn.awwwards-btn:hover:not(:disabled) {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
 }
 
-.custom-radio-btn.selected {
+.custom-radio-btn.awwwards-btn.selected {
   background: var(--accent);
   color: #fff;
-  border-color: var(--accent);
-  box-shadow: 0 8px 24px rgba(72, 164, 165, 0.3);
-  transform: translateY(-2px);
+  transform: scale(0.98);
+  box-shadow: 0 10px 20px rgba(72, 164, 165, 0.3);
 }
 
-.modal-footer-actions {
-  text-align: center;
-  margin-top: auto;
+/* Slide Fade Transition for Questions */
+.slide-fade-enter-active {
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.slide-fade-leave-active {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
 }
 
-.modal-footer-actions .btn {
-  min-width: 240px;
-  justify-content: center;
-  padding: 16px 32px;
-  font-size: 1.1rem;
-}
-
-.btn-blurred {
-  opacity: 0.5;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
+/* Modal Fade for Background */
 .modal-fade-enter-active,
 .modal-fade-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.5s ease;
 }
-
 .modal-fade-enter-from,
 .modal-fade-leave-to {
   opacity: 0;
-  transform: scale(0.98);
 }
 </style>

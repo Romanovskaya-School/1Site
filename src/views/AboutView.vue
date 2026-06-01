@@ -19,7 +19,7 @@
               <span class="quality-tag">🏠 Границы</span>
             </div>
             <div style="margin-top: 36px; display: flex; gap: 16px; flex-wrap: wrap;">
-              <a href="#contact" class="btn btn-primary">Записаться →</a>
+              <router-link to="/#contact" class="btn btn-primary">Записаться →</router-link>
               <a href="#principles" class="btn btn-outline">Мои принципы</a>
             </div>
           </div>
@@ -182,14 +182,14 @@ onMounted(() => {
   padding: 32px 20px;
   background: rgba(255,255,255,0.6);
   border-radius: 16px;
-  border: 1px solid rgba(193, 127, 116, 0.15);
+  border: 1px solid rgba(72, 164, 165, 0.15);
   backdrop-filter: blur(8px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about-stat-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(193, 127, 116, 0.15);
+  box-shadow: 0 16px 40px rgba(72, 164, 165, 0.15);
 }
 
 .about-stat-num {
@@ -220,7 +220,7 @@ onMounted(() => {
 
 .principle-card {
   background: var(--cream);
-  border: 1px solid rgba(193, 127, 116, 0.15);
+  border: 1px solid rgba(72, 164, 165, 0.15);
   border-radius: 20px;
   padding: 36px 28px;
   text-align: center;
@@ -245,7 +245,7 @@ onMounted(() => {
 
 .principle-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 50px rgba(193, 127, 116, 0.15);
+  box-shadow: 0 20px 50px rgba(72, 164, 165, 0.15);
   border-color: var(--rose);
 }
 
@@ -293,7 +293,7 @@ onMounted(() => {
   aspect-ratio: 3/4;
   margin-bottom: 16px;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(193, 127, 116, 0.1);
+  box-shadow: 0 8px 24px rgba(72, 164, 165, 0.1);
 }
 
 .diploma-card-new p {

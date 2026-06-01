@@ -169,7 +169,7 @@ onUnmounted(() => {
   width: 100%;
   padding: 10px 16px;
   border-radius: 100px;
-  border: 1.5px solid rgba(193, 127, 116, 0.22);
+  border: 1.5px solid rgba(72, 164, 165, 0.22);
   background: var(--cream);
   font-family: var(--font-body);
   font-size: 0.9rem;
@@ -179,7 +179,7 @@ onUnmounted(() => {
 }
 .search-input:focus {
   border-color: var(--rose);
-  box-shadow: 0 0 0 4px rgba(193, 127, 116, 0.1);
+  box-shadow: 0 0 0 4px rgba(72, 164, 165, 0.1);
 }
 
 /* Filter Bar */
@@ -191,7 +191,7 @@ onUnmounted(() => {
   margin-bottom: 40px;
   padding: 20px 24px;
   background: var(--warm-white);
-  border: 1px solid rgba(193, 127, 116, 0.12);
+  border: 1px solid rgba(72, 164, 165, 0.12);
   border-radius: 16px;
 }
 .filter-label {
@@ -209,7 +209,7 @@ onUnmounted(() => {
   gap: 6px;
   padding: 8px 18px;
   border-radius: 100px;
-  border: 1.5px solid rgba(193, 127, 116, 0.22);
+  border: 1.5px solid rgba(72, 164, 165, 0.22);
   background: transparent;
   font-family: var(--font-body);
   font-size: 0.85rem;
@@ -227,7 +227,7 @@ onUnmounted(() => {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-  box-shadow: 0 4px 14px rgba(193, 127, 116, 0.35);
+  box-shadow: 0 4px 14px rgba(72, 164, 165, 0.35);
 }
 .filter-count {
   display: inline-flex;
@@ -242,7 +242,7 @@ onUnmounted(() => {
   font-weight: 700;
 }
 .filter-btn:not(.active) .filter-count {
-  background: rgba(193, 127, 116, 0.12);
+  background: rgba(72, 164, 165, 0.12);
   color: var(--text-light);
 }
 
@@ -254,12 +254,12 @@ onUnmounted(() => {
   background: var(--cream);
   border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgba(193, 127, 116, 0.12);
+  border: 1px solid rgba(72, 164, 165, 0.12);
   margin-bottom: 36px;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 .article-full-card:hover {
-  box-shadow: 0 20px 56px rgba(120, 60, 60, 0.1);
+  box-shadow: 0 20px 56px rgba(72, 164, 165, 0.1);
   transform: translateY(-4px);
 }
 .article-full-img {
@@ -317,7 +317,7 @@ onUnmounted(() => {
   position: fixed;
   inset: 0;
   z-index: 5000;
-  background: rgba(61, 43, 43, 0.4);
+  background: rgba(44, 62, 80, 0.4);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   overflow-y: auto;
@@ -333,7 +333,7 @@ onUnmounted(() => {
   border-radius: 24px;
   width: 100%;
   max-width: 900px;
-  box-shadow: 0 32px 80px rgba(61, 43, 43, 0.2);
+  box-shadow: 0 32px 80px rgba(44, 62, 80, 0.2);
   overflow: hidden;
   animation: slideUp 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -357,7 +357,7 @@ onUnmounted(() => {
   height: 40px;
   border-radius: 50%;
   border: none;
-  background: rgba(61, 43, 43, 0.08);
+  background: rgba(44, 62, 80, 0.08);
   font-size: 1.1rem;
   cursor: pointer;
   display: flex;
@@ -368,7 +368,7 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 .overlay-close:hover {
-  background: rgba(193, 127, 116, 0.25);
+  background: rgba(72, 164, 165, 0.25);
 }
 .overlay-cat {
   display: inline-block;
@@ -398,7 +398,7 @@ onUnmounted(() => {
   color: var(--text-light);
   margin-bottom: 32px;
   padding-bottom: 24px;
-  border-bottom: 1px solid rgba(193, 127, 116, 0.12);
+  border-bottom: 1px solid rgba(72, 164, 165, 0.12);
 }
 
 /* Article content inside overlay */
@@ -443,7 +443,7 @@ onUnmounted(() => {
 .overlay-cta {
   margin-top: 40px;
   padding-top: 32px;
-  border-top: 1px solid rgba(193, 127, 116, 0.12);
+  border-top: 1px solid rgba(72, 164, 165, 0.12);
   text-align: center;
 }
 .overlay-cta p {
