@@ -4,17 +4,17 @@
   "type": "module",
   "description": "Сайт психолога Виктории Тереховой",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "vue": "^3.5.34",
-    "vue-router": "^5.0.6"
+    "vue": "^3.5.34"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.6",
-    "vite": "^8.0.11",
-    "vite-plugin-vue-devtools": "^8.1.1"
+    "@nuxtjs/seo": "^5.3.0",
+    "nuxt": "^4.4.8"
   }
 }
