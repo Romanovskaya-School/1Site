@@ -1,3 +1,8 @@
 node_modules/
 dist/
 .junie/
+.env
+.nuxt/
+.idea/
+.output/
+.vscode/

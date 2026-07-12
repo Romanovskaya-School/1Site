@@ -34,6 +34,12 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
       version: string,
    },
 
+   "seo-utils-head": {
+      link: Array<any>,
+
+      meta: Array<any>,
+   },
+
    "nuxt-site-config": {
       stack: Array<{
 
@@ -130,6 +136,14 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
 
          secret: string,
       },
+
+      componentDirs: Array<string>,
+
+      srcDir: string,
+
+      rootDir: string,
+
+      communityTemplatesDir: string,
    },
 
    ogImage: {
@@ -137,6 +151,46 @@ import { RuntimeConfig as UserRuntimeConfig, PublicRuntimeConfig as UserPublicRu
    },
   }
   interface SharedPublicRuntimeConfig {
+   supabaseUrl: string,
+
+   supabaseKey: string,
+
+   "nuxt-link-checker": {
+      version: string,
+
+      hasSitemapModule: boolean,
+
+      rootDir: string,
+
+      excludeLinks: Array<{
+
+      }>,
+
+      excludePages: Array<any>,
+
+      skipInspections: Array<any>,
+
+      fetchTimeout: number,
+
+      showLiveInspections: boolean,
+
+      fetchRemoteUrls: boolean,
+   },
+
+   "nuxt-schema-org": {
+      reactive: boolean,
+
+      minify: boolean,
+
+      scriptAttributes: {
+         "data-nuxt-schema-org": boolean,
+      },
+
+      identity: any,
+
+      version: string,
+   },
+
    "nuxt-seo-utils-version": string,
 
    "seo-utils": {

@@ -50,6 +50,7 @@
             </div>
             <button v-if="!submitted" type="submit" class="btn btn-primary form-submit">Отправить заявку →</button>
             <div v-if="submitted" style="color:var(--accent); text-align:center; margin-top:16px; font-weight:600;">Спасибо! Заявка успешно отправлена.</div>
+            <div v-if="submitError" role="alert" style="color:#b42318; text-align:center; margin-top:16px; font-weight:600;">{{ submitError }}</div>
           </form>
         </div>
       </div>
@@ -63,10 +64,11 @@ import { useSiteData } from '../composables/useSiteData'
 import { useApplications } from '../composables/useApplications'
 
 const { siteData } = useSiteData()
-const { saveApplication, generateAppId } = useApplications()
+const { saveApplication } = useApplications()
 const form = ref({ name: '', phone: '', query: '' })
 const submitted = ref(false)
 const phoneError = ref(false)
+const submitError = ref('')
 
 const validatePhone = (phone) => {
   if (phone.startsWith('@')) return phone.length >= 3 
@@ -74,8 +76,9 @@ const validatePhone = (phone) => {
   return digitsOnly.length >= 7 && digitsOnly.length <= 15
 }
 
-const submitForm = () => {
+const submitForm = async () => {
   phoneError.value = false
+  submitError.value = ''
   
   if (!validatePhone(form.value.phone)) {
     phoneError.value = true
@@ -83,15 +86,16 @@ const submitForm = () => {
   }
 
   const newApp = {
-    id: generateAppId(),
     name: form.value.name,
     contact: form.value.phone,
     query: form.value.query,
-    date: new Date().toISOString(),
-    status: 'new'
   }
   
-  saveApplication(newApp)
+  const { error } = await saveApplication(newApp)
+  if (error) {
+    submitError.value = 'Не удалось отправить заявку. Попробуйте ещё раз позже.'
+    return
+  }
   
   submitted.value = true
   setTimeout(() => {

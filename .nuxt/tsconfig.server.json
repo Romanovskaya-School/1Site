@@ -143,6 +143,12 @@
       "#sitemap/*": [
         "../node_modules/@nuxtjs/sitemap/dist/runtime/*"
       ],
+      "#link-checker": [
+        "../node_modules/nuxt-link-checker/dist/runtime"
+      ],
+      "#link-checker/*": [
+        "../node_modules/nuxt-link-checker/dist/runtime/*"
+      ],
       "#og-image": [
         "../node_modules/nuxt-og-image/dist/runtime"
       ],
@@ -184,6 +190,9 @@
       ],
       "#internal/nuxt-robots/*": [
         "../node_modules/@nuxtjs/robots/dist/runtime/server/composables/*"
+      ],
+      "#link-checker/content-provider": [
+        "../node_modules/nuxt-link-checker/dist/runtime/server/providers/noop"
       ]
     },
     "lib": [

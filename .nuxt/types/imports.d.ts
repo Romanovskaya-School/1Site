@@ -177,6 +177,7 @@ declare global {
   const useNitroOrigin: typeof import('../../node_modules/nuxt-site-config/dist/runtime/app/composables/useNitroOrigin').useNitroOrigin
   const useNuxtApp: typeof import('../../node_modules/nuxt/dist/app/nuxt').useNuxtApp
   const useNuxtData: typeof import('../../node_modules/nuxt/dist/app/composables/asyncData').useNuxtData
+  const useNuxtDevTools: typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools').useNuxtDevTools
   const usePreviewMode: typeof import('../../node_modules/nuxt/dist/app/composables/preview').usePreviewMode
   const useRequestEvent: typeof import('../../node_modules/nuxt/dist/app/composables/ssr').useRequestEvent
   const useRequestFetch: typeof import('../../node_modules/nuxt/dist/app/composables/ssr').useRequestFetch
@@ -242,8 +243,11 @@ declare global {
   const useShareLinks: typeof import('../../node_modules/nuxt-seo-utils/dist/runtime/app/composables/useShareLinks').useShareLinks
   const useSiteConfig: typeof import('../../node_modules/nuxt-site-config/dist/runtime/app/composables/useSiteConfig').useSiteConfig
   const useSiteData: typeof import('../../app/composables/useSiteData').useSiteData
+  const useSiteMedia: typeof import('../../app/composables/useSiteMedia').useSiteMedia
   const useSlots: typeof import('vue').useSlots
   const useState: typeof import('../../node_modules/nuxt/dist/app/composables/state').useState
+  const useSupabase: typeof import('../../app/composables/useSupabase').useSupabase
+  const useSupabaseAuth: typeof import('../../app/composables/useSupabaseAuth').useSupabaseAuth
   const useTemplateRef: typeof import('vue').useTemplateRef
   const useTransitionState: typeof import('vue').useTransitionState
   const watch: typeof import('vue').watch
@@ -448,6 +452,7 @@ declare module 'vue' {
     readonly useNitroOrigin: UnwrapRef<typeof import('../../node_modules/nuxt-site-config/dist/runtime/app/composables/useNitroOrigin')['useNitroOrigin']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/nuxt')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/asyncData')['useNuxtData']>
+    readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly usePreviewMode: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/preview')['usePreviewMode']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestEvent']>
     readonly useRequestFetch: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/ssr')['useRequestFetch']>
@@ -513,8 +518,11 @@ declare module 'vue' {
     readonly useShareLinks: UnwrapRef<typeof import('../../node_modules/nuxt-seo-utils/dist/runtime/app/composables/useShareLinks')['useShareLinks']>
     readonly useSiteConfig: UnwrapRef<typeof import('../../node_modules/nuxt-site-config/dist/runtime/app/composables/useSiteConfig')['useSiteConfig']>
     readonly useSiteData: UnwrapRef<typeof import('../../app/composables/useSiteData')['useSiteData']>
+    readonly useSiteMedia: UnwrapRef<typeof import('../../app/composables/useSiteMedia')['useSiteMedia']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useState: UnwrapRef<typeof import('../../node_modules/nuxt/dist/app/composables/state')['useState']>
+    readonly useSupabase: UnwrapRef<typeof import('../../app/composables/useSupabase')['useSupabase']>
+    readonly useSupabaseAuth: UnwrapRef<typeof import('../../app/composables/useSupabaseAuth')['useSupabaseAuth']>
     readonly useTemplateRef: UnwrapRef<typeof import('vue')['useTemplateRef']>
     readonly useTransitionState: UnwrapRef<typeof import('vue')['useTransitionState']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

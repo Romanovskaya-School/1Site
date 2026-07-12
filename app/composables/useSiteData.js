@@ -497,49 +497,42 @@ const DEFAULT_SITE_DATA = {
   ]
 }
 
-const SITE_DATA_KEY = 'vt_site_data_v7'
+const siteData = reactive(structuredClone(DEFAULT_SITE_DATA))
+let loadedFromSupabase = false
 
-const loadInitialData = () => {
-  const stored = localStorage.getItem(SITE_DATA_KEY)
-  if (stored) {
-    try {
-      const parsed = JSON.parse(stored)
-      if (parsed.tests && parsed.tests.length > 0 && typeof parsed.tests[0].questions[0] === 'string') {
-        return DEFAULT_SITE_DATA
-      }
-      return parsed
-    } catch (e) {
-      return DEFAULT_SITE_DATA
-    }
+const loadSiteData = async () => {
+  if (!import.meta.client || loadedFromSupabase) return { data: siteData }
+
+  try {
+    const supabase = useSupabase()
+    const { data, error } = await supabase
+      .from('site_settings')
+      .select('data')
+      .eq('key', 'site')
+      .maybeSingle()
+
+    if (error) return { error }
+    if (data?.data && typeof data.data === 'object') Object.assign(siteData, data.data)
+    loadedFromSupabase = true
+    return { data: siteData }
+  } catch (error) {
+    return { error }
   }
-  return DEFAULT_SITE_DATA
 }
 
-const siteData = reactive(loadInitialData())
-
-// Save whenever siteData changes
-watch(siteData, (newVal) => {
-  localStorage.setItem(SITE_DATA_KEY, JSON.stringify(newVal))
-}, { deep: true })
-
-// Cross-tab synchronization
-window.addEventListener('storage', (e) => {
-  if (e.key === SITE_DATA_KEY && e.newValue) {
-    try {
-      const parsed = JSON.parse(e.newValue)
-      Object.assign(siteData, parsed)
-    } catch (err) {
-      console.error('Failed to sync siteData across tabs', err)
-    }
-  }
-})
-
 export function useSiteData() {
-  const saveSiteData = (data) => {
-    if (data) {
-        Object.assign(siteData, data)
+  const saveSiteData = async (data) => {
+    if (data) Object.assign(siteData, data)
+
+    try {
+      const supabase = useSupabase()
+      const { error } = await supabase
+        .from('site_settings')
+        .upsert({ key: 'site', data: JSON.parse(JSON.stringify(siteData)) }, { onConflict: 'key' })
+      return { error }
+    } catch (error) {
+      return { error }
     }
-    localStorage.setItem(SITE_DATA_KEY, JSON.stringify(siteData))
   }
 
   const incrementVisits = () => {
@@ -547,8 +540,9 @@ export function useSiteData() {
         siteData.visits = 0
     }
     siteData.visits++
-    saveSiteData()
+    // Visits are a local indicator only. Public visitors must not receive
+    // permission to write the site configuration.
   }
 
-  return { siteData, saveSiteData, incrementVisits }
+  return { siteData, loadSiteData, saveSiteData, incrementVisits }
 }

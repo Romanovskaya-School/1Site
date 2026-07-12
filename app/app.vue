@@ -1,7 +1,7 @@
 <template>
   <div id="app-root">
-    <SiteHeader v-if="!isAdmin" @open-mobile="mobileNavOpen = true" />
-    <div class="mobile-nav" :class="{ open: mobileNavOpen }">
+    <SiteHeader v-if="!isDashboard" @open-mobile="mobileNavOpen = true" />
+    <div v-if="!isDashboard" class="mobile-nav" :class="{ open: mobileNavOpen }">
       <button class="mobile-nav-close" @click="mobileNavOpen = false">✕</button>
       <NuxtLink to="/about" @click="mobileNavOpen = false">О психологе</NuxtLink>
       <NuxtLink to="/rpp" @click="mobileNavOpen = false">РПП</NuxtLink>
@@ -11,18 +11,19 @@
       <NuxtLink to="/#contact" @click="mobileNavOpen = false">Записаться</NuxtLink>
     </div>
     <NuxtPage />
-    <SiteFooter v-if="!isAdmin" />
-    <TestPrompt v-if="!isAdmin" />
+    <SiteFooter v-if="!isDashboard" />
+    <TestPrompt v-if="!isDashboard" />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed, nextTick } from 'vue'
+import { ref, onMounted, computed, nextTick, watch } from 'vue'
 
 const route = useRoute()
-const isAdmin = computed(() => route.path.startsWith('/admin'))
+const isDashboard = computed(() => route.path.startsWith('/dashboard'))
 const mobileNavOpen = ref(false)
-const { incrementVisits } = useSiteData()
+const { incrementVisits, loadSiteData } = useSiteData()
+const { loadArticles } = useArticles()
 
 let revealObserver = null
 
@@ -45,7 +46,8 @@ const initReveal = () => {
   })
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await Promise.all([loadSiteData(), loadArticles()])
   incrementVisits()
   initReveal()
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -61,6 +63,10 @@ onMounted(() => {
       }
     })
   })
+})
+
+watch(() => route.fullPath, () => {
+  initReveal()
 })
 </script>
 
